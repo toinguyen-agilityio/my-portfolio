@@ -1,0 +1,71 @@
+name: Issue status
+
+# Moves linked issues through the status labels in CONTRIBUTING.md:
+# PR ready for review -> status: in review, PR merged -> status: qa,
+# status: done added by QA -> issue closed.
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, closed]
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  pull-request:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 1
+
+      - name: Move linked issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          PR_BODY: ${{ github.event.pull_request.body }}
+          ACTION: ${{ github.event.action }}
+          MERGED: ${{ github.event.pull_request.merged }}
+          DRAFT: ${{ github.event.pull_request.draft }}
+        run: |
+          if [ "$ACTION" = closed ]; then
+            [ "$MERGED" = true ] || exit 0
+            status="status: qa"
+          else
+            [ "$DRAFT" = false ] || exit 0
+            status="status: in review"
+          fi
+
+          issues=$(printf '%s' "$PR_BODY" \
+            | grep -ioE '(close[sd]?|fix(e[sd])?|resolve[sd]?|refs?)[[:space:]]+#[0-9]+' \
+            | grep -oE '[0-9]+' | sort -u || true)
+          [ -n "$issues" ] || { echo "No linked issue in the PR body"; exit 0; }
+
+          for n in $issues; do
+            # A `Closes #n` keyword closes the issue on merge; keep it open for QA
+            [ "$status" = "status: qa" ] && gh issue reopen "$n" >/dev/null 2>&1 || true
+            bash .github/scripts/set-issue-status.sh "$n" "$status"
+          done
+
+  done:
+    if: >-
+      github.event_name == 'issues' &&
+      github.event.label.name == 'status: done'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 1
+
+      - name: Close the issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          NUMBER: ${{ github.event.issue.number }}
+        run: |
+          bash .github/scripts/set-issue-status.sh "$NUMBER" "status: done"
+          gh issue close "$NUMBER" --reason completed

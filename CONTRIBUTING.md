@@ -57,9 +57,30 @@ chore(agents): move BA templates into reference files
 - **Title:** uses the commit message format above. PRs are squash-merged, so the title becomes the commit on `main`.
 - **Description:** follow the [PR template](.github/pull_request_template.md): `Why`, `Summary`, `Evidence`, `How to test` and `Refer`. Do not delete the headings.
 - **Evidence:** show that the change works, for example test output or screenshots. If something was not checked, say so and say why.
-- **Refer:** write `Closes #<number>` under `Refer` so the issue closes on merge. Delete that line if there is no issue.
+- **Refer:** write `Refs #<number>` under `Refer` so the workflow can move the issue. Do not use `Closes`: the issue stays open for QA after merge. Delete that line if there is no issue.
 - **Size:** keep one story or one fix per PR.
 - **Review:** at least one approval before merge. Changes covered by `.github/CODEOWNERS` need the repo owner's approval.
+
+## Issue status
+
+Every issue has exactly one `status: ...` label. Moving to a new status removes the old one.
+
+| Status | When | Who moves it |
+|--------|------|--------------|
+| `status: backlog` | Groomed, not planned yet | PO |
+| `status: todo` | Planned for the current work | PO or dev |
+| `status: in progress` | A dev picks up a `backlog` or `todo` issue and assigns themselves | Dev, or Claude when it starts work on the issue |
+| `status: in review` | A PR that refers to the issue is open and not a draft | `issue-status` workflow |
+| `status: qa` | The PR is merged | `issue-status` workflow |
+| `status: done` | QA has checked the change on `main` | QA; the workflow then closes the issue |
+
+If QA finds a problem, move the issue back to `status: in progress`.
+
+To change a status by hand, use the GitHub UI or:
+
+```
+bash .github/scripts/set-issue-status.sh <issue> "status: in progress"
+```
 
 ## Working with Claude
 
