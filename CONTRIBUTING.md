@@ -55,9 +55,9 @@ chore(agents): move BA templates into reference files
 ## Pull requests
 
 - **Title:** uses the commit message format above. PRs are squash-merged, so the title becomes the commit on `main`.
-- **Description:** follow the [PR template](.github/pull_request_template.md): `Why changes`, `What changes`, `Evidence` and `How to test`. Do not delete the headings.
+- **Description:** follow the [PR template](.github/pull_request_template.md): `Why`, `Summary`, `Evidence`, `How to test` and `Refer`. Do not delete the headings.
 - **Evidence:** show that the change works, for example test output or screenshots. If something was not checked, say so and say why.
-- **Linked issue:** end the description with `Closes #<number>` so the issue closes on merge. Delete that line if there is no issue.
+- **Refer:** write `Closes #<number>` under `Refer` so the issue closes on merge. Delete that line if there is no issue.
 - **Size:** keep one story or one fix per PR.
 - **Review:** at least one approval before merge. Changes covered by `.github/CODEOWNERS` need the repo owner's approval.
 
