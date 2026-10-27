@@ -17,8 +17,11 @@ CLAUDE.local.md            # personal, gitignored
 ├── references/<agent>/    # templates and formats an agent reads on demand
 ├── skills/<name>/         # reusable workflows: SKILL.md + references/
 ├── rules/                 # rules scoped to parts of the codebase
-└── hooks/                 # scripts that settings.json hooks call
+├── hooks/                 # scripts that settings.json hooks call
+└── scripts/               # helper scripts that agents and skills call
 ```
+
+`skills/`, `hooks/` and `scripts/` each have a README that explains how to add the first file. `rules/` has only a `.gitkeep`, because every `.md` file there is loaded as a rule. To add a rule, create `.claude/rules/<topic>.md` with a `paths` frontmatter that lists the files it applies to.
 
 ## Rules for changing Claude config
 
