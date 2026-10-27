@@ -147,10 +147,14 @@ See [open issues](https://github.com/toinguyen-agilityio/my-portfolio/issues) fo
 
 ## 🤝 Contributing
 
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before you start. It sets the format for branch names, commit messages and pull requests, and CI rejects PRs that do not follow it.
+
 1. Pick a story from the [issues](https://github.com/toinguyen-agilityio/my-portfolio/issues).
-2. Create a branch from `main`: `git checkout -b feature/<short-name>`
-3. Commit your changes and push the branch.
-4. Open a pull request to `main`. Changes under `.claude/` and the Claude workflow need the repo owner's review (see `.github/CODEOWNERS`).
+2. Create a branch from `main`, for example `git switch -c feat/12-dark-mode-toggle`.
+3. Commit with [Conventional Commits](https://www.conventionalcommits.org) messages and push the branch.
+4. Open a pull request to `main` and fill in the PR template.
+
+With Claude Code, run `/git-workflow` to do these steps in the right format.
 
 Mention `@claude` on a PR or issue to ask Claude for help or a review (allowed users only).
 

@@ -1,0 +1,43 @@
+name: PR lint
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  pr-lint:
+    runs-on: ubuntu-latest
+    steps:
+      # Rules live in CONTRIBUTING.md; keep the type list in sync with it
+      - name: Check branch name, title and description
+        env:
+          BRANCH: ${{ github.head_ref }}
+          TITLE: ${{ github.event.pull_request.title }}
+          BODY: ${{ github.event.pull_request.body }}
+        run: |
+          types='feat|fix|docs|style|refactor|test|chore|ci'
+          failed=0
+
+          if [[ "$BRANCH" =~ ^(claude|dependabot)/ ]]; then
+            echo "Branch '$BRANCH' is exempt from the naming rule."
+          elif [[ ! "$BRANCH" =~ ^($types)/([0-9]+-)?[a-z0-9]+(-[a-z0-9]+)*$ ]]; then
+            echo "::error::Branch '$BRANCH' must match <type>/<issue>-<short-description>, for example feat/12-dark-mode-toggle."
+            failed=1
+          fi
+
+          if [[ ! "$TITLE" =~ ^($types)(\([a-z0-9-]+\))?!?:\ [a-z0-9].*[^.]$ ]] || (( ${#TITLE} > 72 )); then
+            echo "::error::PR title '$TITLE' must match <type>(<scope>): <subject>, start the subject in lowercase, have no trailing period and be at most 72 characters."
+            failed=1
+          fi
+
+          for heading in 'Summary' 'Linked issue' 'Changes' 'How to test' 'Checklist'; do
+            if ! grep -qE "^## $heading[[:space:]]*$" <<< "$BODY"; then
+              echo "::error::PR description is missing the '## $heading' section from the PR template."
+              failed=1
+            fi
+          done
+
+          exit $failed

@@ -1,6 +1,10 @@
 # Skills
 
-Reusable workflows that Claude can run on request or pick up on its own. No skills yet.
+Reusable workflows that Claude can run on request or pick up on its own.
+
+| Skill | What it does |
+|-------|--------------|
+| `git-workflow` | Creates branches, commits and PRs in the format from `CONTRIBUTING.md` |
 
 ## Add a skill
 
