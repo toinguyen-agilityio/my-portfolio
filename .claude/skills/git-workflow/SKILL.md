@@ -31,4 +31,4 @@ If the user is already on a feature branch with work in progress, ask before you
 
 ## Before you finish
 
-Check the branch name and PR title against the patterns in `CONTRIBUTING.md`. The `PR lint` workflow rejects a PR that does not match.
+Check the branch name and PR title against the patterns in `CONTRIBUTING.md`.

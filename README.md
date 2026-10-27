@@ -147,7 +147,7 @@ See [open issues](https://github.com/toinguyen-agilityio/my-portfolio/issues) fo
 
 ## 🤝 Contributing
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) before you start. It sets the format for branch names, commit messages and pull requests, and CI rejects PRs that do not follow it.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before you start. It sets the format for branch names, commit messages and pull requests.
 
 1. Pick a story from the [issues](https://github.com/toinguyen-agilityio/my-portfolio/issues).
 2. Create a branch from `main`, for example `git switch -c feat/12-dark-mode-toggle`.

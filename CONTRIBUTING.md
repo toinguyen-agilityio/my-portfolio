@@ -1,6 +1,6 @@
 # Contributing
 
-Every dev, and every Claude session, follows these rules. CI checks branch names, PR titles and PR descriptions, and a PR that fails the check cannot be merged.
+Every dev, and every Claude session, follows these rules. Reviewers check branch names, PR titles and PR descriptions before they approve.
 
 ## Types
 

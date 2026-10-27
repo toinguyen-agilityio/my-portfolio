@@ -4,7 +4,6 @@
 /.mcp.json @toinguyen-agilityio
 /.github/workflows/claude.yml @toinguyen-agilityio
 
-# Team conventions and the checks that enforce them
+# Team conventions
 /CONTRIBUTING.md @toinguyen-agilityio
 /.github/pull_request_template.md @toinguyen-agilityio
-/.github/workflows/pr-lint.yml @toinguyen-agilityio
