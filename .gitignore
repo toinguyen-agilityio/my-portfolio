@@ -1,0 +1,7 @@
+# Personal Claude Code config (do not commit)
+CLAUDE.local.md
+.claude/settings.local.json
+
+# Secrets
+.env
+.env.*
