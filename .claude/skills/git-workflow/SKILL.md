@@ -25,7 +25,12 @@ If the user is already on a feature branch with work in progress, ask before you
 
 1. Push the branch: `git push -u origin <branch>`.
 2. Use a title in the commit message format. It becomes the squash commit on `main`.
-3. Fill in every section of `.github/pull_request_template.md`. Keep all headings, write `Closes #<number>` or `None` under "Linked issue", and write `N/A` under "Screenshots" for non-UI changes.
+3. Fill in every section of `.github/pull_request_template.md` and keep all headings:
+   - **Why changes:** the problem or goal, in 1–3 sentences.
+   - **What changes:** one bullet per file or area, as `` `path` ``: what changed and why.
+   - **Evidence:** real test output or measurements from this session. Never invent results; if something could not be checked, say so in bold and explain why.
+   - **How to test:** commands and steps with the expected result.
+   - End with `Closes #<number>`, or delete that line if there is no issue.
 4. Create the PR with `gh pr create --base main --title "<title>" --body-file <file>`. Write the body to a temporary file first, so that quotes and newlines survive.
 5. Give the user the PR link.
 
