@@ -164,6 +164,16 @@ export const projectsSection = {
   sourceLabel: 'Source',
 } satisfies ProjectsSection;
 
+export type ContactSection = {
+  title: string;
+  emailLabel: string;
+};
+
+export const contactSection = {
+  title: 'Contact',
+  emailLabel: 'Email',
+} satisfies ContactSection;
+
 export type SkillsSection = {
   title: string;
   intro: string;

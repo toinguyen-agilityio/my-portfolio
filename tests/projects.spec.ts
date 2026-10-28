@@ -38,7 +38,7 @@ test('every card link opens a new tab safely and has a unique accessible name', 
       });
       await expect(link).toHaveAttribute('href', href);
       await expect(link).toHaveAttribute('target', '_blank');
-      expect(await link.getAttribute('rel')).toBe('noopener noreferrer');
+      await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     }
   }
   const all = section(page).locator('a');

@@ -1,11 +1,10 @@
 import { About } from '@/components/About';
+import { ContactSection } from '@/components/ContactSection';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { ProjectsSection } from '@/components/ProjectsSection';
-import { Section } from '@/components/Section';
 import { SkillsSection } from '@/components/SkillsSection';
 
-// The Contact ticket (#23) fills in the last empty section.
 export default function Home() {
   return (
     <>
@@ -14,7 +13,7 @@ export default function Home() {
         <About />
         <ProjectsSection />
         <SkillsSection />
-        <Section id="contact" title="Contact" tone="surface" />
+        <ContactSection />
       </main>
       <Footer />
     </>
