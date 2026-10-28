@@ -122,7 +122,8 @@ export const skillGroups = [
 export const contact = {
   // Display text only. Build the mailto: link from mailtoHref, never from email.
   email: 'placeholder@example.com [PLACEHOLDER]',
-  mailtoHref: 'mailto:placeholder@example.com?subject=[PLACEHOLDER]',
+  // Must be a valid, percent-encoded mailto: URI, e.g. ?subject=Hello%20there.
+  mailtoHref: 'mailto:placeholder@example.com?subject=%5BPLACEHOLDER%5D',
   intro:
     '[PLACEHOLDER] Have a project in mind or just want to say hi? Send me an email.',
 } satisfies Contact;
