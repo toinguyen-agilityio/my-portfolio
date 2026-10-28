@@ -73,7 +73,7 @@ Track issues on the [my-portfolio project board](https://github.com/users/toingu
 | QA has checked it and posted a comment with screenshots or a video | `Done`, and close the issue | QA only |
 
 - Devs and their agents never move an issue to `Done` and never close it. When the work is finished, it goes to `QA`.
-- Change the status with `bash .claude/scripts/set-issue-status.sh <issue-number> "<status>"`, for example `bash .claude/scripts/set-issue-status.sh 12 "QA"`. It needs a `gh` login with the `project` scope (`gh auth refresh -s project`).
+- Change the status with `bash .claude/scripts/set-issue-status.sh <issue-number> "<status>"`, for example `bash .claude/scripts/set-issue-status.sh 12 "QA"`. The script refuses `Done` and `Released`; QA sets those on the board. It needs a `gh` login with the `project` scope (`gh auth refresh -s project`).
 
 ## Working with Claude
 

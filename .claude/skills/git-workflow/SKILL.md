@@ -12,7 +12,7 @@ The rules live in `CONTRIBUTING.md` at the repo root. Read it before you act, an
 1. Read the issue with `gh issue view <number>` to pick the type and a short description.
 2. Update `main`: `git switch main && git pull --ff-only`.
 3. Create the branch: `git switch -c <type>/<issue>-<short-description>`. Use 2–5 lowercase words for the description.
-4. Move the issue to `In Progress`: `bash .claude/scripts/set-issue-status.sh <issue> "In Progress"`.
+4. If there is an issue, move it to `In Progress`: `bash .claude/scripts/set-issue-status.sh <issue> "In Progress"`.
 
 If the user is already on a feature branch with work in progress, ask before you switch branches.
 
@@ -33,12 +33,12 @@ If the user is already on a feature branch with work in progress, ask before you
    - **How to test:** commands and steps with the expected result.
    - End with `Refs #<issue>`, or delete that line if there is no issue. Never write `Closes`, `Fixes` or `Resolves`: only QA closes issues.
 4. Create the PR with `gh pr create --base main --title "<title>" --body-file <file>`. Write the body to a temporary file first, so that quotes and newlines survive.
-5. Move the issue to `In Review`: `bash .claude/scripts/set-issue-status.sh <issue> "In Review"`.
+5. If there is an issue, move it to `In Review`: `bash .claude/scripts/set-issue-status.sh <issue> "In Review"`.
 6. Give the user the PR link.
 
 ## After the PR is merged
 
-Move the issue to `QA`: `bash .claude/scripts/set-issue-status.sh <issue> "QA"`. Never move it to `Done` and never close it; QA does that after checking.
+If there is an issue, move it to `QA`: `bash .claude/scripts/set-issue-status.sh <issue> "QA"`. Never move it to `Done` and never close it; QA does that after checking.
 
 ## Before you finish
 
