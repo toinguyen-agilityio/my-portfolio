@@ -7,6 +7,8 @@ export type Profile = {
   headline: string;
   bio: string;
   portraitAlt: string;
+  projectsCta: string;
+  contactCta: string;
 };
 
 export type ThumbnailKind = 'kanban' | 'dashboard' | 'components';
@@ -49,6 +51,8 @@ export const profile = {
     '[PLACEHOLDER] Frontend engineer building fast, accessible web apps',
   bio: '[PLACEHOLDER] I design and build web products with React and TypeScript. Right now I am focused on performance, accessibility and clean design systems that teams enjoy using.',
   portraitAlt: '[PLACEHOLDER] Portrait of Huy Pham',
+  projectsCta: 'View projects',
+  contactCta: 'Contact me',
 } satisfies Profile;
 
 export const projects = [
