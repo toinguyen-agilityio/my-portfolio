@@ -28,8 +28,10 @@ test('portrait is an image with the label from content.ts, 220px', async ({
   const portrait = page.getByRole('img', { name: profile.portraitAlt });
   await expect(portrait).toBeVisible();
   const box = await portrait.boundingBox();
-  expect(box?.width).toBe(220);
-  expect(box?.height).toBe(220);
+  // Firefox reports 220.0000153 when the portrait sits at a fractional y (float rounding of
+  // its layout units), so compare to 2 decimals: still fails for any real size change.
+  expect(box?.width).toBeCloseTo(220, 2);
+  expect(box?.height).toBeCloseTo(220, 2);
 });
 
 test('a long headline wraps at 320px without clipping', async ({ page }) => {

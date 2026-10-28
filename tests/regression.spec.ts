@@ -123,3 +123,36 @@ test('placeholder example.com links are never fetched', async ({ page }) => {
   }
   expect(requests).toEqual([]);
 });
+
+// T7d: M1 ships mock demo content, never a leftover placeholder marker.
+for (const path of ['/', '/does-not-exist']) {
+  test(`no placeholder text anywhere on ${path}`, async ({ page }) => {
+    await page.goto(path);
+    const found = await page.evaluate(() => {
+      const meta =
+        document
+          .querySelector('meta[name="description"]')
+          ?.getAttribute('content') ?? '';
+      const attrs = [
+        ...document.querySelectorAll('[alt], [aria-label], [href]'),
+      ].flatMap((el) =>
+        ['alt', 'aria-label', 'href'].map((a) => el.getAttribute(a) ?? ''),
+      );
+      return {
+        text: document.body.innerText,
+        title: document.title,
+        meta,
+        attrs,
+      };
+    });
+    // Without content the checks below would pass on an empty page.
+    expect(found.title).not.toBe('');
+    expect(found.meta).not.toBe('');
+    expect(found.attrs.length).toBeGreaterThan(0);
+    const marker = /placeholder/i;
+    expect(found.text).not.toMatch(marker);
+    expect(found.title).not.toMatch(marker);
+    expect(found.meta).not.toMatch(marker);
+    expect(found.attrs.filter((v) => marker.test(v))).toEqual([]);
+  });
+}
