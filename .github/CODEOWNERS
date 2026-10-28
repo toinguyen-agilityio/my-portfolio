@@ -3,6 +3,7 @@
 /CLAUDE.md @toinguyen-agilityio
 /.mcp.json @toinguyen-agilityio
 /.github/workflows/claude.yml @toinguyen-agilityio
+/.github/workflows/claude-review.yml @toinguyen-agilityio
 
 # Team conventions
 /CONTRIBUTING.md @toinguyen-agilityio
