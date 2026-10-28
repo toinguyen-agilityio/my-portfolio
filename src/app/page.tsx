@@ -1,20 +1,19 @@
+import { About } from '@/components/About';
 import { ContactSection } from '@/components/ContactSection';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Section } from '@/components/Section';
-import { profile } from '@/content';
+import { SkillsSection } from '@/components/SkillsSection';
 
-// The section tickets (#19, #21, #22, #23) fill in these empty sections.
+// The Projects ticket (#21) fills in the last empty section.
 export default function Home() {
   return (
     <>
       <Header />
       <main id="main">
-        {/* Hidden until the About ticket (#19) adds the real H1. */}
-        <h1 className="sr-only">{profile.name}</h1>
-        <Section id="about" title="About" />
+        <About />
         <Section id="projects" title="Projects" tone="surface" />
-        <Section id="skills" title="Skills" />
+        <SkillsSection />
         <ContactSection />
       </main>
       <Footer />

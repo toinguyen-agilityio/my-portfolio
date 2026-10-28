@@ -7,6 +7,8 @@ export type Profile = {
   headline: string;
   bio: string;
   portraitAlt: string;
+  projectsCta: string;
+  contactCta: string;
 };
 
 export type ThumbnailKind = 'kanban' | 'dashboard' | 'components';
@@ -49,6 +51,8 @@ export const profile = {
     '[PLACEHOLDER] Frontend engineer building fast, accessible web apps',
   bio: '[PLACEHOLDER] I design and build web products with React and TypeScript. Right now I am focused on performance, accessibility and clean design systems that teams enjoy using.',
   portraitAlt: '[PLACEHOLDER] Portrait of Huy Pham',
+  projectsCta: 'View projects',
+  contactCta: 'Contact me',
 } satisfies Profile;
 
 export const projects = [
@@ -155,3 +159,27 @@ export const contactSection = {
   title: 'Contact',
   emailLabel: 'Email',
 } satisfies ContactSection;
+
+export type SkillsSection = {
+  title: string;
+  intro: string;
+};
+
+export const skillsSection = {
+  title: 'Skills',
+  intro: '[PLACEHOLDER] The tools and practices I reach for every day.',
+} satisfies SkillsSection;
+
+export type NotFound = {
+  eyebrow: string;
+  title: string;
+  text: string;
+  backLabel: string;
+};
+
+export const notFound = {
+  eyebrow: 'Error 404',
+  title: 'Page not found',
+  text: 'The page you are looking for does not exist or has moved.',
+  backLabel: 'Back to home',
+} satisfies NotFound;
