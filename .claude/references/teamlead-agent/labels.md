@@ -1,6 +1,6 @@
 # Labels and status flow
 
-Create missing labels with `gh api -X POST repos/<owner>/<repo>/labels`. Every ticket gets exactly one priority and one size label, plus one or more area labels. Each ticket also goes into the GitHub milestone for its plan milestone, for example `M1 – Local v1`.
+Create missing labels with `gh api repos/<owner>/<repo>/labels -X POST`. Every ticket gets exactly one priority and one size label, plus one or more area labels. Each ticket also goes into the GitHub milestone for its plan milestone, for example `M1 – Local v1`.
 
 | Label | Color | Meaning |
 |---|---|---|
