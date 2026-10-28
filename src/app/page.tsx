@@ -1,6 +1,7 @@
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Section } from '@/components/Section';
+import { SkillsSection } from '@/components/SkillsSection';
 import { profile } from '@/content';
 
 // The section tickets (#19, #21, #22, #23) fill in these empty sections.
@@ -13,7 +14,7 @@ export default function Home() {
         <h1 className="sr-only">{profile.name}</h1>
         <Section id="about" title="About" />
         <Section id="projects" title="Projects" tone="surface" />
-        <Section id="skills" title="Skills" />
+        <SkillsSection />
         <Section id="contact" title="Contact" tone="surface" />
       </main>
       <Footer />

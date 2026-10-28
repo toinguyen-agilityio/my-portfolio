@@ -145,3 +145,8 @@ export const seo = {
   description:
     '[PLACEHOLDER] Personal portfolio of Huy Pham, a frontend engineer: projects, skills and contact details.',
 } satisfies Seo;
+
+export const skillsSection = {
+  title: 'Skills',
+  intro: '[PLACEHOLDER] The tools and practices I reach for every day.',
+};
