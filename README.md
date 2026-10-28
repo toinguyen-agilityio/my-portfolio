@@ -132,9 +132,9 @@ Deployed to Vercel on the default Vercel URL. _Setup steps to be added._
 
 ## 🏷 Content Placeholders
 
-v1 ships with placeholder text, images and links. Every placeholder is marked with `[PLACEHOLDER]`, including image alt text, the page title, the meta description and link targets.
+For the M1 demo, `src/content.ts` holds realistic mock content: a fictional persona, Jordan Ellis, with demo projects, skills and contact details. Every link points to the reserved `example.com` domain, including the `mailto:` address. Each mock block is marked with a `// DEMO-CONTENT: replace in T8a (M3)` comment. Stable UI labels such as `View projects` carry no marker.
 
-Before launch, search the repo for `[PLACEHOLDER]`. Launch requires the search to return nothing.
+The owner's real content replaces the mock content in T8a (M3). Before launch, the placeholder audit searches the repo for `DEMO-CONTENT`, `example.com` and `[PLACEHOLDER]`. Launch requires all three searches to return nothing in `src/`.
 
 ## 🗺 Roadmap
 

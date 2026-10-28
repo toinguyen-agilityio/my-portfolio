@@ -1,5 +1,7 @@
-// All copy, links and image references live here. Every value except the
-// owner's name is a placeholder marked with [PLACEHOLDER] until M3 content replacement.
+// All copy, links and image references live here. The person, projects and links below are
+// mock demo data for the M1 demo, not real content: Jordan Ellis is a fictional persona and
+// every link points to the reserved example.com domain. Each mock block is marked with
+// DEMO-CONTENT; replace all of them with the owner's real content in T8a (M3).
 
 export type Profile = {
   name: string;
@@ -44,110 +46,90 @@ export type Seo = {
   description: string;
 };
 
+// DEMO-CONTENT: replace in T8a (M3)
 export const profile = {
-  name: 'Huy Pham',
-  greeting: '[PLACEHOLDER] Hi, I am Huy Pham',
-  headline:
-    '[PLACEHOLDER] Frontend engineer building fast, accessible web apps',
-  bio: '[PLACEHOLDER] I design and build web products with React and TypeScript. Right now I am focused on performance, accessibility and clean design systems that teams enjoy using.',
-  portraitAlt: '[PLACEHOLDER] Portrait of Huy Pham',
+  name: 'Jordan Ellis',
+  greeting: 'Hi, I am Jordan Ellis',
+  headline: 'Frontend engineer building fast, accessible web apps',
+  bio: 'I design and build web products with React and TypeScript. Right now I am focused on performance, accessibility and clean design systems that teams enjoy using.',
+  portraitAlt: 'Portrait of Jordan Ellis',
   projectsCta: 'View projects',
   contactCta: 'Contact me',
 } satisfies Profile;
 
+// DEMO-CONTENT: replace in T8a (M3)
 export const projects = [
   {
-    title: '[PLACEHOLDER] Task Flow',
+    title: 'Task Flow',
     description:
-      '[PLACEHOLDER] A kanban board with drag and drop, keyboard shortcuts and offline sync. I built the whole frontend.',
-    tags: [
-      '[PLACEHOLDER] React',
-      '[PLACEHOLDER] TypeScript',
-      '[PLACEHOLDER] Vite',
-    ],
-    demoUrl: 'https://example.com/?ph=[PLACEHOLDER]',
-    sourceUrl: 'https://example.com/?ph=[PLACEHOLDER]',
+      'A kanban board with drag and drop, keyboard shortcuts and offline sync. I built the whole frontend.',
+    tags: ['React', 'TypeScript', 'Vite'],
+    demoUrl: 'https://example.com/demo/task-flow',
+    sourceUrl: 'https://example.com/source/task-flow',
     thumbnail: 'kanban',
-    thumbnailAlt: '[PLACEHOLDER] Screenshot of Task Flow',
+    thumbnailAlt: 'Task Flow kanban board with three columns of task cards',
   },
   {
-    title: '[PLACEHOLDER] Weather Now',
+    title: 'Weather Now',
     description:
-      '[PLACEHOLDER] A fast weather dashboard with hourly charts and a clean mobile layout. Scores 100 on Lighthouse.',
-    tags: [
-      '[PLACEHOLDER] Next.js',
-      '[PLACEHOLDER] Tailwind',
-      '[PLACEHOLDER] Charts',
-    ],
-    demoUrl: 'https://example.com/?ph=[PLACEHOLDER]',
-    sourceUrl: 'https://example.com/?ph=[PLACEHOLDER]',
+      'A fast weather dashboard with hourly charts and a clean mobile layout. Scores 100 on Lighthouse.',
+    tags: ['Next.js', 'Tailwind', 'Charts'],
+    demoUrl: 'https://example.com/demo/weather-now',
+    sourceUrl: 'https://example.com/source/weather-now',
     thumbnail: 'dashboard',
-    thumbnailAlt: '[PLACEHOLDER] Screenshot of Weather Now',
+    thumbnailAlt: 'Weather Now dashboard with a bar chart of the coming hours',
   },
   {
-    title: '[PLACEHOLDER] Kit UI',
+    title: 'Kit UI',
     description:
-      '[PLACEHOLDER] An open source component library focused on accessibility, with full keyboard support and dark mode.',
-    tags: [
-      '[PLACEHOLDER] Design system',
-      '[PLACEHOLDER] a11y',
-      '[PLACEHOLDER] Storybook',
-    ],
-    demoUrl: 'https://example.com/?ph=[PLACEHOLDER]',
-    sourceUrl: 'https://example.com/?ph=[PLACEHOLDER]',
+      'An open source component library focused on accessibility, with full keyboard support and dark mode.',
+    tags: ['Design system', 'a11y', 'Storybook'],
+    demoUrl: 'https://example.com/demo/kit-ui',
+    sourceUrl: 'https://example.com/source/kit-ui',
     thumbnail: 'components',
-    thumbnailAlt: '[PLACEHOLDER] Screenshot of Kit UI',
+    thumbnailAlt:
+      'Kit UI components: two cards, two buttons, a toggle switch and a text field',
   },
 ] satisfies readonly Project[];
 
+// DEMO-CONTENT: replace in T8a (M3)
 export const skillGroups = [
   {
-    name: '[PLACEHOLDER] Frontend',
-    items: [
-      '[PLACEHOLDER] React',
-      '[PLACEHOLDER] TypeScript',
-      '[PLACEHOLDER] Next.js',
-      '[PLACEHOLDER] Tailwind CSS',
-      '[PLACEHOLDER] Accessibility',
-    ],
+    name: 'Frontend',
+    items: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Accessibility'],
   },
   {
-    name: '[PLACEHOLDER] Tooling',
-    items: [
-      '[PLACEHOLDER] Git',
-      '[PLACEHOLDER] Vite',
-      '[PLACEHOLDER] Jest',
-      '[PLACEHOLDER] Playwright',
-      '[PLACEHOLDER] Figma',
-    ],
+    name: 'Tooling',
+    items: ['Git', 'Vite', 'Jest', 'Playwright', 'Figma'],
   },
 ] satisfies readonly SkillGroup[];
 
+// DEMO-CONTENT: replace in T8a (M3)
 export const contact = {
   // Display text only. Build the mailto: link from mailtoHref, never from email.
-  email: 'placeholder@example.com [PLACEHOLDER]',
+  email: 'jordan.ellis@example.com',
   // Must be a valid, percent-encoded mailto: URI, e.g. ?subject=Hello%20there.
-  // The marker is intentionally encoded (%5BPLACEHOLDER%5D), so audit with `grep PLACEHOLDER`.
-  mailtoHref: 'mailto:placeholder@example.com?subject=%5BPLACEHOLDER%5D',
-  intro:
-    '[PLACEHOLDER] Have a project in mind or just want to say hi? Send me an email.',
+  mailtoHref: 'mailto:jordan.ellis@example.com?subject=Hello%20Jordan',
+  intro: 'Have a project in mind or just want to say hi? Send me an email.',
 } satisfies Contact;
 
+// DEMO-CONTENT: replace in T8a (M3)
 export const socials = [
   {
-    label: '[PLACEHOLDER] GitHub',
-    href: 'https://example.com/?ph=[PLACEHOLDER]',
+    label: 'GitHub',
+    href: 'https://example.com/github/jordan-ellis',
   },
   {
-    label: '[PLACEHOLDER] LinkedIn',
-    href: 'https://example.com/?ph=[PLACEHOLDER]',
+    label: 'LinkedIn',
+    href: 'https://example.com/linkedin/jordan-ellis',
   },
 ] satisfies readonly Social[];
 
+// DEMO-CONTENT: replace in T8a (M3)
 export const seo = {
-  title: '[PLACEHOLDER] Huy Pham - Portfolio',
+  title: 'Jordan Ellis - Frontend Engineer',
   description:
-    '[PLACEHOLDER] Personal portfolio of Huy Pham, a frontend engineer: projects, skills and contact details.',
+    'Personal portfolio of Jordan Ellis, a frontend engineer: projects, skills and contact details.',
 } satisfies Seo;
 
 export type ProjectsSection = {
@@ -159,7 +141,8 @@ export type ProjectsSection = {
 
 export const projectsSection = {
   title: 'Projects',
-  intro: '[PLACEHOLDER] A few things I have built recently.',
+  // DEMO-CONTENT: replace in T8a (M3)
+  intro: 'A few things I have built recently.',
   demoLabel: 'Live demo',
   sourceLabel: 'Source',
 } satisfies ProjectsSection;
@@ -181,7 +164,8 @@ export type SkillsSection = {
 
 export const skillsSection = {
   title: 'Skills',
-  intro: '[PLACEHOLDER] The tools and practices I reach for every day.',
+  // DEMO-CONTENT: replace in T8a (M3)
+  intro: 'The tools and practices I reach for every day.',
 } satisfies SkillsSection;
 
 export type NotFound = {

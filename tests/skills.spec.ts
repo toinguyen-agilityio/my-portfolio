@@ -16,8 +16,6 @@ test('renders every skill group and item from content.ts', async ({ page }) => {
         exact: true,
       });
       await expect(chip).toBeVisible();
-      // Every item is a placeholder in M1, so check the rendered text, not the data.
-      await expect(chip).toContainText('[PLACEHOLDER]');
     }
   }
 });
