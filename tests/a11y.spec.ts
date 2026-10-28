@@ -64,6 +64,8 @@ for (const { name, path } of pages) {
       await page.keyboard.press('Tab');
       await page.keyboard.press('Enter');
       await expect(page).toHaveURL(/#main$/);
+      // The hash changes even if focus stays put, so check that <main> really has focus.
+      await expect(page.locator('main#main')).toBeFocused();
     });
   });
 }
