@@ -19,7 +19,7 @@ importers:
         version: 19.3.1(react@19.3.1)
     devDependencies:
       '@tailwindcss/postcss':
-        specifier: ^4.3.3
+        specifier: 4.3.3
         version: 4.3.3
       '@types/node':
         specifier: ^22.20.5
@@ -43,7 +43,7 @@ importers:
         specifier: ^6.10.2
         version: 6.10.2(eslint@9.39.5(jiti@2.7.0))
       postcss:
-        specifier: ^8.5.32
+        specifier: 8.5.32
         version: 8.5.32
       prettier:
         specifier: ^3.9.10
@@ -52,7 +52,7 @@ importers:
         specifier: 14.2.6
         version: 14.2.6
       tailwindcss:
-        specifier: ^4.3.3
+        specifier: 4.3.3
         version: 4.3.3
       typescript:
         specifier: 5.9.3
