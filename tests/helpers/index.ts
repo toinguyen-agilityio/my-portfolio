@@ -2,6 +2,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, type Page } from '@playwright/test';
 
 // Fails when axe finds serious or critical WCAG 2.1 A/AA violations on the current page.
+// Moderate and minor violations are allowed on purpose, so they do not fail the tests.
 export async function expectNoA11yViolations(page: Page) {
   const { violations } = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
