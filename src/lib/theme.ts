@@ -41,6 +41,11 @@ export function chooseTheme(theme: Theme) {
 // Follows live system changes until the user picks a theme. Returns a cleanup function.
 export function followSystemTheme() {
   const query = matchMedia('(prefers-color-scheme: dark)');
+  // Re-apply once on mount: hydration can reset the theme-color metas, and the system theme
+  // may have changed since the pre-paint script ran.
+  applyTheme(
+    sessionChoice ?? readStoredTheme() ?? (query.matches ? 'dark' : 'light'),
+  );
   const onChange = (event: MediaQueryListEvent) => {
     if (sessionChoice || readStoredTheme()) return;
     applyTheme(event.matches ? 'dark' : 'light');
