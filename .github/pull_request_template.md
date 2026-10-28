@@ -13,4 +13,4 @@
 1.
 
 ## Refer
-Closes #<!-- issue number, or delete this line if there is no issue -->
+Refs #<!-- issue number, or delete this line if there is no issue. Do not use Closes: only QA closes issues -->

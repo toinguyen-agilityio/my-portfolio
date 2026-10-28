@@ -12,6 +12,7 @@ The rules live in `CONTRIBUTING.md` at the repo root. Read it before you act, an
 1. Read the issue with `gh issue view <number>` to pick the type and a short description.
 2. Update `main`: `git switch main && git pull --ff-only`.
 3. Create the branch: `git switch -c <type>/<issue>-<short-description>`. Use 2–5 lowercase words for the description.
+4. If there is an issue, move it to `In Progress`: `bash .claude/scripts/set-issue-status.sh <issue> "In Progress"`.
 
 If the user is already on a feature branch with work in progress, ask before you switch branches.
 
@@ -30,10 +31,15 @@ If the user is already on a feature branch with work in progress, ask before you
    - **Summary:** one bullet per file or area, as `` `path` ``: what changed and why.
    - **Evidence:** real test output or measurements from this session. Never invent results; if something could not be checked, say so in bold and explain why.
    - **How to test:** commands and steps with the expected result.
-   - End with reference, or delete that line if there is no issue.
+   - End with `Refs #<issue>`, or delete that line if there is no issue. Never write `Closes`, `Fixes` or `Resolves`: only QA closes issues.
 4. Create the PR with `gh pr create --base main --title "<title>" --body-file <file>`. Write the body to a temporary file first, so that quotes and newlines survive.
-5. Give the user the PR link.
+5. If there is an issue, move it to `In Review`: `bash .claude/scripts/set-issue-status.sh <issue> "In Review"`.
+6. Give the user the PR link.
+
+## After the PR is merged
+
+Do this when you merge the PR yourself, or when the user tells you it is merged. If there is an issue, move it to `QA`: `bash .claude/scripts/set-issue-status.sh <issue> "QA"`. Never move it to `Done` and never close it; QA does that after checking.
 
 ## Before you finish
 
-Check the branch name and PR title against the patterns in `CONTRIBUTING.md`.
+Check the branch name and PR title against the patterns in `CONTRIBUTING.md`, and check that the issue status on the board matches the step you finished.

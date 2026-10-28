@@ -19,3 +19,6 @@ test-results/
 
 # Local test recordings
 screenshot/
+
+# Local Claude agent worktrees
+.claude/worktrees/
