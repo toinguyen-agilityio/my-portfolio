@@ -1,0 +1,102 @@
+import { expect, test, type Page } from '@playwright/test';
+import {
+  expectNoA11yViolations,
+  expectNoHorizontalScroll,
+  setTheme,
+} from './helpers';
+
+// Smooth scrolling would make us measure mid-scroll.
+test.use({ reducedMotion: 'reduce' });
+
+const sizes = [
+  { name: '320', width: 320, height: 640 },
+  { name: '375', width: 375, height: 667 },
+  { name: '768', width: 768, height: 1024 },
+  { name: '1280', width: 1280, height: 800 },
+  { name: '375x667 landscape', width: 667, height: 375 },
+];
+
+const sections = ['About', 'Projects', 'Skills', 'Contact'];
+
+// The part of the header that is still on screen, 0 when it has scrolled away.
+const headerBottom = (page: Page) =>
+  page
+    .locator('header')
+    .evaluate((el) => Math.max(0, el.getBoundingClientRect().bottom));
+
+for (const size of sizes) {
+  test.describe(size.name, () => {
+    test.beforeEach(async ({ page }) => {
+      await page.setViewportSize({ width: size.width, height: size.height });
+      await page.goto('/');
+    });
+
+    test('nav links put the section heading below the header', async ({
+      page,
+    }) => {
+      for (const name of sections) {
+        await page
+          .getByRole('navigation', { name: 'Sections' })
+          .getByRole('link', { name })
+          .click();
+        const heading = page.getByRole('heading', { level: 2, name });
+        await expect(heading).toBeInViewport({ ratio: 1 });
+        const top = await heading.evaluate(
+          (el) => el.getBoundingClientRect().top,
+        );
+        expect(top).toBeGreaterThanOrEqual(await headerBottom(page));
+      }
+    });
+
+    test('no horizontal scroll', async ({ page }) => {
+      await expectNoHorizontalScroll(page);
+    });
+  });
+}
+
+test('the 4 nav links fit on one row at 320px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 640 });
+  await page.goto('/');
+  const boxes = await page
+    .getByRole('navigation', { name: 'Sections' })
+    .getByRole('link')
+    .evaluateAll((els) =>
+      els.map((el) => {
+        const r = el.getBoundingClientRect();
+        return { top: r.top, right: r.right };
+      }),
+    );
+  expect(boxes).toHaveLength(4);
+  expect(new Set(boxes.map((b) => b.top)).size).toBe(1);
+  expect(Math.max(...boxes.map((b) => b.right))).toBeLessThanOrEqual(320);
+});
+
+test('header is sticky at 1280x800 and static at 667x375', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/');
+  const position = () =>
+    page.locator('header').evaluate((el) => getComputedStyle(el).position);
+  expect(await position()).toBe('sticky');
+  await page.setViewportSize({ width: 667, height: 375 });
+  expect(await position()).toBe('static');
+});
+
+test('name link goes to the top', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/#contact');
+  await page.getByRole('link', { name: 'Huy Pham' }).first().click();
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
+});
+
+for (const theme of ['light', 'dark'] as const) {
+  for (const width of [320, 1280]) {
+    test(`no serious a11y violations, ${theme}, ${width}px`, async ({
+      page,
+    }) => {
+      await page.setViewportSize({ width, height: 800 });
+      await page.goto('/');
+      await setTheme(page, theme);
+      await expectNoA11yViolations(page);
+    });
+  }
+}

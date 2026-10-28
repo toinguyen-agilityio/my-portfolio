@@ -19,6 +19,22 @@
 
   --container-max: 1080px;
   --gutter: 24px;
+
+  /* Sticky header height. Anchors stop below it (html scroll-padding-top). */
+  --header-h: 73px; /* 72px + 1px border */
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-h: 113px; /* name row + nav row + border */
+  }
+}
+
+/* The header is static on short screens (phones in landscape), so nothing to clear. */
+@media (max-height: 480px) {
+  :root {
+    --header-h: 0px;
+  }
 }
 
 html.dark {
@@ -55,6 +71,7 @@ html.dark {
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: var(--header-h);
   }
 
   @media (prefers-reduced-motion: reduce) {
