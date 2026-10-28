@@ -81,7 +81,7 @@ Track issues on the [my-portfolio project board](https://github.com/users/toingu
 An issue is blocked only when it cannot be built in parallel with another one: feature A has to be finished before feature B can be implemented. Then B is blocked by A. Sharing an area or touching the same file is not a block.
 
 - Add a "Blocked by" link only for that kind of dependency.
-- A blocker counts as finished once its PR is merged, even while it waits in `QA`. GitHub still shows a "Blocked" badge until QA closes the blocker; ignore it.
+- A blocker counts as finished once its PR is merged, even while it waits in `QA`. Whoever merges the PR removes its "Blocked by" links from the issues it blocks, so GitHub stops showing the "Blocked" badge on them. The "Blocked by" line in each issue body stays as the record.
 
 ## Working with Claude
 
