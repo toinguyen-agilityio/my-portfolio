@@ -145,3 +145,17 @@ export const seo = {
   description:
     '[PLACEHOLDER] Personal portfolio of Huy Pham, a frontend engineer: projects, skills and contact details.',
 } satisfies Seo;
+
+export type ProjectsSection = {
+  title: string;
+  intro: string;
+  demoLabel: string;
+  sourceLabel: string;
+};
+
+export const projectsSection = {
+  title: 'Projects',
+  intro: '[PLACEHOLDER] A few things I have built recently.',
+  demoLabel: 'Live demo',
+  sourceLabel: 'Source',
+} satisfies ProjectsSection;
