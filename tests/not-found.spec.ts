@@ -18,8 +18,11 @@ test('the 404 page has no theme toggle and every link points home', async ({
   const hrefs = await page
     .getByRole('link')
     .evaluateAll((links) => links.map((a) => a.getAttribute('href')));
-  expect(hrefs.length).toBeGreaterThan(0);
-  for (const href of hrefs) expect(href).toBe('/');
+  // The skip link (#main) is the only link that does not go home.
+  const links = hrefs.filter((href) => href !== '#main');
+  expect(links.length).toBeGreaterThan(0);
+  for (const href of links) expect(href).toBe('/');
+  expect(hrefs.some((href) => href?.includes('Main.dc.html'))).toBe(false);
   await page.getByRole('link', { name: 'Back to home' }).click();
   await expect(page).toHaveURL(/\/$/);
 });

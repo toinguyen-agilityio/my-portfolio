@@ -9,7 +9,11 @@ export default function NotFound() {
   return (
     <>
       <MinimalHeader />
-      <main id="main" className="py-[clamp(48px,8vw,96px)]">
+      <main
+        id="main"
+        tabIndex={-1}
+        className="py-[clamp(48px,8vw,96px)] outline-none"
+      >
         <Container>
           <p className="text-accent text-[15px] font-semibold">
             {notFound.eyebrow}

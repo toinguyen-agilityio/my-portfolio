@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main id="main">
+      <main id="main" tabIndex={-1} className="outline-none">
         <About />
         <Section id="projects" title="Projects" tone="surface" />
         <SkillsSection />
