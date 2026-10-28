@@ -12,17 +12,14 @@ test('renders every skill group and item from content.ts', async ({ page }) => {
       skills(page).getByRole('heading', { level: 3, name: group.name }),
     ).toBeVisible();
     for (const item of group.items) {
-      await expect(
-        skills(page).getByRole('listitem').filter({ hasText: item }).first(),
-      ).toBeVisible();
+      const chip = skills(page).getByRole('listitem').getByText(item, {
+        exact: true,
+      });
+      await expect(chip).toBeVisible();
+      // Every item is a placeholder in M1, so check the rendered text, not the data.
+      await expect(chip).toContainText('[PLACEHOLDER]');
     }
   }
-  // Every item is a placeholder in M1.
-  expect(
-    skillGroups.every((g) =>
-      g.items.every((i) => i.startsWith('[PLACEHOLDER]')),
-    ),
-  ).toBe(true);
 });
 
 test('heading order is H2 then H3 inside the section', async ({ page }) => {
