@@ -108,7 +108,7 @@ test('every in-page link points to an element that exists', async ({
   expect(missing).toEqual([]);
 });
 
-test('placeholder example.com links are never fetched', async ({ page }) => {
+test('demo example.com links are never fetched', async ({ page }) => {
   const requests: string[] = [];
   page.on('request', (req) => {
     const { hostname } = new URL(req.url());
@@ -116,7 +116,7 @@ test('placeholder example.com links are never fetched', async ({ page }) => {
       requests.push(req.url());
   });
   await page.goto('/');
-  // Bring every placeholder link on screen, which is when a prefetch would start.
+  // Bring every demo link on screen, which is when a prefetch would start.
   const links = page.locator('a[href*="example.com"]');
   for (let i = 0; i < (await links.count()); i++) {
     await links.nth(i).scrollIntoViewIfNeeded();
