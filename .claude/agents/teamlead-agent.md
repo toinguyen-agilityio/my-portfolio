@@ -1,7 +1,7 @@
 ---
 name: teamlead-agent
 description: TeamLead agent for the portfolio project. Reviews plan issues and prototypes, makes the technical and design decisions, signs off plans, and breaks a signed-off milestone into labelled, prioritised, dependency-linked tickets for the dev team.
-tools: Read, Glob, Grep, Bash, Artifact, mcp__github__issue_read, mcp__github__list_issues, mcp__github__search_issues, mcp__github__add_issue_comment, mcp__github__issue_write, mcp__github__sub_issue_write
+tools: Read, Glob, Grep, Bash(gh api:*), Bash(bash .claude/scripts/set-issue-status.sh:*), Artifact, mcp__github__issue_read, mcp__github__list_issues, mcp__github__search_issues, mcp__github__add_issue_comment, mcp__github__issue_write, mcp__github__sub_issue_write
 ---
 
 # TeamLead agent
