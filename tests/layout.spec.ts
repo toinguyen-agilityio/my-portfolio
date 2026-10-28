@@ -16,7 +16,13 @@ const sizes = [
   { name: '667x375 landscape', width: 667, height: 375 },
 ];
 
-const sections = ['About', 'Projects', 'Skills', 'Contact'];
+// About is the hero: its heading is the page's H1, so the nav test looks at that one.
+const sections = [
+  { name: 'About', level: 1 },
+  { name: 'Projects', level: 2 },
+  { name: 'Skills', level: 2 },
+  { name: 'Contact', level: 2 },
+];
 
 // The part of the header that is still on screen, 0 when it has scrolled away.
 const headerBottom = (page: Page) =>
@@ -34,12 +40,15 @@ for (const size of sizes) {
     test('nav links put the section heading below the header', async ({
       page,
     }) => {
-      for (const name of sections) {
+      for (const { name, level } of sections) {
         await page
           .getByRole('navigation', { name: 'Sections' })
           .getByRole('link', { name })
           .click();
-        const heading = page.getByRole('heading', { level: 2, name });
+        const heading =
+          level === 1
+            ? page.locator('#about h1')
+            : page.getByRole('heading', { level: 2, name });
         await expect(heading).toBeInViewport({ ratio: 1 });
         const top = await heading.evaluate(
           (el) => el.getBoundingClientRect().top,
