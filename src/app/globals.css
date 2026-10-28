@@ -71,12 +71,6 @@ html.dark {
     line-height: 1.6;
   }
 
-  h1,
-  h2,
-  h3 {
-    color: var(--text);
-  }
-
   h1 {
     font-size: clamp(32px, 5.2vw, 56px);
     line-height: 1.1;
