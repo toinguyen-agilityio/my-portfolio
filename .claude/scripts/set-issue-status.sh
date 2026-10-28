@@ -6,6 +6,7 @@ OWNER=toinguyen-agilityio
 PROJECT=3
 issue=${1:?usage: set-issue-status.sh <issue-number> "<status>"}
 status=${2:?usage: set-issue-status.sh <issue-number> "<status>"}
+[[ $issue =~ ^[0-9]+$ ]] || { echo "Issue must be a number, got '$issue'" >&2; exit 1; }
 
 # Only QA moves issues to Done, on the board itself (see "Issue status" in CONTRIBUTING.md)
 case "$status" in

@@ -69,7 +69,7 @@ Track issues on the [my-portfolio project board](https://github.com/users/toingu
 |------|-------------------|-----|
 | You start work on it | `In Progress` | Dev or dev's agent |
 | You open its PR | `In Review` | Dev or dev's agent |
-| Its PR is merged | `QA` | Dev or dev's agent |
+| Its PR is merged | `QA` | Whoever merges the PR, or their agent |
 | QA has checked it and posted a comment with screenshots or a video | `Done`, and close the issue | QA only |
 
 - Devs and their agents never move an issue to `Done` and never close it. When the work is finished, it goes to `QA`.

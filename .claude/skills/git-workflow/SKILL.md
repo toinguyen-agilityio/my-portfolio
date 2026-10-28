@@ -38,7 +38,7 @@ If the user is already on a feature branch with work in progress, ask before you
 
 ## After the PR is merged
 
-If there is an issue, move it to `QA`: `bash .claude/scripts/set-issue-status.sh <issue> "QA"`. Never move it to `Done` and never close it; QA does that after checking.
+Do this when you merge the PR yourself, or when the user tells you it is merged. If there is an issue, move it to `QA`: `bash .claude/scripts/set-issue-status.sh <issue> "QA"`. Never move it to `Done` and never close it; QA does that after checking.
 
 ## Before you finish
 
