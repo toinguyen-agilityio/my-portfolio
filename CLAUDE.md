@@ -16,7 +16,7 @@ pnpm format:check        # Prettier; pnpm format fixes
 pnpm typecheck           # tsc --noEmit
 pnpm test:e2e            # builds, serves out/ on :4173, runs Playwright on 5 browser projects
 pnpm test:e2e tests/theme.spec.ts --project=chromium   # one file, one browser
-pnpm test:e2e -g "opens a new tab"                     # one test by name
+pnpm test:e2e -g "ExternalLink opens a new tab"        # one test by name
 ```
 
 ## Code style
@@ -60,7 +60,7 @@ tests/          # Playwright specs and helpers
 
 Follow `CONTRIBUTING.md` for branch names, commit messages and PR descriptions. Use the `git-workflow` skill when you create a branch, commit or open a PR.
 
-Shared agents, skills, rules and scripts live in `.claude/`. Read `.claude/README.md` before changing them. Any change to `.claude/` or `CLAUDE.md` needs its own PR.
+Shared agents, skills, rules and scripts live in `.claude/`. Read `.claude/README.md` before changing them. As that file says, every change under `.claude/` or to `CLAUDE.md` goes through a PR, and `CODEOWNERS` requires the repo owner's review.
 
 ## Environment setup
 
