@@ -1,0 +1,31 @@
+name: QA Gate
+
+on:
+  issues:
+    types: [closed]
+  # Moving a card to Done on the board sends no event to Actions, so check on a schedule too
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: qa-gate
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 1
+
+      - name: Move Done items without QA evidence back to QA
+        env:
+          # GITHUB_TOKEN cannot write user-owned projects; this is a classic PAT with repo + project scopes
+          GH_TOKEN: ${{ secrets.PROJECT_TOKEN }}
+          PROJECT_OWNER: toinguyen-agilityio
+          PROJECT_NUMBER: 3
+          REPO: ${{ github.repository }}
+        run: bash .github/scripts/qa-gate.sh
