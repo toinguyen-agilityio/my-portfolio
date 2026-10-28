@@ -24,9 +24,9 @@ export function About() {
               {profile.bio}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="#projects">View projects</Button>
+              <Button href="#projects">{profile.projectsCta}</Button>
               <Button href="#contact" variant="secondary">
-                Contact me
+                {profile.contactCta}
               </Button>
             </div>
           </div>

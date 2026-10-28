@@ -51,28 +51,25 @@ test('a long headline wraps at 320px without clipping', async ({ page }) => {
 test('text and portrait sit side by side on desktop, stacked on mobile', async ({
   page,
 }) => {
-  const top = (selector: string) =>
-    page.locator(selector).evaluate((el) => el.getBoundingClientRect().top);
+  const box = (selector: string) =>
+    page.locator(selector).evaluate((el) => {
+      const r = el.getBoundingClientRect();
+      return { top: r.top, bottom: r.bottom, left: r.left, right: r.right };
+    });
+  const text = '#about div.flex-1';
+  const portrait = '#about svg[role="img"]';
+
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/');
-  const h1Top = await top('#about h1');
-  const portraitTop = await top('#about svg[role="img"]');
-  // Same row on desktop: the portrait starts above the end of the text block, not below it.
-  expect(
-    await page
-      .locator('#about svg[role="img"]')
-      .evaluate((el) => el.getBoundingClientRect().left),
-  ).toBeGreaterThan(
-    (await page
-      .locator('#about h1')
-      .evaluate((el) => el.getBoundingClientRect().right)) - 1,
-  );
-  expect(Math.abs(portraitTop - h1Top)).toBeLessThan(400);
+  let t = await box(text);
+  let p = await box(portrait);
+  expect(p.left).toBeGreaterThanOrEqual(t.right);
+  const centre = (p.top + p.bottom) / 2;
+  expect(centre).toBeGreaterThan(t.top);
+  expect(centre).toBeLessThan(t.bottom);
 
   await page.setViewportSize({ width: 375, height: 667 });
-  expect(await top('#about svg[role="img"]')).toBeGreaterThan(
-    await page
-      .locator('#about h1')
-      .evaluate((el) => el.getBoundingClientRect().bottom),
-  );
+  t = await box(text);
+  p = await box(portrait);
+  expect(p.top).toBeGreaterThanOrEqual(t.bottom);
 });
