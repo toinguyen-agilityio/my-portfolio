@@ -1,3 +1,4 @@
+import { ContactSection } from '@/components/ContactSection';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Section } from '@/components/Section';
@@ -14,7 +15,7 @@ export default function Home() {
         <Section id="about" title="About" />
         <Section id="projects" title="Projects" tone="surface" />
         <Section id="skills" title="Skills" />
-        <Section id="contact" title="Contact" tone="surface" />
+        <ContactSection />
       </main>
       <Footer />
     </>
