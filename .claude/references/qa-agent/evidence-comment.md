@@ -4,10 +4,10 @@
 
 GitHub's API cannot attach images to a comment, so the evidence lives on one orphan branch per ticket:
 
-- Name it `qa/evidence-<issue>`. It holds only evidence files, under `qa-evidence/<issue>/<YYYY-MM-DD>/`. It is never merged and has no PR.
-- Create it in a temporary worktree (`git worktree add --detach <dir>`, then `git switch --orphan qa/evidence-<issue>` inside it), commit the files and push. On a later pass, add a new date folder to the same branch.
+- Name it `chore/<issue>-qa-evidence`, which follows the branch rules in `CONTRIBUTING.md`. It holds only evidence files, under `qa-evidence/<issue>/<YYYY-MM-DD>/`. It is never merged and has no PR.
+- Create it in a temporary worktree (`git worktree add --detach <dir>`, then `git switch --orphan chore/<issue>-qa-evidence` inside it), commit the files and push. On a later pass, add a new date folder to the same branch.
 - Keep one pass under about 5 MB: viewport screenshots rather than full pages where that is enough, and one short `.webm` walkthrough.
-- Embed images with `https://github.com/toinguyen-agilityio/my-portfolio/blob/qa/evidence-<issue>/<path>?raw=true`. Link the video, because it does not play inline.
+- Embed images with `https://github.com/toinguyen-agilityio/my-portfolio/blob/chore/<issue>-qa-evidence/<path>?raw=true`. Link the video, because it does not play inline.
 
 ## Comment
 
