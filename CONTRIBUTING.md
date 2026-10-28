@@ -57,9 +57,23 @@ chore(agents): move BA templates into reference files
 - **Title:** uses the commit message format above. PRs are squash-merged, so the title becomes the commit on `main`.
 - **Description:** follow the [PR template](.github/pull_request_template.md): `Why`, `Summary`, `Evidence`, `How to test` and `Refer`. Do not delete the headings.
 - **Evidence:** show that the change works, for example test output or screenshots. If something was not checked, say so and say why.
-- **Refer:** write `Closes #<number>` under `Refer` so the issue closes on merge. Delete that line if there is no issue.
+- **Refer:** write `Refs #<number>` under `Refer`. Do not use `Closes`, `Fixes` or `Resolves`: they close the issue on merge, and only QA closes issues (see [Issue status](#issue-status)). Delete that line if there is no issue.
 - **Size:** keep one story or one fix per PR.
 - **Review:** at least one approval before merge. Changes covered by `.github/CODEOWNERS` need the repo owner's approval.
+
+## Issue status
+
+Track issues on the [my-portfolio project board](https://github.com/users/toinguyen-agilityio/projects/3). The board's `Status` field is the source of truth.
+
+| When | Move the issue to | Who |
+|------|-------------------|-----|
+| You start work on it | `In Progress` | Dev or dev's agent |
+| You open its PR | `In Review` | Dev or dev's agent |
+| Its PR is merged | `QA` | Dev or dev's agent |
+| QA has checked it and posted a comment with screenshots or a video | `Done`, and close the issue | QA only |
+
+- Devs and their agents never move an issue to `Done` and never close it. When the work is finished, it goes to `QA`.
+- Change the status with `bash .claude/scripts/set-issue-status.sh <issue-number> "<status>"`, for example `bash .claude/scripts/set-issue-status.sh 12 "QA"`. It needs a `gh` login with the `project` scope (`gh auth refresh -s project`).
 
 ## Working with Claude
 
