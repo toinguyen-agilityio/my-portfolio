@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { seo } from '@/content';
 import './globals.css';
 
 const inter = Inter({
@@ -10,7 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Huy Pham',
+  title: seo.title,
+  description: seo.description,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
