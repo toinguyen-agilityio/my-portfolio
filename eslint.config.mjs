@@ -1,8 +1,8 @@
-import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
-import jsxA11y from "eslint-plugin-jsx-a11y";
-import prettier from "eslint-config-prettier/flat";
+import { defineConfig, globalIgnores } from 'eslint/config';
+import nextVitals from 'eslint-config-next/core-web-vitals';
+import nextTs from 'eslint-config-next/typescript';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import prettier from 'eslint-config-prettier/flat';
 
 export default defineConfig([
   ...nextVitals,
@@ -11,5 +11,5 @@ export default defineConfig([
   { rules: jsxA11y.flatConfigs.recommended.rules },
   // Keep last so it turns off every rule that conflicts with Prettier.
   prettier,
-  globalIgnores([".next/**", "out/**", "next-env.d.ts", "pnpm-lock.yaml"]),
+  globalIgnores(['.next/**', 'out/**', 'next-env.d.ts', 'pnpm-lock.yaml']),
 ]);
