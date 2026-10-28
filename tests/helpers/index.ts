@@ -17,11 +17,16 @@ export async function expectNoA11yViolations(page: Page) {
 
 // Fails when the page scrolls sideways, which means some content overflows the viewport.
 export async function expectNoHorizontalScroll(page: Page) {
-  const { scrollWidth, clientWidth } = await page.evaluate(() => ({
-    scrollWidth: document.documentElement.scrollWidth,
-    clientWidth: document.documentElement.clientWidth,
-  }));
+  const { scrollWidth, bodyScrollWidth, clientWidth } = await page.evaluate(
+    () => ({
+      scrollWidth: document.documentElement.scrollWidth,
+      bodyScrollWidth: document.body.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+    }),
+  );
   expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
+  // A wrapper with overflow-x: hidden would clip content without widening <html>.
+  expect(bodyScrollWidth).toBeLessThanOrEqual(clientWidth);
 }
 
 // Switches the theme by toggling the `dark` class on <html>, the same hook the CSS tokens use.
