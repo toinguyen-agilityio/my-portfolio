@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import type { ReactNode } from 'react';
+import { seo } from '@/content';
 import './globals.css';
 
 const inter = Inter({
@@ -10,7 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Huy Pham',
+  title: seo.title,
+  description: seo.description,
 };
 
 // Colors match --bg in globals.css. The pre-paint script and ThemeToggle keep them in sync with the choice.
