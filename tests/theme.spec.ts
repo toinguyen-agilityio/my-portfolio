@@ -50,9 +50,23 @@ test.describe('system light', () => {
   }) => {
     await page.goto('/');
     await toggle(page).click();
+    // Reload drops the in-memory session choice, so only the stored value can win now.
+    await page.reload();
     await page.emulateMedia({ colorScheme: 'dark' });
     await page.emulateMedia({ colorScheme: 'light' });
     expect(await isDark(page)).toBe(true);
+  });
+
+  test('a stored choice sets the theme-color metas on load', async ({
+    page,
+  }) => {
+    await page.goto('/');
+    await toggle(page).click();
+    await page.reload();
+    const colors = await page
+      .locator('meta[name="theme-color"]')
+      .evaluateAll((metas) => metas.map((m) => (m as HTMLMetaElement).content));
+    expect(new Set(colors)).toEqual(new Set(['#0f1117']));
   });
 
   test('follows live system changes until a choice is made', async ({
