@@ -95,4 +95,10 @@ html.dark {
     outline: 3px solid var(--accent);
     outline-offset: 2px;
   }
+
+  /* ThemeToggle: moon in light, sun in dark, switched by the same class as the tokens. */
+  html.dark .theme-icon-moon,
+  html:not(.dark) .theme-icon-sun {
+    display: none;
+  }
 }
