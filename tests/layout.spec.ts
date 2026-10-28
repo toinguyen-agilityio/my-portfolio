@@ -13,7 +13,7 @@ const sizes = [
   { name: '375', width: 375, height: 667 },
   { name: '768', width: 768, height: 1024 },
   { name: '1280', width: 1280, height: 800 },
-  { name: '375x667 landscape', width: 667, height: 375 },
+  { name: '667x375 landscape', width: 667, height: 375 },
 ];
 
 const sections = ['About', 'Projects', 'Skills', 'Contact'];
@@ -79,6 +79,23 @@ test('header is sticky at 1280x800 and static at 667x375', async ({ page }) => {
   expect(await position()).toBe('sticky');
   await page.setViewportSize({ width: 667, height: 375 });
   expect(await position()).toBe('static');
+});
+
+test('anchors still clear a header that grows', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto('/');
+  await page.locator('header').evaluate((el) => {
+    el.style.paddingBottom = '60px';
+  });
+  await expect
+    .poll(() =>
+      page.evaluate(() =>
+        parseFloat(
+          document.documentElement.style.getPropertyValue('--header-h'),
+        ),
+      ),
+    )
+    .toBeGreaterThan(130);
 });
 
 test('name link goes to the top', async ({ page }) => {

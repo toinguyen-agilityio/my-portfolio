@@ -1,8 +1,9 @@
 import { profile } from '@/content';
 import { ThemeToggle } from './ThemeToggle';
 import { Container } from './Container';
+import { HeaderOffset } from './HeaderOffset';
 
-export const navLinks = [
+const navLinks = [
   { href: '#about', label: 'About' },
   { href: '#projects', label: 'Projects' },
   { href: '#skills', label: 'Skills' },
@@ -13,7 +14,7 @@ const navLink =
   'text-text hover:text-accent inline-flex min-h-11 items-center rounded-md px-3 text-[15px] font-medium no-underline max-[400px]:px-1.5 max-[400px]:text-[14px]';
 
 // Sticky, except on short screens. At 640px and below the nav moves to its own row and
-// the toggle stays next to the name. Keep --header-h in globals.css in sync with its height.
+// the toggle stays next to the name. HeaderOffset sets --header-h from its real height; globals.css has the fallback.
 export function Header() {
   return (
     <header className="border-line bg-bg sticky top-0 z-10 border-b [@media(max-height:480px)]:static">
@@ -38,6 +39,7 @@ export function Header() {
           <ThemeToggle />
         </div>
       </Container>
+      <HeaderOffset />
     </header>
   );
 }
