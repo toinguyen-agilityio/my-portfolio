@@ -1,6 +1,6 @@
 import { contact, contactSection, socials } from '@/content';
 import { buttonClasses } from './Button';
-import { ExternalLink } from './ExternalLink';
+import { ExternalLink, textLinkClasses } from './ExternalLink';
 import { Section } from './Section';
 
 function ArrowIcon() {
@@ -35,7 +35,7 @@ export function ContactSection() {
       {/* The address is visible text, so it can be read and copied with no mail client. */}
       <a
         href={contact.mailtoHref}
-        className="text-accent mt-1 inline-block text-[clamp(18px,3.4vw,28px)] font-semibold underline decoration-1 underline-offset-4 [overflow-wrap:anywhere] hover:decoration-2"
+        className={`${textLinkClasses} mt-1 max-w-full text-[clamp(18px,3.4vw,28px)] font-semibold [overflow-wrap:anywhere]`}
       >
         {contact.email}
       </a>
