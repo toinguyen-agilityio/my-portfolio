@@ -29,7 +29,7 @@
 <what the next tickets cover, optional>
 
 ## Dependencies
-- **Blocked by:** #<n>, #<n> | none, can start now
+- **Blocked by:** #<n>, #<n> | none, can start now. Only list tickets that must be finished before this one can be built (see "Blocked issues" in `CONTRIBUTING.md`).
 - **Blocks:** #<n> | nothing (end of a chain)
 
 ---
