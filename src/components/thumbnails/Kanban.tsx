@@ -1,5 +1,5 @@
 export function Kanban() {
-  const cols = [16, 118, 220];
+  const cols = [12, 116, 220];
   return (
     <svg
       viewBox="0 0 320 180"

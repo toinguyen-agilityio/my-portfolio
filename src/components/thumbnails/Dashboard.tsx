@@ -20,15 +20,8 @@ export function Dashboard() {
       <rect x="30" y="28" width="60" height="6" rx="3" fill="var(--text)" />
       <rect x="30" y="40" width="36" height="5" rx="2.5" fill="var(--muted)" />
       <rect x="236" y="28" width="54" height="18" rx="9" fill="var(--accent)" />
-      {[70, 100, 130].map((y) => (
-        <line
-          key={y}
-          x1="30"
-          x2="290"
-          y1={y + 30}
-          y2={y + 30}
-          stroke="var(--line)"
-        />
+      {[90, 110, 130].map((y) => (
+        <line key={y} x1="30" x2="290" y1={y} y2={y} stroke="var(--line)" />
       ))}
       {bars.map((h, i) => (
         <rect
