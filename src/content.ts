@@ -149,3 +149,17 @@ export const seo = {
   description:
     '[PLACEHOLDER] Personal portfolio of Huy Pham, a frontend engineer: projects, skills and contact details.',
 } satisfies Seo;
+
+export type NotFound = {
+  eyebrow: string;
+  title: string;
+  text: string;
+  backLabel: string;
+};
+
+export const notFound = {
+  eyebrow: 'Error 404',
+  title: 'Page not found',
+  text: 'The page you are looking for does not exist or has moved.',
+  backLabel: 'Back to home',
+} satisfies NotFound;
