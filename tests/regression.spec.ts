@@ -50,7 +50,12 @@ for (const size of sizes) {
       const hrefs = await page
         .getByRole('navigation', { name: 'Sections' })
         .getByRole('link')
-        .evaluateAll((as) => as.map((a) => a.getAttribute('href')!));
+        .evaluateAll((as) =>
+          as
+            .map((a) => a.getAttribute('href')!)
+            // Only real section anchors: "#" or an off-page link has no section to land on.
+            .filter((href) => /^#.+/.test(href)),
+        );
       expect(hrefs.length).toBeGreaterThan(0);
       for (const href of hrefs) {
         await page
@@ -58,7 +63,9 @@ for (const size of sizes) {
           .locator(`a[href="${href}"]`)
           .click();
         // The first heading of the target section: the H1 for the hero, the H2 elsewhere.
-        const heading = page.locator(`${href} :is(h1, h2)`).first();
+        const heading = page
+          .locator(`[id="${href.slice(1)}"] :is(h1, h2)`)
+          .first();
         await expect(heading).toBeInViewport({ ratio: 1 });
         const top = await heading.evaluate(
           (el) => el.getBoundingClientRect().top,
@@ -78,6 +85,8 @@ test('every link that opens a new tab is marked noopener and noreferrer', async 
   const rels = await page
     .locator('a[target="_blank"]')
     .evaluateAll((as) => as.map((a) => a.getAttribute('rel') ?? ''));
+  // Without this a changed selector would turn the rule into a silent no-op.
+  expect(rels.length).toBeGreaterThan(0);
   for (const rel of rels) {
     expect(rel.split(/\s+/)).toEqual(
       expect.arrayContaining(['noopener', 'noreferrer']),
@@ -102,10 +111,15 @@ test('every in-page link points to an element that exists', async ({
 test('placeholder example.com links are never fetched', async ({ page }) => {
   const requests: string[] = [];
   page.on('request', (req) => {
-    if (new URL(req.url()).hostname.endsWith('example.com'))
+    const { hostname } = new URL(req.url());
+    if (hostname === 'example.com' || hostname.endsWith('.example.com'))
       requests.push(req.url());
   });
   await page.goto('/');
-  await page.waitForLoadState('networkidle');
+  // Bring every placeholder link on screen, which is when a prefetch would start.
+  const links = page.locator('a[href*="example.com"]');
+  for (let i = 0; i < (await links.count()); i++) {
+    await links.nth(i).scrollIntoViewIfNeeded();
+  }
   expect(requests).toEqual([]);
 });
