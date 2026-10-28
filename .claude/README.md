@@ -12,7 +12,7 @@ CLAUDE.local.md            # personal, gitignored
 ├── README.md              # this file
 ├── settings.json          # shared: permissions, hooks, non-secret env
 ├── settings.local.json    # personal, gitignored
-├── agents/                # subagents, one file per role (ba-agent.md, po-agent.md)
+├── agents/                # subagents, one file per role (ba-agent.md, po-agent.md, teamlead-agent.md)
 ├── references/<agent>/    # templates and formats an agent reads on demand
 ├── skills/<name>/         # reusable workflows: SKILL.md + references/
 ├── rules/                 # rules scoped to parts of the codebase
