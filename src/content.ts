@@ -150,6 +150,16 @@ export const seo = {
     '[PLACEHOLDER] Personal portfolio of Huy Pham, a frontend engineer: projects, skills and contact details.',
 } satisfies Seo;
 
+export type ContactSection = {
+  title: string;
+  emailLabel: string;
+};
+
+export const contactSection = {
+  title: 'Contact',
+  emailLabel: 'Email',
+} satisfies ContactSection;
+
 export type SkillsSection = {
   title: string;
   intro: string;

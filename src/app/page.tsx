@@ -1,10 +1,11 @@
 import { About } from '@/components/About';
+import { ContactSection } from '@/components/ContactSection';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Section } from '@/components/Section';
 import { SkillsSection } from '@/components/SkillsSection';
 
-// The section tickets (#21, #22, #23) fill in these empty sections.
+// The Projects ticket (#21) fills in the last empty section.
 export default function Home() {
   return (
     <>
@@ -13,7 +14,7 @@ export default function Home() {
         <About />
         <Section id="projects" title="Projects" tone="surface" />
         <SkillsSection />
-        <Section id="contact" title="Contact" tone="surface" />
+        <ContactSection />
       </main>
       <Footer />
     </>
