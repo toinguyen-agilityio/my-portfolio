@@ -73,7 +73,15 @@ Track issues on the [my-portfolio project board](https://github.com/users/toingu
 | QA has checked it and posted a comment with screenshots or a video | `Done`, and close the issue | QA only |
 
 - Devs and their agents never move an issue to `Done` and never close it. When the work is finished, it goes to `QA`.
+- The board `Status` field is the only place for status. Do not add status labels to issues.
 - Change the status with `bash .claude/scripts/set-issue-status.sh <issue-number> "<status>"`, for example `bash .claude/scripts/set-issue-status.sh 12 "QA"`. The script refuses `Done` and `Released`; QA sets those on the board. It needs a `gh` login with the `project` scope (`gh auth refresh -s project`).
+
+### Blocked issues
+
+An issue is blocked only when it cannot be built in parallel with another one: feature A has to be finished before feature B can be implemented. Then B is blocked by A. Sharing an area or touching the same file is not a block.
+
+- Add a "Blocked by" link only for that kind of dependency.
+- A blocker counts as finished once its PR is merged, even while it waits in `QA`. Whoever merges the PR removes its "Blocked by" links from the issues it blocks, so GitHub stops showing the "Blocked" badge on them. The "Blocked by" line in each issue body stays as the record.
 
 ## Working with Claude
 
