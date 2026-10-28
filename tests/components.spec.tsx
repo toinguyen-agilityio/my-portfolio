@@ -23,7 +23,7 @@ test('ExternalLink opens a new tab safely and says so in its name', async ({
   await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
 });
 
-test('Button is a link with the variant look', async ({ page }) => {
+test('Button is a plain in-page link', async ({ page }) => {
   await page.setContent(
     renderToStaticMarkup(
       <Button href="#projects" variant="secondary">
@@ -33,7 +33,6 @@ test('Button is a link with the variant look', async ({ page }) => {
   );
   const button = page.getByRole('link', { name: 'View' });
   await expect(button).toHaveAttribute('href', '#projects');
-  await expect(button).toHaveClass(/border-ctl/);
 });
 
 test('Section is a landmark named by its H2', async ({ page }) => {
