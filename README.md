@@ -48,23 +48,19 @@ Scope and requirements come from the plan in [#3](https://github.com/toinguyen-a
 
 ## 🛠 Tech Stack
 
-_To be decided by the TeamLead._
-
-| Layer     | Technology |
-|-----------|------------|
-| Framework | TBD        |
-| Styling   | TBD        |
-| Testing   | TBD        |
-| Hosting   | Vercel     |
+| Layer     | Technology                                                  |
+|-----------|-------------------------------------------------------------|
+| Framework | [Next.js](https://nextjs.org) (App Router, static export) with TypeScript |
+| Styling   | [Tailwind CSS](https://tailwindcss.com) v4, colors as CSS variables |
+| Testing   | [Playwright](https://playwright.dev) with [axe-core](https://github.com/dequelabs/axe-core) |
+| Hosting   | Vercel                                                      |
 
 ## 🚀 Getting Started
 
-_To be added once the tech stack is decided._
-
 ### Prerequisites
 
-- TBD <!-- e.g. Node.js >= 20 -->
-- TBD <!-- e.g. pnpm -->
+- Node.js 22 (see `.nvmrc`)
+- [pnpm](https://pnpm.io) (the exact version is pinned in `packageManager` in `package.json`; `corepack enable` installs it)
 
 ### Installation
 
@@ -74,13 +70,20 @@ git clone https://github.com/toinguyen-agilityio/my-portfolio.git
 cd my-portfolio
 
 # 2. Install dependencies
-# TBD
-
-# 3. Run it
-# TBD
+pnpm install
 ```
 
-Open _TBD_ and you should see the portfolio page.
+### Run it
+
+```bash
+pnpm dev     # dev server with hot reload
+pnpm build   # production build, written to out/
+pnpm start   # serve out/ (run pnpm build first)
+```
+
+Open <http://localhost:3000> and you should see the portfolio page.
+
+**Check it on your phone (optional).** Run `pnpm dev --hostname 0.0.0.0` and open `http://<your-computer-ip>:3000` on a phone on the same Wi-Fi.
 
 ## ⚙️ Configuration
 
@@ -98,16 +101,26 @@ _TBD. List environment variables here if the app needs any._
 my-portfolio/
 ├── .claude/       # shared Claude Code config (see .claude/README.md)
 ├── .github/       # workflows and CODEOWNERS
+├── src/
+│   ├── app/       # Next.js App Router: layout, page, global CSS, icons
+│   ├── components/ # React components
+│   └── content.ts # all copy, links and image references
+├── tests/         # Playwright tests and helpers
 └── README.md
 ```
-
-> The app source will be added once the tech stack is decided.
 
 ## 🧪 Testing
 
 ```bash
-# TBD   # run all tests
+pnpm lint            # ESLint
+pnpm format:check    # Prettier (pnpm format fixes it)
+pnpm typecheck       # tsc --noEmit
+pnpm exec playwright install --with-deps   # once: download the browsers
+pnpm test:e2e        # build, serve out/ and run the Playwright tests
+pnpm exec playwright show-report           # open the HTML report of the last run
 ```
+
+`pnpm test:e2e` runs against the production build in `out/` on Chromium, WebKit, Firefox and two mobile emulations.
 
 ## 📦 Deployment
 
