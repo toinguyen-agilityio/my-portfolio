@@ -83,7 +83,7 @@ pnpm start   # serve out/ (run pnpm build first)
 
 Open <http://localhost:3000> and you should see the portfolio page.
 
-**Check it on your phone (optional).** Run `pnpm dev --hostname 0.0.0.0` and open `http://<your-computer-ip>:3000` on a phone on the same Wi-Fi.
+**Check it on your phone (optional).** Run `pnpm dev --hostname 0.0.0.0` and open `http://<your-computer-ip>:3000` on a phone on the same Wi-Fi. Next.js blocks dev requests from other origins, so if the page does not respond to taps, add your computer's IP to `allowedDevOrigins` in `next.config.ts` while you test (do not commit it).
 
 ## ⚙️ Configuration
 
@@ -115,7 +115,7 @@ my-portfolio/
 pnpm lint            # ESLint
 pnpm format:check    # Prettier (pnpm format fixes it)
 pnpm typecheck       # tsc --noEmit
-pnpm exec playwright install --with-deps   # once: download the browsers
+pnpm exec playwright install               # once: download the browsers (Linux: add --with-deps, needs sudo)
 pnpm test:e2e        # build, serve out/ and run the Playwright tests
 pnpm exec playwright show-report           # open the HTML report of the last run
 ```
