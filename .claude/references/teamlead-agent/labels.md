@@ -18,5 +18,5 @@ Create missing labels with `gh api -X POST repos/<owner>/<repo>/labels`. Every t
 
 1. The TeamLead creates every ticket with `status: backlog`.
 2. A dev picks a ticket, swaps the label to `status: todo` and assigns themselves.
-3. Pick-up rules: highest priority first. Only take a ticket whose "Blocked by" tickets are all merged. Follow `CONTRIBUTING.md` for the branch and PR, and put `Closes #<n>` in the PR.
+3. Pick-up rules: highest priority first. Only take a ticket whose "Blocked by" tickets are all merged. Follow `CONTRIBUTING.md` for the branch and PR, and put `Refs #<n>` under `Refer`.
 4. The PR closes the ticket on merge.
