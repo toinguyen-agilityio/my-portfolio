@@ -8,8 +8,8 @@ Things learned on this repo. Update this file when one of them stops being true.
 - Playwright tests run against the production export in `out/`: the config runs `pnpm build` and serves `out/` on port 4173. The Playwright browsers must match the installed version. If the sandbox has a different Chromium build, do not change `playwright.config.ts`. Use a throwaway config in the repo root (delete it before you commit) that imports the real config, keeps only the `chromium` project and sets `use.launchOptions.executablePath` plus `args: ['--no-sandbox']`. WebKit, Firefox and the mobile projects then run for the first time on CI, so say that in the PR.
 - Test files that use JSX must be `.tsx`. ESLint rejects passing `children` as a prop to `createElement`.
 - Tests use the `@/` alias for components and a relative path for `content.ts`.
-- To look at the page, build, serve `out/` on a spare port, take a screenshot with `require('playwright')` and open the image. Stop the server by its PID, not with a broad `pkill`, which can kill your own shell.
-- Do not use `sleep` in the foreground to wait for CI. Poll in a loop that exits when all check runs are `completed`, or run it in the background.
+- To look at the page, build, serve `out/` on a spare port, take a screenshot with `require('playwright')` and open the image. Do not use a broad `pkill`, which can kill your own shell: start the server in the background and stop it by its PID.
+- Do not use `sleep` in the foreground to wait for CI. Read the check runs with `pull_request_read` (`get_check_runs`) between other work, and come back when they are all `completed`.
 
 ## Review bot
 
@@ -20,7 +20,7 @@ Things learned on this repo. Update this file when one of them stops being true.
 ## Board and labels
 
 - The `Status` column on project board 3 is the source of truth. `.claude/scripts/set-issue-status.sh` needs GraphQL and a `gh` login with the `project` scope. It does not work from cloud sessions.
-- The `status: ...` labels on issues are not the source of truth. Another session may set them, and that is fine, but they do not replace the board.
+- The board `Status` field is the only place for status. Do not add or change `status: ...` labels on issues. If another session already set them, leave them and do not rely on them.
 
 ## Working next to other sessions
 
