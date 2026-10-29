@@ -24,11 +24,26 @@ for (const { name, path } of pages) {
   }
 }
 
+// On Linux and macOS, Playwright's WebKit build exposes WebKitGTK's `enable-tabs-to-links`
+// setting and turns it on, so Tab moves focus into <a> elements for testing. The Windows WebKit
+// build does not expose that setting, so Tab only cycles form controls there, matching real
+// Safari's own default (Tab skips links unless the user turns on "Full Keyboard Access"):
+// https://dev.to/hawkchen/safaris-tab-key-trap-why-your-websites-focus-navigation-might-be-breaking-for-safari-users-5632
+// This is a limit of the Windows WebKit test build, not a bug in the page: real Safari users on
+// any OS keep their own system/browser keyboard-access setting, unaffected by this.
+const skipOnWebkitWindows = (browserName: string) =>
+  browserName === 'webkit' && process.platform === 'win32';
+
 for (const { name, path } of pages) {
   test.describe(`skip link on ${name}`, () => {
     test('is the first focusable element and shows only on focus', async ({
       page,
+      browserName,
     }) => {
+      test.skip(
+        skipOnWebkitWindows(browserName),
+        'Tab does not move focus into <a> elements on the Windows WebKit test build; see the comment above this describe block.',
+      );
       await page.goto(path);
       const skip = page.getByRole('link', { name: 'Skip to content' });
       const first = await page.evaluate(() => {
@@ -59,7 +74,12 @@ for (const { name, path } of pages) {
 
     test('moves focus past the header to the main landmark', async ({
       page,
+      browserName,
     }) => {
+      test.skip(
+        skipOnWebkitWindows(browserName),
+        'Tab does not move focus into <a> elements on the Windows WebKit test build; see the comment above this describe block.',
+      );
       await page.goto(path);
       await page.keyboard.press('Tab');
       await page.keyboard.press('Enter');
