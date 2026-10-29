@@ -1,0 +1,16 @@
+# Normalize all text files to LF line endings, both in the repo and on checkout,
+# so `pnpm format:check` is stable on Windows clones where Git would otherwise
+# check files out with CRLF.
+* text=auto eol=lf
+
+# Binary files: do not touch their bytes.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
