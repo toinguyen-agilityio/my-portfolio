@@ -53,7 +53,7 @@ Scope and requirements come from the plan in [#3](https://github.com/toinguyen-a
 | Framework | [Next.js](https://nextjs.org) (App Router, static export) with TypeScript |
 | Styling   | [Tailwind CSS](https://tailwindcss.com) v4, colors as CSS variables |
 | Testing   | [Playwright](https://playwright.dev) with [axe-core](https://github.com/dequelabs/axe-core) |
-| Hosting   | Vercel                                                      |
+| Hosting   | GitHub Pages (demo), or any static host                    |
 
 ## 🚀 Getting Started
 
@@ -124,10 +124,17 @@ pnpm exec playwright show-report           # open the HTML report of the last ru
 
 ## 📦 Deployment
 
-Deployed to Vercel on the default Vercel URL. _Setup steps to be added._
+**Demo:** the `main` branch auto-deploys to GitHub Pages at <https://toinguyen-agilityio.github.io/my-portfolio/> via `.github/workflows/deploy.yml`. It builds the static export with `pnpm build`, with `PAGES_BASE_PATH` set to the Pages sub-path (`actions/configure-pages` provides it), then publishes `out/` with `actions/upload-pages-artifact` and `actions/deploy-pages`. A push to `main`, or `workflow_dispatch`, triggers a deploy. The repo's Pages source is set to **GitHub Actions** (Settings → Pages).
+
+`PAGES_BASE_PATH` only matters for a sub-path deploy: it sets `basePath`/`assetPrefix` in `next.config.ts` so root-relative links and `/_next/*` assets resolve under the sub-path. Local dev, CI and the Playwright tests never set it, so they keep building and serving from `/`.
+
+**Deploy your own copy:**
+
+- **GitHub Pages (fork or template copy):** enable Pages with source "GitHub Actions" in the repo settings, then push to `main`. The workflow deploys to `https://<you>.github.io/<repo>/` automatically; no manual base path setup is needed.
+- **Vercel, or any static host at the domain root:** `pnpm build` with no `PAGES_BASE_PATH` set, and upload `out/`. No sub-path handling is needed at the root.
 
 ```bash
-# TBD   # build
+pnpm build   # static export to out/, root path unless PAGES_BASE_PATH is set
 ```
 
 ## 🏷 Content Placeholders

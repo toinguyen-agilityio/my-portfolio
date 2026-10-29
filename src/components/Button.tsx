@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { getBasePath } from '@/lib/base-path';
 
 export type ButtonVariant = 'primary' | 'secondary';
 
@@ -25,9 +26,12 @@ type ButtonProps = {
 };
 
 // A button-looking link. It is an <a> because every button on this page navigates.
+// It is not next/link, which would add basePath on its own, so a root-relative href
+// ("/", used by the 404 page) must be prefixed here. An in-page anchor needs no prefix.
 export function Button({ href, variant = 'primary', children }: ButtonProps) {
+  const resolvedHref = href.startsWith('/') ? `${getBasePath()}${href}` : href;
   return (
-    <a href={href} className={buttonClasses(variant)}>
+    <a href={resolvedHref} className={buttonClasses(variant)}>
       {children}
     </a>
   );

@@ -35,6 +35,40 @@ test('Button is a plain in-page link', async ({ page }) => {
   await expect(button).toHaveAttribute('href', '#projects');
 });
 
+test('Button prefixes a root-relative href with PAGES_BASE_PATH', async ({
+  page,
+}) => {
+  const original = process.env.PAGES_BASE_PATH;
+  process.env.PAGES_BASE_PATH = '/my-portfolio';
+  try {
+    await page.setContent(
+      renderToStaticMarkup(<Button href="/">Back to home</Button>),
+    );
+  } finally {
+    // Never leak into another test, whichever branch runs.
+    if (original === undefined) delete process.env.PAGES_BASE_PATH;
+    else process.env.PAGES_BASE_PATH = original;
+  }
+  const button = page.getByRole('link', { name: 'Back to home' });
+  await expect(button).toHaveAttribute('href', '/my-portfolio/');
+});
+
+test('Button leaves a root-relative href as-is with no base path set', async ({
+  page,
+}) => {
+  const original = process.env.PAGES_BASE_PATH;
+  delete process.env.PAGES_BASE_PATH;
+  try {
+    await page.setContent(
+      renderToStaticMarkup(<Button href="/">Back to home</Button>),
+    );
+  } finally {
+    if (original !== undefined) process.env.PAGES_BASE_PATH = original;
+  }
+  const button = page.getByRole('link', { name: 'Back to home' });
+  await expect(button).toHaveAttribute('href', '/');
+});
+
 test('Section is a landmark named by its H2', async ({ page }) => {
   await page.setContent(
     renderToStaticMarkup(
