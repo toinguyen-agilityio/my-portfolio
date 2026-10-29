@@ -30,8 +30,22 @@ export async function expectNoHorizontalScroll(page: Page) {
 }
 
 // Switches the theme by toggling the `dark` class on <html>, the same hook the CSS tokens use.
+// Button uses `transition-colors`, so flipping the class starts a CSS color transition on it.
+// A check that reads computed colors right after (axe's contrast check, for example) could then
+// sample an in-between color and fail at random, on a timeline that is engine-specific: waiting
+// for the animations the toggle starts (the Web Animations API) is not reliable on every engine.
+// Disabling transitions for the test page before the switch removes the in-between frame outright,
+// on every engine, with no fixed sleep, no retry and no axe rule turned off.
 export async function setTheme(page: Page, theme: 'light' | 'dark') {
   await page.evaluate((t) => {
+    const styleId = 'playwright-disable-transitions';
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.textContent =
+        '*, *::before, *::after { transition: none !important; }';
+      document.head.append(style);
+    }
     document.documentElement.classList.toggle('dark', t === 'dark');
   }, theme);
 }
