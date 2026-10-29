@@ -168,6 +168,23 @@ export const skillsSection = {
   intro: 'The tools and practices I reach for every day.',
 } satisfies SkillsSection;
 
+export type Footer = {
+  builtWith: string;
+  demoNotice: string;
+  templateLabel: string;
+  templateHref: string;
+  separator: string;
+};
+
+export const footer = {
+  builtWith: 'Built with Next.js',
+  // DEMO-CONTENT: replace or remove when this template becomes a real portfolio
+  demoNotice: 'Demo content',
+  templateLabel: 'Use this template',
+  templateHref: 'https://github.com/toinguyen-agilityio/my-portfolio',
+  separator: '·',
+} satisfies Footer;
+
 export type NotFound = {
   eyebrow: string;
   title: string;
