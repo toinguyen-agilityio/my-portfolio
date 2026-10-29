@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { expectNoA11yViolations, expectNoHorizontalScroll } from './helpers';
+import { footer } from '../src/content';
 
 test('an unknown path shows the 404 page', async ({ page }) => {
   const response = await page.goto('/does-not-exist');
@@ -18,8 +19,11 @@ test('the 404 page has no theme toggle and every link points home', async ({
   const hrefs = await page
     .getByRole('link')
     .evaluateAll((links) => links.map((a) => a.getAttribute('href')));
-  // The skip link (#main) is the only link that does not go home.
-  const links = hrefs.filter((href) => href !== '#main');
+  // The skip link (#main) and the footer's template link are the only links
+  // that do not go home.
+  const links = hrefs.filter(
+    (href) => href !== '#main' && href !== footer.templateHref,
+  );
   expect(links.length).toBeGreaterThan(0);
   for (const href of links) expect(href).toBe('/');
   expect(hrefs.some((href) => href?.includes('Main.dc.html'))).toBe(false);
