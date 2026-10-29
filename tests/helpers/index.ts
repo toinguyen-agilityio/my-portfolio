@@ -1,9 +1,11 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, type Page } from '@playwright/test';
 
-// Disables CSS transitions on the page, so a check that reads computed colors right after a
-// change (for example right after setTheme) never samples an in-between frame.
-async function disableTransitions(page: Page) {
+// Disables CSS transitions on the page. Call this before a change such as setTheme, not after:
+// canceling a transition that has already started does not reliably jump to the final value on
+// every engine, so a check right after the change (axe's contrast check, for example) could
+// still sample an in-between frame.
+export async function disableTransitions(page: Page) {
   await page.addStyleTag({
     content: '*, *::before, *::after { transition: none !important; }',
   });
@@ -12,7 +14,6 @@ async function disableTransitions(page: Page) {
 // Fails when axe finds serious or critical WCAG 2.1 A/AA violations on the current page.
 // Moderate and minor violations are allowed on purpose, so they do not fail the tests.
 export async function expectNoA11yViolations(page: Page) {
-  await disableTransitions(page);
   const { violations } = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
     .analyze();
