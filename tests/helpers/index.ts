@@ -1,9 +1,18 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, type Page } from '@playwright/test';
 
+// Disables CSS transitions on the page, so a check that reads computed colors right after a
+// change (for example right after setTheme) never samples an in-between frame.
+async function disableTransitions(page: Page) {
+  await page.addStyleTag({
+    content: '*, *::before, *::after { transition: none !important; }',
+  });
+}
+
 // Fails when axe finds serious or critical WCAG 2.1 A/AA violations on the current page.
 // Moderate and minor violations are allowed on purpose, so they do not fail the tests.
 export async function expectNoA11yViolations(page: Page) {
+  await disableTransitions(page);
   const { violations } = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
     .analyze();
@@ -30,22 +39,8 @@ export async function expectNoHorizontalScroll(page: Page) {
 }
 
 // Switches the theme by toggling the `dark` class on <html>, the same hook the CSS tokens use.
-// Button uses `transition-colors`, so flipping the class starts a CSS color transition on it.
-// A check that reads computed colors right after (axe's contrast check, for example) could then
-// sample an in-between color and fail at random, on a timeline that is engine-specific: waiting
-// for the animations the toggle starts (the Web Animations API) is not reliable on every engine.
-// Disabling transitions for the test page before the switch removes the in-between frame outright,
-// on every engine, with no fixed sleep, no retry and no axe rule turned off.
 export async function setTheme(page: Page, theme: 'light' | 'dark') {
   await page.evaluate((t) => {
-    const styleId = 'playwright-disable-transitions';
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement('style');
-      style.id = styleId;
-      style.textContent =
-        '*, *::before, *::after { transition: none !important; }';
-      document.head.append(style);
-    }
     document.documentElement.classList.toggle('dark', t === 'dark');
   }, theme);
 }
