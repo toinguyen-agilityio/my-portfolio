@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-A single-page personal portfolio (Next.js App Router, TypeScript, Tailwind v4) deployed on Vercel. See `README.md` for scope and status.
+A single-page personal portfolio (Next.js App Router, TypeScript, Tailwind v4) deployed to GitHub Pages (`.github/workflows/deploy.yml`). See `README.md` for scope and status.
 
 ## Commands
 
