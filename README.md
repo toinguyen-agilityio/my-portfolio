@@ -2,9 +2,9 @@
 
 # My Portfolio
 
-**A clean, minimal, single-page personal portfolio, deployed to a public URL on Vercel.**
+**A clean, minimal, single-page personal portfolio template, with a live demo you can clone and personalise.**
 
-Demo: _TBD_ · [Report a bug](https://github.com/toinguyen-agilityio/my-portfolio/issues) · [Request a feature](https://github.com/toinguyen-agilityio/my-portfolio/issues)
+Demo: <https://toinguyen-agilityio.github.io/my-portfolio/> · [Report a bug](https://github.com/toinguyen-agilityio/my-portfolio/issues) · [Request a feature](https://github.com/toinguyen-agilityio/my-portfolio/issues)
 
 </div>
 
@@ -13,6 +13,7 @@ Demo: _TBD_ · [Report a bug](https://github.com/toinguyen-agilityio/my-portfoli
 ## 📑 Table of Contents
 
 - [About](#-about)
+- [Use this template](#-use-this-template)
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
 - [Getting Started](#-getting-started)
@@ -29,11 +30,22 @@ Demo: _TBD_ · [Report a bug](https://github.com/toinguyen-agilityio/my-portfoli
 
 ## 🧐 About
 
-A personal portfolio that introduces the owner, shows their projects and skills, and gives visitors an easy way to get in touch. It is a single English page, hosted on Vercel's default URL.
+A single-page portfolio template: an intro, projects, skills and a way to get in touch, built to be cloned and personalised. The live demo shows a fictional persona, Jordan Ellis, so you can see it fully filled in before you swap in your own content. It is a single English page.
 
 Scope and requirements come from the plan in [#3](https://github.com/toinguyen-agilityio/my-portfolio/issues/3).
 
 <!-- Add a screenshot once the first version is deployed. -->
+
+## 🧑‍💻 Use this template
+
+Click **Use this template** on GitHub (or just clone the repo), then edit:
+
+- `src/content.ts` — every piece of copy, every link, alt text and the SEO title/description. This is the only file with text in it; components never hard-code copy.
+- `src/app/icon.svg` — the favicon.
+- The portrait and project thumbnail SVGs in `src/components/` (for example `Portrait.tsx` and `src/components/thumbnails/`) — they are inline React components so they pick up the color tokens, not static images.
+- The color tokens in `src/app/globals.css` — the only place colors are defined. If you change `--bg`, also update the matching `theme-color` hex values in the three places `CLAUDE.md` lists, so the browser toolbar color still matches the page.
+
+Blocks still marked `// DEMO-CONTENT` in `src/content.ts` are the fictional demo persona (Jordan Ellis) and the `example.com` links; replace or remove them with your own content.
 
 ## ✨ Features
 
@@ -139,20 +151,20 @@ pnpm build   # static export to out/, root path unless PAGES_BASE_PATH is set
 
 ## 🏷 Content Placeholders
 
-For the M1 demo, `src/content.ts` holds realistic mock content: a fictional persona, Jordan Ellis, with demo projects, skills and contact details. Every link points to the reserved `example.com` domain, including the `mailto:` address. Each mock block is marked with a `// DEMO-CONTENT: replace in T8a (M3)` comment. Stable UI labels such as `View projects` carry no marker.
+`src/content.ts` holds the demo content: a fictional persona, Jordan Ellis, with demo projects, skills and contact details. Every link points to the reserved `example.com` domain, including the `mailto:` address. Each demo block is marked with a `// DEMO-CONTENT: replace with your own content` comment, so a search for `DEMO-CONTENT` finds everything to personalise. Stable UI labels such as `View projects` carry no marker, since they are not content to replace.
 
-The owner's real content replaces the mock content in T8a (M3). Before launch, the placeholder audit searches the repo for `DEMO-CONTENT`, `example.com` and `[PLACEHOLDER]`. Launch requires all three searches to return nothing in `src/`.
+The demo persona and its `example.com` links are expected to stay in the template's own demo; they are not a bug and not something a regression check should flag. A leftover `[PLACEHOLDER]` string is still a bug: it means a file was never filled in at all, demo or not.
 
 ## 🗺 Roadmap
 
-**v1**
+**v1 (M1)**
 
-- [ ] Project setup and Vercel deploy
-- [ ] Layout and dark mode
-- [ ] About, Projects, Skills and Contact sections
-- [ ] Accessibility, page title and meta, 404 page
-- [ ] Placeholder audit and QA
-- [ ] Launch on a public Vercel URL
+- [x] Project setup and static export
+- [x] Layout and dark mode
+- [x] About, Projects, Skills and Contact sections
+- [x] Accessibility, page title and meta, 404 page
+- [x] Demo content and regression QA
+- [ ] `v1.0.0` release, published as a GitHub template repository, with a public GitHub Pages deploy
 
 **Phase 2**
 
@@ -180,4 +192,4 @@ Mention `@claude` on a PR or issue to ask Claude for help or a review (allowed u
 
 ## 📄 License
 
-_TBD._
+[MIT](LICENSE).

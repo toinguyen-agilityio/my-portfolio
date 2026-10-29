@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-A single-page personal portfolio (Next.js App Router, TypeScript, Tailwind v4) deployed to GitHub Pages (`.github/workflows/deploy.yml`). See `README.md` for scope and status.
+A single-page personal portfolio template (Next.js App Router, TypeScript, Tailwind v4), with a live demo deployed to GitHub Pages (`.github/workflows/deploy.yml`). Anyone can clone or "Use this template" and personalise it. See `README.md` for scope and status.
 
 ## Commands
 
@@ -36,7 +36,7 @@ tests/          # Playwright specs and helpers
 ```
 
 - **Static export only.** `next.config.ts` sets `output: 'export'` and unoptimized images. Do not use features that need a server (route handlers, server actions, ISR, `next/image` optimization).
-- **Content is separate from components.** All copy, links, alt text and SEO strings live in `src/content.ts`, typed with `satisfies`. Components read from it and never hard-code text. Placeholder values are marked `[PLACEHOLDER]`, and launch requires a repo search for that marker to return nothing.
+- **Content is separate from components.** All copy, links, alt text and SEO strings live in `src/content.ts`, typed with `satisfies`. Components read from it and never hard-code text. The demo content (the fictional persona Jordan Ellis, and its `example.com` links) is marked `// DEMO-CONTENT`, and is expected to stay in the template's own demo; a cloner replaces it with their own content. A leftover `[PLACEHOLDER]` string is always a bug, demo or not: it means a file was never filled in.
 - **Colors come from design tokens.** `src/app/globals.css` is the only place colors are defined (CSS variables mapped to Tailwind colors such as `bg-bg` and `text-muted`). Toggling `dark` on `<html>` swaps the whole set, so components must not use `dark:` variants.
 - **Dark mode logic is spread across three places that must agree:**
   - the inline pre-paint script in `src/app/layout.tsx`, which prevents a flash of the wrong theme;

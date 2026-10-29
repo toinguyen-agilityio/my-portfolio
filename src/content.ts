@@ -1,7 +1,7 @@
 // All copy, links and image references live here. The person, projects and links below are
-// mock demo data for the M1 demo, not real content: Jordan Ellis is a fictional persona and
-// every link points to the reserved example.com domain. Each mock block is marked with
-// DEMO-CONTENT; replace all of them with the owner's real content in T8a (M3).
+// this template's demo data, not real content: Jordan Ellis is a fictional, permanent demo
+// persona, and every link points to the reserved example.com domain. Each demo block is
+// marked with DEMO-CONTENT; replace or remove all of them with your own content.
 
 export type Profile = {
   name: string;
@@ -46,7 +46,7 @@ export type Seo = {
   description: string;
 };
 
-// DEMO-CONTENT: replace in T8a (M3)
+// DEMO-CONTENT: replace with your own content
 export const profile = {
   name: 'Jordan Ellis',
   greeting: 'Hi, I am Jordan Ellis',
@@ -57,7 +57,7 @@ export const profile = {
   contactCta: 'Contact me',
 } satisfies Profile;
 
-// DEMO-CONTENT: replace in T8a (M3)
+// DEMO-CONTENT: replace with your own content
 export const projects = [
   {
     title: 'Task Flow',
@@ -92,7 +92,7 @@ export const projects = [
   },
 ] satisfies readonly Project[];
 
-// DEMO-CONTENT: replace in T8a (M3)
+// DEMO-CONTENT: replace with your own content
 export const skillGroups = [
   {
     name: 'Frontend',
@@ -104,7 +104,7 @@ export const skillGroups = [
   },
 ] satisfies readonly SkillGroup[];
 
-// DEMO-CONTENT: replace in T8a (M3)
+// DEMO-CONTENT: replace with your own content
 export const contact = {
   // Display text only. Build the mailto: link from mailtoHref, never from email.
   email: 'jordan.ellis@example.com',
@@ -113,7 +113,7 @@ export const contact = {
   intro: 'Have a project in mind or just want to say hi? Send me an email.',
 } satisfies Contact;
 
-// DEMO-CONTENT: replace in T8a (M3)
+// DEMO-CONTENT: replace with your own content
 export const socials = [
   {
     label: 'GitHub',
@@ -125,7 +125,7 @@ export const socials = [
   },
 ] satisfies readonly Social[];
 
-// DEMO-CONTENT: replace in T8a (M3)
+// DEMO-CONTENT: replace with your own content
 export const seo = {
   title: 'Jordan Ellis - Frontend Engineer',
   description:
@@ -141,7 +141,7 @@ export type ProjectsSection = {
 
 export const projectsSection = {
   title: 'Projects',
-  // DEMO-CONTENT: replace in T8a (M3)
+  // DEMO-CONTENT: replace with your own content
   intro: 'A few things I have built recently.',
   demoLabel: 'Live demo',
   sourceLabel: 'Source',
@@ -164,7 +164,7 @@ export type SkillsSection = {
 
 export const skillsSection = {
   title: 'Skills',
-  // DEMO-CONTENT: replace in T8a (M3)
+  // DEMO-CONTENT: replace with your own content
   intro: 'The tools and practices I reach for every day.',
 } satisfies SkillsSection;
 

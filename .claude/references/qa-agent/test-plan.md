@@ -5,6 +5,7 @@ Run these on every pass, as well as the ticket's own acceptance criteria. Captur
 ## Content
 
 - No `[PLACEHOLDER]` (or `%5BPLACEHOLDER%5D`) in visible text, `<title>`, meta tags, alt text, `aria-*` or `href`, on the home page and the 404 page.
+- The demo persona (Jordan Ellis) and its `example.com` links are expected on the demo; they are not a `[PLACEHOLDER]` and not a bug on their own.
 - Every section renders: header, About, Projects, Skills, Contact and footer.
 - Copy, links and alt text match `src/content.ts`.
 
