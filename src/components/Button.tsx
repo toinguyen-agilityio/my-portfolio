@@ -29,7 +29,10 @@ type ButtonProps = {
 // It is not next/link, which would add basePath on its own, so a root-relative href
 // ("/", used by the 404 page) must be prefixed here. An in-page anchor needs no prefix.
 export function Button({ href, variant = 'primary', children }: ButtonProps) {
-  const resolvedHref = href.startsWith('/') ? `${getBasePath()}${href}` : href;
+  const resolvedHref =
+    href.startsWith('/') && !href.startsWith('//')
+      ? `${getBasePath()}${href}`
+      : href;
   return (
     <a href={resolvedHref} className={buttonClasses(variant)}>
       {children}

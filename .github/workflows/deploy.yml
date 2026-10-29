@@ -5,16 +5,14 @@ on:
     branches: [main]
   workflow_dispatch:
 
-# Only one deploy runs at a time; a newer push supersedes a running one. The Pages environment
-# itself also serialises deployments, so this mainly keeps the build step from piling up.
+# Only one deploy runs at a time. A running deploy is never cancelled, because that could leave
+# the site on a half-finished release; a newer push waits for it.
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 jobs:
   build:
@@ -48,6 +46,9 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
