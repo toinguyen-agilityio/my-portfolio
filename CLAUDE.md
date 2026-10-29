@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-A single-page personal portfolio template (Next.js App Router, TypeScript, Tailwind v4), with a live demo deployed to GitHub Pages. Anyone can clone or "Use this template" and personalise it. See `README.md` for scope and status.
+A single-page personal portfolio template (Next.js App Router, TypeScript, Tailwind v4), with a live demo deployed to GitHub Pages (`.github/workflows/deploy.yml`). Anyone can clone or "Use this template" and personalise it. See `README.md` for scope and status.
 
 ## Commands
 
