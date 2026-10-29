@@ -1,6 +1,25 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, type Page } from '@playwright/test';
 
+// Disables CSS transitions on the page. Call this before a change such as setTheme, not after:
+// canceling a transition that has already started does not reliably jump to the final value on
+// every engine, so a check right after the change (axe's contrast check, for example) could
+// still sample an in-between frame. Also waits two real paints in a separate round trip, so the
+// override is confirmed active before the caller makes its change in a later call: under load,
+// inserting the style and changing the page in the same task can still let a transition start,
+// because the engine has not necessarily applied the new stylesheet yet.
+export async function disableTransitions(page: Page) {
+  await page.addStyleTag({
+    content: '*, *::before, *::after { transition: none !important; }',
+  });
+  await page.evaluate(
+    () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve)),
+      ),
+  );
+}
+
 // Fails when axe finds serious or critical WCAG 2.1 A/AA violations on the current page.
 // Moderate and minor violations are allowed on purpose, so they do not fail the tests.
 export async function expectNoA11yViolations(page: Page) {

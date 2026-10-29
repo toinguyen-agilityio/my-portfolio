@@ -1,5 +1,6 @@
 import { expect, test, type Page } from '@playwright/test';
 import {
+  disableTransitions,
   expectNoA11yViolations,
   expectNoHorizontalScroll,
   setTheme,
@@ -122,6 +123,9 @@ for (const theme of ['light', 'dark'] as const) {
     }) => {
       await page.setViewportSize({ width, height: 800 });
       await page.goto('/');
+      // Disable transitions before the switch: Button's transition-colors would otherwise
+      // animate, and a check right after could sample an in-between color at random.
+      await disableTransitions(page);
       await setTheme(page, theme);
       await expectNoA11yViolations(page);
     });
