@@ -173,6 +173,7 @@ export type Footer = {
   demoNotice: string;
   templateLabel: string;
   templateHref: string;
+  separator: string;
 };
 
 export const footer = {
@@ -181,6 +182,7 @@ export const footer = {
   demoNotice: 'Demo content',
   templateLabel: 'Use this template',
   templateHref: 'https://github.com/toinguyen-agilityio/my-portfolio',
+  separator: '·',
 } satisfies Footer;
 
 export type NotFound = {

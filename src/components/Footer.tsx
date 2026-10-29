@@ -10,9 +10,9 @@ export function Footer() {
           <span>{profile.name}</span>
           <span className="flex flex-wrap items-center gap-x-2">
             <span>{footer.builtWith}</span>
-            <span aria-hidden="true">·</span>
+            <span aria-hidden="true">{footer.separator}</span>
             <span>{footer.demoNotice}</span>
-            <span aria-hidden="true">·</span>
+            <span aria-hidden="true">{footer.separator}</span>
             <ExternalLink href={footer.templateHref}>
               {footer.templateLabel}
             </ExternalLink>
