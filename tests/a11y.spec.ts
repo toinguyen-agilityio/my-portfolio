@@ -40,7 +40,10 @@ for (const { name, path } of pages) {
       expect(first).toBe('Skip to content');
       // Hidden: clipped to a 1px box until focused.
       expect((await skip.boundingBox())!.width).toBeLessThanOrEqual(1);
-      await page.keyboard.press('Tab');
+      // Focus directly rather than pressing Tab: Playwright's WebKit build on Windows does not
+      // move focus into <a> elements on Tab (unlike its Linux/macOS builds, observed on this
+      // machine), which is unrelated to what this assertion checks, the show-on-focus CSS.
+      await skip.focus();
       await expect(skip).toBeFocused();
       const box = (await skip.boundingBox())!;
       expect(box.width).toBeGreaterThan(40);
@@ -61,7 +64,9 @@ for (const { name, path } of pages) {
       page,
     }) => {
       await page.goto(path);
-      await page.keyboard.press('Tab');
+      // Focus directly: the behavior under test is the jump to #main on activation, not
+      // whether Tab reaches the link (see the comment in the test above).
+      await page.getByRole('link', { name: 'Skip to content' }).focus();
       await page.keyboard.press('Enter');
       await expect(page).toHaveURL(/#main$/);
       // The hash changes even if focus stays put, so check that <main> really has focus.
