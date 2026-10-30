@@ -65,7 +65,7 @@ for (const size of sizes) {
   });
 }
 
-test('the 4 nav links fit on one row at 320px', async ({ page }) => {
+test('the 5 nav links fit on one row at 320px', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 640 });
   await page.goto('/');
   const boxes = await page
@@ -77,7 +77,7 @@ test('the 4 nav links fit on one row at 320px', async ({ page }) => {
         return { top: r.top, right: r.right };
       }),
     );
-  expect(boxes).toHaveLength(4);
+  expect(boxes).toHaveLength(5);
   expect(new Set(boxes.map((b) => b.top)).size).toBe(1);
   expect(Math.max(...boxes.map((b) => b.right))).toBeLessThanOrEqual(320);
 });

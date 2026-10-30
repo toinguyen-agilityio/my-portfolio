@@ -5,6 +5,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { Button } from '@/components/Button';
 import { Chip } from '@/components/Chip';
 import { ExternalLink } from '@/components/ExternalLink';
+import { Header } from '@/components/Header';
 import { Section } from '@/components/Section';
 import { StoryImage } from '@/components/story/StoryImage';
 import { Tag } from '@/components/Tag';
@@ -267,4 +268,85 @@ test('the story illustrations do not scroll sideways at 320px', async ({
   );
   await loadTokens(page);
   await expectNoHorizontalScroll(page);
+});
+
+test('Header on home keeps bare section hashes and a root-relative My Story link', async ({
+  page,
+}) => {
+  const original = process.env.NEXT_PUBLIC_BASE_PATH;
+  delete process.env.NEXT_PUBLIC_BASE_PATH;
+  try {
+    await page.setContent(renderToStaticMarkup(<Header />));
+  } finally {
+    if (original !== undefined) process.env.NEXT_PUBLIC_BASE_PATH = original;
+  }
+  const nav = page.getByRole('navigation', { name: 'Sections' });
+  await expect(nav.getByRole('link', { name: 'About' })).toHaveAttribute(
+    'href',
+    '#about',
+  );
+  await expect(nav.getByRole('link', { name: 'Contact' })).toHaveAttribute(
+    'href',
+    '#contact',
+  );
+  await expect(nav.getByRole('link', { name: 'My Story' })).toHaveAttribute(
+    'href',
+    '/story',
+  );
+  await expect(
+    page.getByRole('link', { name: 'Jordan Ellis' }),
+  ).toHaveAttribute('href', '#top');
+});
+
+test('Header on /story points sections home and My Story at the base path', async ({
+  page,
+}) => {
+  const original = process.env.NEXT_PUBLIC_BASE_PATH;
+  process.env.NEXT_PUBLIC_BASE_PATH = '/my-portfolio';
+  try {
+    await page.setContent(renderToStaticMarkup(<Header current="story" />));
+  } finally {
+    if (original === undefined) delete process.env.NEXT_PUBLIC_BASE_PATH;
+    else process.env.NEXT_PUBLIC_BASE_PATH = original;
+  }
+  const nav = page.getByRole('navigation', { name: 'Sections' });
+  await expect(nav.getByRole('link', { name: 'About' })).toHaveAttribute(
+    'href',
+    '/my-portfolio/#about',
+  );
+  await expect(nav.getByRole('link', { name: 'Contact' })).toHaveAttribute(
+    'href',
+    '/my-portfolio/#contact',
+  );
+  const story = nav.getByRole('link', { name: 'My Story' });
+  await expect(story).toHaveAttribute('href', '/my-portfolio/story');
+  await expect(story).toHaveAttribute('aria-current', 'page');
+  await expect(nav.getByRole('link', { name: 'About' })).not.toHaveAttribute(
+    'aria-current',
+    'page',
+  );
+  await expect(
+    page.getByRole('link', { name: 'Jordan Ellis' }),
+  ).toHaveAttribute('href', '/my-portfolio/');
+});
+
+test('Header on /story without a base path uses /story and /#projects', async ({
+  page,
+}) => {
+  const original = process.env.NEXT_PUBLIC_BASE_PATH;
+  delete process.env.NEXT_PUBLIC_BASE_PATH;
+  try {
+    await page.setContent(renderToStaticMarkup(<Header current="story" />));
+  } finally {
+    if (original !== undefined) process.env.NEXT_PUBLIC_BASE_PATH = original;
+  }
+  const nav = page.getByRole('navigation', { name: 'Sections' });
+  await expect(nav.getByRole('link', { name: 'Projects' })).toHaveAttribute(
+    'href',
+    '/#projects',
+  );
+  await expect(nav.getByRole('link', { name: 'My Story' })).toHaveAttribute(
+    'href',
+    '/story',
+  );
 });
