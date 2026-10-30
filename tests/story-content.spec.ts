@@ -50,8 +50,8 @@ test('My Story is in the nav and points to /story', () => {
 });
 
 test('the CTA labels and SEO strings are filled in', () => {
-  expect(storySection.cta.contactLabel).not.toBe('');
-  expect(storySection.cta.projectsLabel).not.toBe('');
-  expect(storySection.seo.title).not.toBe('');
-  expect(storySection.seo.description).not.toBe('');
+  expect(storySection.cta.contactLabel.trim()).not.toBe('');
+  expect(storySection.cta.projectsLabel.trim()).not.toBe('');
+  expect(storySection.seo.title.trim()).not.toBe('');
+  expect(storySection.seo.description.trim()).not.toBe('');
 });
