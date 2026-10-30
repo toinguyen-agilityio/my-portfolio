@@ -9,13 +9,15 @@ type HeaderProps = {
   current?: 'story';
 };
 
-// Five links must fit a 320px row, so the padding drops below 400px. Labels never wrap.
-const navLink =
-  'text-text hover:text-accent inline-flex min-h-11 items-center whitespace-nowrap rounded-md px-3 text-[15px] font-medium no-underline max-[400px]:px-0.5 max-[400px]:text-[14px]';
+// Five links must fit one row from 320px up to 480px, so the padding and size drop below 481px.
+// Labels never wrap.
+const navLinkBase =
+  'inline-flex min-h-11 items-center whitespace-nowrap rounded-md px-3 text-[15px] font-medium no-underline max-[480px]:px-0.5 max-[480px]:text-[14px]';
+
+const navLink = `text-text hover:text-accent ${navLinkBase}`;
 
 // The current page gets accent text and a 2px inset underline, so it does not rely on color alone.
-const navLinkCurrent =
-  'text-accent shadow-[inset_0_-2px_0_0_var(--color-accent)] inline-flex min-h-11 items-center whitespace-nowrap rounded-md px-3 text-[15px] font-medium no-underline max-[400px]:px-0.5 max-[400px]:text-[14px]';
+const navLinkCurrent = `text-accent shadow-[inset_0_-2px_0_0_var(--color-accent)] ${navLinkBase}`;
 
 // Sticky, except on short screens. At 640px and below the nav moves to its own row and
 // the toggle stays next to the name. HeaderOffset sets --header-h from its real height; globals.css has the fallback.

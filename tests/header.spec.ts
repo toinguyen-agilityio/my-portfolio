@@ -28,6 +28,10 @@ test('My Story is not the current page on home', async ({ page }) => {
 const sizes = [
   { name: '320', width: 320, height: 640 },
   { name: '375', width: 375, height: 667 },
+  { name: '400', width: 400, height: 700 },
+  { name: '420', width: 420, height: 700 },
+  { name: '440', width: 440, height: 700 },
+  { name: '480', width: 480, height: 700 },
   { name: '640', width: 640, height: 800 },
 ];
 
