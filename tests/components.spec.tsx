@@ -128,7 +128,7 @@ test('Header on home keeps bare section hashes and a root-relative My Story link
     '/story',
   );
   await expect(
-    page.getByRole('link', { name: 'Jordan Ellis' }),
+    page.getByRole('link', { name: 'Jordan Pham' }),
   ).toHaveAttribute('href', '#top');
 });
 
@@ -160,7 +160,7 @@ test('Header on /story points sections home and My Story at the base path', asyn
     'page',
   );
   await expect(
-    page.getByRole('link', { name: 'Jordan Ellis' }),
+    page.getByRole('link', { name: 'Jordan Pham' }),
   ).toHaveAttribute('href', '/my-portfolio/');
 });
 
