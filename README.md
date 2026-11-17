@@ -30,7 +30,7 @@ Demo: <https://toinguyen-agilityio.github.io/my-portfolio/> · [Report a bug](ht
 
 ## 🧐 About
 
-A single-page portfolio template: an intro, projects, skills and a way to get in touch, built to be cloned and personalised. The live demo shows a fictional persona, Jordan Ellis, so you can see it fully filled in before you swap in your own content. It is a single English page.
+A single-page portfolio template: an intro, projects, skills and a way to get in touch, built to be cloned and personalised. The live demo shows a fictional persona, Jordan Nguyen, so you can see it fully filled in before you swap in your own content. It is a single English page.
 
 Scope and requirements come from the plan in [#3](https://github.com/toinguyen-agilityio/my-portfolio/issues/3).
 
@@ -45,7 +45,7 @@ Click **Use this template** on GitHub (or just clone the repo), then edit:
 - The portrait and project thumbnail SVGs in `src/components/` (for example `Portrait.tsx` and `src/components/thumbnails/`) — they are inline React components so they pick up the color tokens, not static images.
 - The color tokens in `src/app/globals.css` — the only place colors are defined. If you change `--bg`, also update the matching `theme-color` hex values in the three places `CLAUDE.md` lists, so the browser toolbar color still matches the page.
 
-Blocks still marked `// DEMO-CONTENT` in `src/content.ts` are the fictional demo persona (Jordan Ellis) and the `example.com` links; replace or remove them with your own content.
+Blocks still marked `// DEMO-CONTENT` in `src/content.ts` are the fictional demo persona (Jordan Nguyen) and the `example.com` links; replace or remove them with your own content.
 
 ## ✨ Features
 
@@ -151,7 +151,7 @@ pnpm build   # static export to out/, root path unless PAGES_BASE_PATH is set
 
 ## 🏷 Content Placeholders
 
-`src/content.ts` holds the demo content: a fictional persona, Jordan Ellis, with demo projects, skills and contact details. Every link points to the reserved `example.com` domain, including the `mailto:` address. Each demo block is marked with a `// DEMO-CONTENT: replace with your own content` comment, so a search for `DEMO-CONTENT` finds everything to personalise. Stable UI labels such as `View projects` carry no marker, since they are not content to replace.
+`src/content.ts` holds the demo content: a fictional persona, Jordan Nguyen, with demo projects, skills and contact details. Every link points to the reserved `example.com` domain, including the `mailto:` address. Each demo block is marked with a `// DEMO-CONTENT: replace with your own content` comment, so a search for `DEMO-CONTENT` finds everything to personalise. Stable UI labels such as `View projects` carry no marker, since they are not content to replace.
 
 The demo persona and its `example.com` links are expected to stay in the template's own demo; they are not a bug and not something a regression check should flag. A leftover `[PLACEHOLDER]` string is still a bug: it means a file was never filled in at all, demo or not.
 

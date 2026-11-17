@@ -1,5 +1,5 @@
 // All copy, links and image references live here. The person, projects and links below are
-// this template's demo data, not real content: Jordan Ellis is a fictional, permanent demo
+// this template's demo data, not real content: Jordan Nguyen is a fictional, permanent demo
 // persona, and every link points to the reserved example.com domain. Each demo block is
 // marked with DEMO-CONTENT; replace or remove all of them with your own content.
 
@@ -48,11 +48,11 @@ export type Seo = {
 
 // DEMO-CONTENT: replace with your own content
 export const profile = {
-  name: 'Jordan Ellis',
-  greeting: 'Hi, I am Jordan Ellis',
+  name: 'Jordan Nguyen',
+  greeting: 'Hi, I am Jordan Nguyen',
   headline: 'Frontend engineer building fast, accessible web apps',
   bio: 'I design and build web products with React and TypeScript. Right now I am focused on performance, accessibility and clean design systems that teams enjoy using.',
-  portraitAlt: 'Portrait of Jordan Ellis',
+  portraitAlt: 'Portrait of Jordan Nguyen',
   projectsCta: 'View projects',
   contactCta: 'Contact me',
 } satisfies Profile;
@@ -107,9 +107,9 @@ export const skillGroups = [
 // DEMO-CONTENT: replace with your own content
 export const contact = {
   // Display text only. Build the mailto: link from mailtoHref, never from email.
-  email: 'jordan.ellis@example.com',
+  email: 'jordan.nguyen@example.com',
   // Must be a valid, percent-encoded mailto: URI, e.g. ?subject=Hello%20there.
-  mailtoHref: 'mailto:jordan.ellis@example.com?subject=Hello%20Jordan',
+  mailtoHref: 'mailto:jordan.nguyen@example.com?subject=Hello%20Jordan',
   intro: 'Have a project in mind or just want to say hi? Send me an email.',
 } satisfies Contact;
 
@@ -117,19 +117,19 @@ export const contact = {
 export const socials = [
   {
     label: 'GitHub',
-    href: 'https://example.com/github/jordan-ellis',
+    href: 'https://example.com/github/jordan-nguyen',
   },
   {
     label: 'LinkedIn',
-    href: 'https://example.com/linkedin/jordan-ellis',
+    href: 'https://example.com/linkedin/jordan-nguyen',
   },
 ] satisfies readonly Social[];
 
 // DEMO-CONTENT: replace with your own content
 export const seo = {
-  title: 'Jordan Ellis - Frontend Engineer',
+  title: 'Jordan Nguyen - Frontend Engineer',
   description:
-    'Personal portfolio of Jordan Ellis, a frontend engineer: projects, skills and contact details.',
+    'Personal portfolio of Jordan Nguyen, a frontend engineer: projects, skills and contact details.',
 } satisfies Seo;
 
 export type ProjectsSection = {
@@ -272,7 +272,7 @@ export const storySection = {
   eyebrow: 'My story',
   title: 'How I got here',
   lead: 'I started by drawing interfaces on paper and never stopped. Here is the road from my first computer to shipping products with a team.',
-  portraitAlt: 'Portrait of Jordan Ellis',
+  portraitAlt: 'Portrait of Jordan Nguyen',
   backLabel: '← Back to home',
   journey: {
     eyebrow: 'Journey',
@@ -353,8 +353,8 @@ export const storySection = {
     projectsLabel: 'View projects',
   },
   seo: {
-    title: 'My Story - Jordan Ellis',
+    title: 'My Story - Jordan Nguyen',
     description:
-      'The story of Jordan Ellis, a frontend engineer: the journey so far and the hobbies that keep them going.',
+      'The story of Jordan Nguyen, a frontend engineer: the journey so far and the hobbies that keep them going.',
   },
 } satisfies StorySection;
