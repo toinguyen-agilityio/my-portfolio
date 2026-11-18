@@ -5,6 +5,7 @@
 
 export type Profile = {
   name: string;
+  navName: string;
   greeting: string;
   headline: string;
   bio: string;
@@ -49,6 +50,7 @@ export type Seo = {
 // DEMO-CONTENT: replace with your own content
 export const profile = {
   name: 'Jordan Ellis',
+  navName: 'Jordan Walker',
   greeting: 'Hi, I am Jordan Ellis',
   headline: 'Frontend engineer building fast, accessible web apps',
   bio: 'I design and build web products with React and TypeScript. Right now I am focused on performance, accessibility and clean design systems that teams enjoy using.',
