@@ -7,9 +7,11 @@ import { Chip } from '@/components/Chip';
 import { ExternalLink } from '@/components/ExternalLink';
 import { Header } from '@/components/Header';
 import { Section } from '@/components/Section';
+import { HobbiesSection } from '@/components/story/HobbiesSection';
+import { HobbyCard } from '@/components/story/HobbyCard';
 import { StoryImage } from '@/components/story/StoryImage';
 import { Tag } from '@/components/Tag';
-import { storySection, type StoryImageKind } from '../src/content';
+import { storySection, type Hobby, type StoryImageKind } from '../src/content';
 import {
   disableTransitions,
   expectNoA11yViolations,
@@ -349,4 +351,68 @@ test('Header on /story without a base path uses /story and /#projects', async ({
     'href',
     '/story',
   );
+});
+
+const makeHobbies = (count: number): Hobby[] =>
+  Array.from({ length: count }, (_, i) => ({
+    title: `Hobby ${i + 1}`,
+    text: 'A short description of the hobby. '.repeat(3),
+    tags: [`Tag ${i + 1}a`, `Tag ${i + 1}b`],
+    image: { kind: 'travel' as const, alt: `Hobby ${i + 1} picture` },
+  }));
+
+for (const count of [1, 7]) {
+  test(`HobbyCard grid renders ${count} card(s) without overflow or gaps`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 640 });
+    await page.setContent(
+      renderToStaticMarkup(
+        <div style={{ width: '288px' }}>
+          <ul>
+            {makeHobbies(count).map((hobby) => (
+              <HobbyCard key={hobby.title} hobby={hobby} />
+            ))}
+          </ul>
+        </div>,
+      ),
+    );
+    await loadTokens(page);
+    await expect(page.locator('article')).toHaveCount(count);
+    await expect(page.locator('article h3')).toHaveCount(count);
+    for (const ul of await page.locator('ul').all()) {
+      expect(await ul.locator('li').count()).toBeGreaterThan(0);
+    }
+    await expectNoHorizontalScroll(page);
+  });
+}
+
+test('HobbyCard without image and tags still renders its title and text', async ({
+  page,
+}) => {
+  await page.setContent(
+    renderToStaticMarkup(
+      <ul>
+        <HobbyCard hobby={{ title: 'Reading', text: 'Books.', tags: [] }} />
+      </ul>,
+    ),
+  );
+  await expect(page.getByRole('heading', { level: 3 })).toHaveText('Reading');
+  await expect(page.getByText('Books.')).toBeVisible();
+  await expect(page.locator('svg')).toHaveCount(0);
+  // Only the outer list: no empty tag list.
+  await expect(page.locator('ul')).toHaveCount(1);
+});
+
+test('HobbiesSection and HobbyCard are static, token-only and not clickable', () => {
+  const html = renderToStaticMarkup(<HobbiesSection />);
+  expect(html).toContain('id="hobbies"');
+  expect(html).not.toMatch(/hover:|focus|cursor-pointer|dark:/);
+  for (const file of ['HobbyCard.tsx', 'HobbiesSection.tsx']) {
+    const source = readFileSync(
+      resolve(__dirname, '../src/components/story', file),
+      'utf8',
+    );
+    expect(source, file).not.toContain('use client');
+  }
 });

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
+import { HobbiesSection } from '@/components/story/HobbiesSection';
 import { StoryCta } from '@/components/story/StoryCta';
 import { StoryIntro } from '@/components/story/StoryIntro';
 import { storySection } from '@/content';
@@ -18,7 +19,7 @@ export default function StoryPage() {
       <main id="main" tabIndex={-1} className="outline-none">
         <StoryIntro />
         {/* Journey mount point (T15): add <StoryJourney /> here, with id="journey". */}
-        {/* Hobbies mount point (T16): add <StoryHobbies /> here, with id="hobbies". */}
+        <HobbiesSection />
         <StoryCta />
       </main>
       <Footer />
