@@ -167,18 +167,19 @@ test.describe('Hobbies', () => {
     await page.goto('/story');
     const section = page.locator('#hobbies');
     await expect(section.locator('h2')).toHaveText(storySection.hobbies.title);
-    const cards = section.locator('article');
+    const cards = section.locator('li > a');
     await expect(cards).toHaveCount(3);
     for (const [i, hobby] of items.entries()) {
       const card = cards.nth(i);
       await expect(card.locator('h3')).toHaveText(hobby.title);
       await expect(card.locator('ul li')).toHaveText([...hobby.tags]);
+      await expect(card).toHaveAttribute('href', `/story/${hobby.slug}`);
     }
   });
 
   const cardBoxes = (page: Page) =>
     page
-      .locator('#hobbies article')
+      .locator('#hobbies li > a')
       .evaluateAll((els) =>
         els.map((el) => el.getBoundingClientRect().toJSON()),
       );

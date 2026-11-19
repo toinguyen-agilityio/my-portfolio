@@ -355,6 +355,7 @@ test('Header on /story without a base path uses /story and /#projects', async ({
 
 const makeHobbies = (count: number): Hobby[] =>
   Array.from({ length: count }, (_, i) => ({
+    slug: `hobby-${i + 1}`,
     title: `Hobby ${i + 1}`,
     text: 'A short description of the hobby. '.repeat(3),
     tags: [`Tag ${i + 1}a`, `Tag ${i + 1}b`],
@@ -378,8 +379,8 @@ for (const count of [1, 7]) {
       ),
     );
     await loadTokens(page);
-    await expect(page.locator('article')).toHaveCount(count);
-    await expect(page.locator('article h3')).toHaveCount(count);
+    await expect(page.locator('li > a')).toHaveCount(count);
+    await expect(page.locator('li > a h3')).toHaveCount(count);
     for (const ul of await page.locator('ul').all()) {
       expect(await ul.locator('li').count()).toBeGreaterThan(0);
     }
@@ -393,7 +394,14 @@ test('HobbyCard without image and tags still renders its title and text', async 
   await page.setContent(
     renderToStaticMarkup(
       <ul>
-        <HobbyCard hobby={{ title: 'Reading', text: 'Books.', tags: [] }} />
+        <HobbyCard
+          hobby={{
+            slug: 'reading',
+            title: 'Reading',
+            text: 'Books.',
+            tags: [],
+          }}
+        />
       </ul>,
     ),
   );
@@ -404,10 +412,13 @@ test('HobbyCard without image and tags still renders its title and text', async 
   await expect(page.locator('ul')).toHaveCount(1);
 });
 
-test('HobbiesSection and HobbyCard are static, token-only and not clickable', () => {
+test('HobbyCard is one link to its category with a hint, focus style and no dark: variants', () => {
   const html = renderToStaticMarkup(<HobbiesSection />);
   expect(html).toContain('id="hobbies"');
-  expect(html).not.toMatch(/hover:|focus|cursor-pointer|dark:/);
+  expect(html).toContain('href="/story/travel"');
+  expect(html).toContain('aria-label="Travel: read stories"');
+  expect(html).toContain('Read stories →');
+  expect(html).not.toContain('dark:');
   for (const file of ['HobbyCard.tsx', 'HobbiesSection.tsx']) {
     const source = readFileSync(
       resolve(__dirname, '../src/components/story', file),

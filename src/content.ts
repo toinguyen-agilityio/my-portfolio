@@ -229,6 +229,8 @@ export type StoryEntry = {
 };
 
 export type Hobby = {
+  // URL segment of the category page: /story/<slug>. Posts live in content/story/<slug>/.
+  slug: string;
   title: string;
   text: string;
   tags: readonly string[];
@@ -318,6 +320,7 @@ export const storySection = {
     intro: 'Away from the keyboard, these are the things I do to recharge.',
     items: [
       {
+        slug: 'travel',
         title: 'Travel',
         text: 'I plan trips around local food and slow train rides. Every new city gives me ideas for the next interface I build.',
         tags: ['City walks', 'Local food', 'Trains'],
@@ -327,6 +330,7 @@ export const storySection = {
         },
       },
       {
+        slug: 'sport',
         title: 'Sport',
         text: 'I run three mornings a week and play badminton on weekends. Sport teaches me to keep going when a problem is hard.',
         tags: ['Running', 'Badminton'],
@@ -336,6 +340,7 @@ export const storySection = {
         },
       },
       {
+        slug: 'photography',
         title: 'Photography',
         text: 'I take photos on a film camera and love the slow process of waiting for prints. It keeps me focused on light and framing.',
         tags: ['Film', 'Street'],
@@ -358,3 +363,35 @@ export const storySection = {
       'The story of Jordan Ellis, a frontend engineer: the journey so far and the hobbies that keep them going.',
   },
 } satisfies StorySection;
+
+export type StoryBlog = {
+  readStories: string;
+  // "{title}" is replaced with the hobby title.
+  cardLabel: string;
+  backToStory: string;
+  backToCategory: string;
+  postsTitle: string;
+  empty: string;
+  readMore: string;
+  minRead: string;
+  gallery: string;
+  prev: string;
+  next: string;
+  postNav: string;
+};
+
+// DEMO-CONTENT: replace with your own content
+export const storyBlog = {
+  readStories: 'Read stories →',
+  cardLabel: '{title}: read stories',
+  backToStory: '← Back to My story',
+  backToCategory: '← Back to {title}',
+  postsTitle: 'Stories',
+  empty: 'No stories here yet. Check back soon.',
+  readMore: 'Read story',
+  minRead: 'min read',
+  gallery: 'Photo gallery',
+  prev: '← Previous',
+  next: 'Next →',
+  postNav: 'More stories',
+} satisfies StoryBlog;
