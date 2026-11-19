@@ -56,13 +56,51 @@ test('travel lists its posts newest first', async ({ page }) => {
   await expect(first).toContainText(`min read`);
 });
 
-for (const slug of ['sport', 'photography']) {
-  test(`${slug} shows the empty state`, async ({ page }) => {
-    await page.goto(`/story/${slug}`);
-    await expect(page.getByText(storyBlog.empty)).toBeVisible();
-    await expect(page.locator('#posts-title ~ ul')).toHaveCount(0);
-  });
-}
+test('photography shows the empty state', async ({ page }) => {
+  await page.goto('/story/photography');
+  await expect(page.getByText(storyBlog.empty)).toBeVisible();
+  await expect(page.locator('#posts-title ~ ul')).toHaveCount(0);
+});
+
+test('sport lists its posts newest first', async ({ page }) => {
+  await page.goto('/story/sport');
+  await expect(page.getByText(storyBlog.empty)).toHaveCount(0);
+  const titles = page.locator('#posts-title ~ ul h3');
+  await expect(titles).toHaveText([
+    'Morning runs along the Perfume River',
+    'Weekend badminton doubles',
+  ]);
+  const first = page.locator('#posts-title ~ ul > li').first();
+  await expect(first.locator('img')).toBeVisible();
+  await expect(first.locator('time')).toHaveText('September 12, 2026');
+  await expect(first).toContainText('Huế, Vietnam');
+  await expect(first).toContainText('min read');
+});
+
+test('sport posts show content, and a gallery only when they have one', async ({
+  page,
+}) => {
+  await page.goto('/story/sport/morning-run-along-the-river');
+  await expect(page.locator('h1')).toHaveText(
+    'Morning runs along the Perfume River',
+  );
+  await expect(page.locator('article h2').first()).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: storyBlog.gallery }),
+  ).toBeVisible();
+  for (const img of await page.locator('article img').all()) {
+    await img.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() => img.evaluate((el: HTMLImageElement) => el.naturalWidth))
+      .toBeGreaterThan(0);
+  }
+
+  await page.goto('/story/sport/weekend-badminton-doubles');
+  await expect(page.locator('h1')).toHaveText('Weekend badminton doubles');
+  await expect(
+    page.getByRole('heading', { name: storyBlog.gallery }),
+  ).toHaveCount(0);
+});
 
 test('a post shows its content, gallery and navigation', async ({ page }) => {
   await page.goto('/story/travel');
@@ -133,6 +171,8 @@ test('SEO: post title, description and og:image come from frontmatter', async ({
 for (const path of [
   '/story/travel',
   '/story/sport',
+  '/story/sport/morning-run-along-the-river',
+  '/story/sport/weekend-badminton-doubles',
   '/story/travel/hue-food-and-trains',
 ]) {
   for (const theme of ['light', 'dark'] as const) {
