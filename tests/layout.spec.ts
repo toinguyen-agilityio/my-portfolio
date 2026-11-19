@@ -112,7 +112,7 @@ test('anchors still clear a header that grows', async ({ page }) => {
 test('name link goes to the top', async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto('/#contact');
-  await page.getByRole('link', { name: profile.name }).first().click();
+  await page.getByRole('link', { name: profile.navName }).first().click();
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(0);
 });
 

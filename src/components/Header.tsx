@@ -41,7 +41,7 @@ export function Header({ current }: HeaderProps = {}) {
             href={brandHref}
             className="text-text mr-auto inline-flex min-h-11 items-center text-[18px] font-bold no-underline"
           >
-            {profile.name}
+            {profile.navName}
           </a>
           <nav
             aria-label="Sections"
