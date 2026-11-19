@@ -159,3 +159,66 @@ for (const theme of ['light', 'dark'] as const) {
     await expectNoA11yViolations(page);
   });
 }
+
+test.describe('Hobbies', () => {
+  const { items } = storySection.hobbies;
+
+  test('shows a card per hobby with an H3 and its tags', async ({ page }) => {
+    await page.goto('/story');
+    const section = page.locator('#hobbies');
+    await expect(section.locator('h2')).toHaveText(storySection.hobbies.title);
+    const cards = section.locator('li > a');
+    await expect(cards).toHaveCount(3);
+    for (const [i, hobby] of items.entries()) {
+      const card = cards.nth(i);
+      await expect(card.locator('h3')).toHaveText(hobby.title);
+      await expect(card.locator('ul li')).toHaveText([...hobby.tags]);
+      await expect(card).toHaveAttribute('href', `/story/${hobby.slug}`);
+    }
+  });
+
+  const cardBoxes = (page: Page) =>
+    page
+      .locator('#hobbies li > a')
+      .evaluateAll((els) =>
+        els.map((el) => el.getBoundingClientRect().toJSON()),
+      );
+
+  test('uses one column at 320px', async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 800 });
+    await page.goto('/story');
+    await expectNoHorizontalScroll(page);
+    const boxes = await cardBoxes(page);
+    expect(boxes).toHaveLength(3);
+    for (const box of boxes) expect(box.x).toBeCloseTo(boxes[0].x, 0);
+    expect(boxes[1].y).toBeGreaterThan(boxes[0].y + boxes[0].height - 1);
+  });
+
+  test('fills the row at 1080px with equal-height cards', async ({ page }) => {
+    await page.setViewportSize({ width: 1080, height: 800 });
+    await page.goto('/story');
+    const boxes = await cardBoxes(page);
+    expect(boxes).toHaveLength(3);
+    for (const box of boxes) {
+      expect(box.y).toBeCloseTo(boxes[0].y, 0);
+      expect(box.height).toBeCloseTo(boxes[0].height, 0);
+    }
+    const left = Math.min(...boxes.map((b) => b.x));
+    const right = Math.max(...boxes.map((b) => b.x + b.width));
+    const container = await page
+      .locator('#hobbies ul')
+      .first()
+      .evaluate((el) => el.getBoundingClientRect().toJSON());
+    expect(left).toBeCloseTo(container.x, 0);
+    expect(right).toBeCloseTo(container.x + container.width, 0);
+  });
+
+  for (const theme of ['light', 'dark'] as const) {
+    test(`passes axe in the ${theme} theme`, async ({ page }) => {
+      await page.goto('/story');
+      await disableTransitions(page);
+      await setTheme(page, theme);
+      await expectNoA11yViolations(page);
+    });
+  }
+});
