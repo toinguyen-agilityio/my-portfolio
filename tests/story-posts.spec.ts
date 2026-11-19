@@ -56,10 +56,74 @@ test('travel lists its posts newest first', async ({ page }) => {
   await expect(first).toContainText(`min read`);
 });
 
-test('photography shows the empty state', async ({ page }) => {
+const photoPosts = [
+  ['frames-of-hue', 'One roll of film in Huế'],
+  ['golden-hour-river', 'Golden hour on the river'],
+  ['day-in-the-darkroom', 'A day in the darkroom'],
+];
+
+test('photography lists its 3 posts newest first with loaded covers', async ({
+  page,
+}) => {
   await page.goto('/story/photography');
-  await expect(page.getByText(storyBlog.empty)).toBeVisible();
-  await expect(page.locator('#posts-title ~ ul')).toHaveCount(0);
+  await expect(page.locator('#posts-title ~ ul h3')).toHaveText(
+    photoPosts.map(([, title]) => title),
+  );
+  await expect(page.getByText(storyBlog.empty)).toHaveCount(0);
+  for (const img of await page.locator('#posts-title ~ ul img').all()) {
+    await img.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() => img.evaluate((el: HTMLImageElement) => el.naturalWidth))
+      .toBeGreaterThan(0);
+  }
+});
+
+test('photography post A shows its gallery and mid-post image', async ({
+  page,
+}) => {
+  await page.goto('/story/photography/frames-of-hue');
+  await expect(
+    page.getByRole('heading', { name: storyBlog.gallery }),
+  ).toBeVisible();
+  await expect(page.locator('article figure')).toHaveCount(2);
+  await expect(page.locator('article')).toContainText(
+    'Frame 7, shot at f/8 in the morning haze.',
+  );
+  await expect(
+    page.getByRole('img', {
+      name: 'A placeholder image of a street at midday',
+    }),
+  ).toBeVisible();
+  await expect(page.locator('article h2').first()).toBeVisible();
+  await expect(page.getByText('One lens, no zoom')).toBeVisible();
+  for (const img of await page.locator('article img').all()) {
+    await img.scrollIntoViewIfNeeded();
+    await expect
+      .poll(() => img.evaluate((el: HTMLImageElement) => el.naturalWidth))
+      .toBeGreaterThan(0);
+  }
+});
+
+test('photography prev/next works across the 3 posts', async ({ page }) => {
+  const nav = () => page.getByRole('navigation', { name: storyBlog.postNav });
+  await page.goto('/story/photography/frames-of-hue');
+  // Newest: next goes to the older post, there is no prev.
+  await expect(nav().getByRole('link')).toHaveCount(1);
+  await nav()
+    .getByRole('link', { name: /Golden hour/ })
+    .click();
+  await expect(page).toHaveURL(/golden-hour-river$/);
+  await expect(nav().getByRole('link')).toHaveCount(2);
+  await nav()
+    .getByRole('link', { name: /darkroom/ })
+    .click();
+  await expect(page).toHaveURL(/day-in-the-darkroom$/);
+  // Oldest: only a link back to the newer post.
+  await expect(nav().getByRole('link')).toHaveCount(1);
+  await nav()
+    .getByRole('link', { name: /Golden hour/ })
+    .click();
+  await expect(page).toHaveURL(/golden-hour-river$/);
 });
 
 test('sport lists its posts newest first', async ({ page }) => {
@@ -171,6 +235,8 @@ test('SEO: post title, description and og:image come from frontmatter', async ({
 for (const path of [
   '/story/travel',
   '/story/sport',
+  '/story/photography',
+  '/story/photography/frames-of-hue',
   '/story/sport/morning-run-along-the-river',
   '/story/sport/weekend-badminton-doubles',
   '/story/travel/hue-food-and-trains',
