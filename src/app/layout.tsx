@@ -11,7 +11,11 @@ const inter = Inter({
   variable: '--font-inter',
 });
 
+// Optional: set NEXT_PUBLIC_SITE_URL to the deployed origin so Open Graph image URLs are absolute.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+
 export const metadata: Metadata = {
+  ...(siteUrl ? { metadataBase: new URL(siteUrl) } : {}),
   title: seo.title,
   description: seo.description,
 };
