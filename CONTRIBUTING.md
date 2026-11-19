@@ -57,31 +57,29 @@ chore(agents): move BA templates into reference files
 - **Title:** uses the commit message format above. PRs are squash-merged, so the title becomes the commit on `main`.
 - **Description:** follow the [PR template](.github/pull_request_template.md): `Why`, `Summary`, `Evidence`, `How to test` and `Refer`. Do not delete the headings.
 - **Evidence:** show that the change works, for example test output or screenshots. If something was not checked, say so and say why.
-- **Refer:** write `Refs #<number>` under `Refer`. Do not use `Closes`, `Fixes` or `Resolves`: they close the issue on merge, and only QA closes issues (see [Issue status](#issue-status)). Delete that line if there is no issue.
+- **Refer:** write `Refs #<number>` under `Refer`. Do not use `Closes`, `Fixes` or `Resolves`: the issue is closed by hand after the merge (see [Issue status](#issue-status)). Delete that line if there is no issue.
 - **Size:** keep one story or one fix per PR.
 - **Review:** at least one approval before merge. Changes covered by `.github/CODEOWNERS` need the repo owner's approval.
 
 ## Issue status
 
-Track issues on the [my-portfolio project board](https://github.com/users/toinguyen-agilityio/projects/3). The board's `Status` field is the source of truth.
+The repo is no longer linked to a project board, so an issue's status lives on the issue itself: it is either open or closed.
 
-| When | Move the issue to | Who |
-|------|-------------------|-----|
-| You start work on it | `In Progress` | Dev or dev's agent |
-| You open its PR | `In Review` | Dev or dev's agent |
-| Its PR is merged | `QA` | Whoever merges the PR, or their agent |
-| QA has checked it and posted a comment with screenshots or a video | `Done`, and close the issue | QA only |
+| When | Do this to the issue | Who |
+|------|----------------------|-----|
+| You start work on it | Assign it to yourself and leave it open | Dev or dev's agent |
+| Its PR is merged | Close the issue and comment with the PR link | Whoever merges the PR, or their agent |
 
-- Devs and their agents never move an issue to `Done` and never close it. When the work is finished, it goes to `QA`.
-- The board `Status` field is the only place for status. Do not add status labels to issues.
-- Change the status with `bash .claude/scripts/set-issue-status.sh <issue-number> "<status>"`, for example `bash .claude/scripts/set-issue-status.sh 12 "QA"`. The script refuses `Done` and `Released`; QA sets those on the board. It needs a `gh` login with the `project` scope (`gh auth refresh -s project`).
+- Devs and their agents close the issue themselves once its PR is merged. QA does not check each issue; QA only tests at a release.
+- Closing the issue is the only status change. Do not add status labels to issues.
+- Close an issue with `gh issue close <issue-number> --comment "<PR link>"`, or with the Close button on GitHub.
 
 ### Blocked issues
 
 An issue is blocked only when it cannot be built in parallel with another one: feature A has to be finished before feature B can be implemented. Then B is blocked by A. Sharing an area or touching the same file is not a block.
 
 - Add a "Blocked by" link only for that kind of dependency.
-- A blocker counts as finished once its PR is merged, even while it waits in `QA`. Whoever merges the PR removes its "Blocked by" links from the issues it blocks, so GitHub stops showing the "Blocked" badge on them. The "Blocked by" line in each issue body stays as the record.
+- A blocker counts as finished once its PR is merged and the issue is closed. Whoever merges the PR removes its "Blocked by" links from the issues it blocks, so GitHub stops showing the "Blocked" badge on them. The "Blocked by" line in each issue body stays as the record.
 
 ## Working with Claude
 

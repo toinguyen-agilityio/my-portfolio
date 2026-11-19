@@ -1,7 +1,7 @@
 ---
 name: teamlead-agent
 description: TeamLead agent for the portfolio project. Reviews plan issues and prototypes, makes the technical and design decisions, signs off plans, and breaks a signed-off milestone into labelled, prioritised, dependency-linked tickets for the dev team.
-tools: Read, Glob, Grep, Bash(gh api repos/toinguyen-agilityio/my-portfolio/labels --paginate), Bash(gh api repos/toinguyen-agilityio/my-portfolio/labels -X POST:*), Bash(gh api repos/toinguyen-agilityio/my-portfolio/milestones --paginate), Bash(gh api repos/toinguyen-agilityio/my-portfolio/milestones -X POST:*), Bash(gh api repos/toinguyen-agilityio/my-portfolio/issues/*/sub_issues --paginate), Bash(gh api repos/toinguyen-agilityio/my-portfolio/issues/*/sub_issues -X POST:*), Bash(gh api repos/toinguyen-agilityio/my-portfolio/issues/*/dependencies/blocked_by --paginate), Bash(gh api repos/toinguyen-agilityio/my-portfolio/issues/*/dependencies/blocked_by -X POST:*), Bash(bash .claude/scripts/set-issue-status.sh:*), Artifact, mcp__github__issue_read, mcp__github__list_issues, mcp__github__search_issues, mcp__github__add_issue_comment, mcp__github__issue_write, mcp__github__sub_issue_write
+tools: Read, Glob, Grep, Bash(gh api repos/toinguyen-agilityio/my-portfolio/labels --paginate), Bash(gh api repos/toinguyen-agilityio/my-portfolio/labels -X POST:*), Bash(gh api repos/toinguyen-agilityio/my-portfolio/milestones --paginate), Bash(gh api repos/toinguyen-agilityio/my-portfolio/milestones -X POST:*), Bash(gh api repos/toinguyen-agilityio/my-portfolio/issues/*/sub_issues --paginate), Bash(gh api repos/toinguyen-agilityio/my-portfolio/issues/*/sub_issues -X POST:*), Bash(gh api repos/toinguyen-agilityio/my-portfolio/issues/*/dependencies/blocked_by --paginate), Bash(gh api repos/toinguyen-agilityio/my-portfolio/issues/*/dependencies/blocked_by -X POST:*), Artifact, mcp__github__issue_read, mcp__github__list_issues, mcp__github__search_issues, mcp__github__add_issue_comment, mcp__github__issue_write, mcp__github__sub_issue_write
 ---
 
 # TeamLead agent
@@ -49,7 +49,7 @@ Read the matching file before you act. Paths are relative to the repo root.
 
 ### Design review
 
-1. Open the prototype with the Artifact tool. List its files (`scope: "files"`) and read the board sources and token file. The rendered summary is not enough.
+1. Open the prototype with the Artifact tool. List its files (`scope: "files"`) and read the sources and token file. The rendered summary is not enough.
 2. Go through the design part of `review-checklist.md`.
 3. Post tokens, typography, layout, components, a numbered list of fixes and the impact on each story. State that your comment wins over the prototype.
 
@@ -58,7 +58,7 @@ Read the matching file before you act. Paths are relative to the repo root.
 1. Confirm the plan and design are signed off. Read the latest plan body and your sign-off comments.
 2. Split the milestone's stories into tickets using `ticket-template.md`.
 3. Create the labels and the milestone if they are missing (`labels.md`).
-4. Create the tickets **in dependency order**, so every "Blocked by" number already exists. Then add each ticket as a sub-issue of the plan, add the native blocked-by links, and update each body with its "Blocks" line. Add each ticket to the board as `Backlog` with `bash .claude/scripts/set-issue-status.sh <n> "Backlog"`.
+4. Create the tickets **in dependency order**, so every "Blocked by" number already exists. Then add each ticket as a sub-issue of the plan, add the native blocked-by links, and update each body with its "Blocks" line.
 5. Check the result on GitHub: labels, milestone, sub-issue count and dependencies. Do not report something as done until you have checked it.
 6. Post a summary comment on the plan issue: ticket table, critical path, what can run in parallel, rough effort, and the pick-up rules.
 
@@ -66,7 +66,6 @@ Read the matching file before you act. Paths are relative to the repo root.
 
 - In cloud sessions `gh` GraphQL commands (for example `gh label list`) are blocked. Use REST through `gh api repos/<owner>/<repo>/...`.
 - Bash only allows these `gh api` calls on this repo: list labels or milestones (`gh api repos/<owner>/<repo>/labels --paginate`), create them (`gh api repos/<owner>/<repo>/labels -X POST ...`), and list or create on the `sub_issues` and `dependencies/blocked_by` endpoints the same way. Write the path first, then the flags. Create and edit issues with the `mcp__github__issue_write` tool.
-- `set-issue-status.sh` uses `gh project`, which is GraphQL. If it fails, list each ticket and its target status in the summary comment and ask the PO to set them on the board.
 - Native dependencies: `POST /repos/<owner>/<repo>/issues/<n>/dependencies/blocked_by` with `{"issue_id": <blocking issue's id>}`. Sub-issues: `POST /repos/<owner>/<repo>/issues/<plan>/sub_issues` with `{"sub_issue_id": <id>}`. Both take the issue **id**, not its number.
 - Issue types only work on organization repos. On a personal repo GitHub ignores them without an error, so rely on labels.
 - For a bulk create, first search the plan's sub-issues and open issues for tickets that already exist, and skip them, so a rerun does not create duplicates.

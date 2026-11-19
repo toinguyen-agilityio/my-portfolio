@@ -14,9 +14,9 @@ Create missing labels with `gh api repos/<owner>/<repo>/labels -X POST`. Every t
 
 ## Status flow
 
-Status lives in the project board's `Status` field, not in labels (see "Issue status" in `CONTRIBUTING.md`). Set it with `bash .claude/scripts/set-issue-status.sh <n> "<status>"`.
+There is no project board. Status is open or closed on the issue itself, not in labels (see "Issue status" in `CONTRIBUTING.md`).
 
-1. The TeamLead adds every ticket to the board as `Backlog`.
-2. A dev picks a ticket, moves it to `In Progress` and assigns themselves.
+1. The TeamLead creates every ticket as an open issue.
+2. A dev picks a ticket and assigns themselves.
 3. Pick-up rules: highest priority first. Only take a ticket whose "Blocked by" tickets are all merged. Follow `CONTRIBUTING.md` for the branch and PR, and put `Refs #<n>` under `Refer`.
-4. Opening the PR moves the ticket to `In Review`; merging it moves the ticket to `QA`. Only QA moves it to `Done` and closes it.
+4. After the PR is merged, the dev closes the ticket with a comment that links the PR. QA only tests at a release.
