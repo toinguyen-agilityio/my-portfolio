@@ -73,10 +73,9 @@ test('My Story is the current page in the header, the others link home', async (
       `/${link.href}`,
     );
   }
-  await expect(page.getByRole('link', { name: profile.name })).toHaveAttribute(
-    'href',
-    '/',
-  );
+  await expect(
+    page.getByRole('link', { name: profile.navName }),
+  ).toHaveAttribute('href', '/');
 });
 
 test('Contact me lands on the home contact section below the header', async ({

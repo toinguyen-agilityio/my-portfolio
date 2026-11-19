@@ -14,7 +14,7 @@ export function MinimalHeader() {
             href="/"
             className="text-text inline-flex min-h-11 items-center text-[18px] font-bold no-underline"
           >
-            {profile.name}
+            {profile.navName}
           </Link>
         </div>
       </Container>
