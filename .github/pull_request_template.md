@@ -13,4 +13,4 @@
 1.
 
 ## Refer
-Refs #<!-- issue number, or delete this line if there is no issue. Do not use Closes: only QA closes issues -->
+Refs #<!-- issue number, or delete this line if there is no issue. Do not use Closes: the issue is closed by hand after the merge -->
