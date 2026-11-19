@@ -193,3 +193,7 @@ Mention `@claude` on a PR or issue to ask Claude for help or a review (allowed u
 ## 📄 License
 
 [MIT](LICENSE).
+
+## Story posts
+
+The cards under "Beyond work" on `/story` open `/story/<category>` and list that category's posts. To add a post, add one MDX file at `content/story/<category>/<slug>.mdx` (plus its images under `public/images/story/...`). Frontmatter: `title`, `date` (YYYY-MM-DD), `category`, `cover`, `coverAlt`, `excerpt`, and optionally `location`, `tags` and `gallery`. A missing or invalid field fails the build. Set `NEXT_PUBLIC_SITE_URL` to your deployed origin to get absolute Open Graph image URLs.
