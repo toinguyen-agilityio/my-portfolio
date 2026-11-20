@@ -1,0 +1,36 @@
+/
+  title: Jordan Ellis - Frontend Engineer
+  description: Personal portfolio of Jordan Ellis, a frontend engineer: projects, skills and contact details.
+/story
+  title: My Story - Jordan Ellis
+  description: The story of Jordan Ellis, a frontend engineer: the journey so far and the hobbies that keep them going.
+/story/travel
+  title: Travel - Stories
+  description: I plan trips around local food and slow train rides. Every new city gives me ideas for the next interface I build.
+/story/sport
+  title: Sport - Stories
+  description: I run three mornings a week and play badminton on weekends. Sport teaches me to keep going when a problem is hard.
+/story/photography
+  title: Photography - Stories
+  description: I take photos on a film camera and love the slow process of waiting for prints. It keeps me focused on light and framing.
+/story/travel/hue-food-and-trains
+  title: Slow trains and street food in Huế
+  description: Four days of bún bò, clay-pot rice and the slow train from Da Nang, with no plan beyond the next meal.
+/story/travel/lisbon-tram-walks
+  title: Walking Lisbon by tram line
+  description: I picked tram 28 as a spine and wandered off it whenever a street looked interesting.
+/story/sport/morning-run-along-the-river
+  title: Morning runs along the Perfume River
+  description: Three mornings a week, five kilometres at sunrise, and the one habit that makes the rest of my day easier.
+/story/sport/weekend-badminton-doubles
+  title: Weekend badminton doubles
+  description: Saturday doubles with the same four friends, loud rallies and no scoreboard worth trusting.
+/story/photography/frames-of-hue
+  title: One roll of film in Huế
+  description: Thirty-six frames, one old camera and a morning of walking the streets without checking the screen.
+/story/photography/golden-hour-river
+  title: Golden hour on the river
+  description: The best light of the day lasts about twenty minutes, so I arrive early and wait.
+/story/photography/day-in-the-darkroom
+  title: A day in the darkroom
+  description: Trays, timers and red light: printing my own negatives for the first time.
