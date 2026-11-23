@@ -30,6 +30,7 @@ export function PostMeta({ post }: { post: Post }) {
     <p className="text-muted flex flex-wrap gap-x-3 text-[14px]">
       <time dateTime={post.date}>{formatDate(post.date)}</time>
       {post.location ? <span>{post.location}</span> : null}
+      {post.tripLength ? <span>{post.tripLength}</span> : null}
     </p>
   );
 }
@@ -115,6 +116,8 @@ export function PostGallery({ post }: { post: Post }) {
               <img
                 src={withBasePath(img.src)}
                 alt={img.alt}
+                width={1200}
+                height={900}
                 loading="lazy"
                 className="aspect-[4/3] h-auto w-full rounded-md object-cover"
               />
