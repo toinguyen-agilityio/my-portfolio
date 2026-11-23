@@ -1,0 +1,1846 @@
+{
+ "title": "Release 1",
+ "languages": [
+  "en",
+  "vi"
+ ],
+ "meta": {
+  "en": "Tested 2026-11-19 on the production build (pnpm build, out/ served locally), Chromium via Playwright, commit e021b43. Light and dark themes at 320, 375 and 1280px.",
+  "vi": "Kiểm thử ngày 19/11/2026 trên bản build production (pnpm build, phục vụ out/ ở local), Chromium qua Playwright, commit e021b43. Giao diện sáng và tối ở 320, 375 và 1280px."
+ },
+ "issues": [
+  {
+   "id": "95",
+   "label": "#95",
+   "title": {
+    "en": "Rename on navigation",
+    "vi": "Đổi tên trên thanh điều hướng"
+   },
+   "links": [
+    {
+     "text": "#95 Rename only on navigation",
+     "href": "https://github.com/toinguyen-agilityio/my-portfolio/issues/95"
+    }
+   ],
+   "cases": [
+    {
+     "id": "95-1",
+     "title": {
+      "en": "Name shown in the navigation, light and dark",
+      "vi": "Tên hiển thị trên thanh điều hướng, sáng và tối"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Check the name shown as the brand in the top navigation on / and /story, in light and dark themes.",
+      "vi": "Kiểm tra tên hiển thị ở logo trên thanh điều hướng tại / và /story, ở giao diện sáng và tối."
+     },
+     "expected": {
+      "en": "The navigation shows the new name \"Jordan Walker\"; the hero greeting and portrait alt text keep \"Jordan Ellis\" (rename applies to the navigation only).",
+      "vi": "Thanh điều hướng hiện tên mới \"Jordan Walker\"; lời chào ở hero và alt của ảnh chân dung vẫn giữ \"Jordan Ellis\" (chỉ đổi tên trên thanh điều hướng)."
+     },
+     "result": {
+      "en": "Matches: the navigation shows \"Jordan Walker\" on both pages in both themes, and the hero and portrait still say \"Jordan Ellis\".",
+      "vi": "Đúng như mong muốn: thanh điều hướng hiện \"Jordan Walker\" ở cả 2 trang, cả 2 giao diện; hero và ảnh chân dung vẫn là \"Jordan Ellis\"."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Navigation shows \"Jordan Walker\" on / (light, dark)",
+        "vi": "Thanh điều hướng hiện \"Jordan Walker\" ở / (sáng, tối)"
+       },
+       "shots": [
+        1,
+        3
+       ]
+      },
+      {
+       "text": {
+        "en": "Navigation shows \"Jordan Walker\" on /story (light, dark)",
+        "vi": "Thanh điều hướng hiện \"Jordan Walker\" ở /story (sáng, tối)"
+       },
+       "shots": [
+        2,
+        4
+       ]
+      },
+      {
+       "text": {
+        "en": "Hero greeting still says \"Jordan Ellis\"",
+        "vi": "Lời chào ở hero vẫn là \"Jordan Ellis\""
+       },
+       "shots": [
+        1,
+        3
+       ]
+      }
+     ],
+     "raw": [
+      "/ light: nav brand = \"Jordan Walker\"",
+      "hero greeting 'Jordan Ellis' present=true, portrait alt 'Jordan Ellis' present=true",
+      "/story light: nav brand = \"Jordan Walker\"",
+      "/ dark: nav brand = \"Jordan Walker\"",
+      "hero greeting 'Jordan Ellis' present=true, portrait alt 'Jordan Ellis' present=true",
+      "/story dark: nav brand = \"Jordan Walker\""
+     ],
+     "shots": [
+      "shots/95-1-home-light-1280.png",
+      "shots/95-1-story-light-1280.png",
+      "shots/95-1-home-dark-1280.png",
+      "shots/95-1-story-dark-1280.png"
+     ]
+    },
+    {
+     "id": "95-2",
+     "title": {
+      "en": "Brand link goes home",
+      "vi": "Logo tên dẫn về trang chủ"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Click the brand name in the navigation from the /story page.",
+      "vi": "Bấm vào tên ở thanh điều hướng khi đang ở trang /story."
+     },
+     "expected": {
+      "en": "It goes back to the home page (/).",
+      "vi": "Quay về trang chủ (/)."
+     },
+     "result": {
+      "en": "Matches: clicking the brand on /story opened /.",
+      "vi": "Đúng như mong muốn: bấm tên ở /story mở ra trang /."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Home page shown after clicking the brand on /story",
+        "vi": "Trang chủ hiện ra sau khi bấm tên ở /story"
+       },
+       "shots": [
+        1
+       ]
+      }
+     ],
+     "raw": [
+      "clicked brand on /story -> /"
+     ],
+     "shots": [
+      "shots/95-2-home-after-click-light-1280.png"
+     ]
+    },
+    {
+     "id": "95-3",
+     "title": {
+      "en": "Navigation fits at 320px and 375px",
+      "vi": "Thanh điều hướng vừa khung ở 320px và 375px"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Check the navigation bar on / and /story at narrow phone widths (320px and 375px), light and dark.",
+      "vi": "Kiểm tra thanh điều hướng ở / và /story với màn hình điện thoại hẹp (320px và 375px), sáng và tối."
+     },
+     "expected": {
+      "en": "The navigation stays on one line, nothing is clipped, the page has no horizontal scroll, and the theme toggle and menu are visible.",
+      "vi": "Thanh điều hướng nằm trên một dòng, không bị cắt chữ, trang không cuộn ngang, nút đổi giao diện và menu đều hiện."
+     },
+     "result": {
+      "en": "Matches: all 8 combinations (2 pages × 2 widths × 2 themes) fit on one line with no clipping or horizontal scroll.",
+      "vi": "Đúng như mong muốn: cả 8 trường hợp (2 trang × 2 độ rộng × 2 giao diện) đều trên một dòng, không cắt chữ, không cuộn ngang."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "320px: navigation on one line, not clipped (light / dark)",
+        "vi": "320px: thanh điều hướng một dòng, không cắt chữ (sáng / tối)"
+       },
+       "shots": [
+        1,
+        2,
+        5,
+        6
+       ]
+      },
+      {
+       "text": {
+        "en": "375px: navigation on one line, not clipped (light / dark)",
+        "vi": "375px: thanh điều hướng một dòng, không cắt chữ (sáng / tối)"
+       },
+       "shots": [
+        3,
+        4,
+        7,
+        8
+       ]
+      }
+     ],
+     "raw": [
+      "/ light 320: one line, not clipped, no h-scroll, toggle+menu visible",
+      "/story light 320: one line, not clipped, no h-scroll, toggle+menu visible",
+      "/ light 375: one line, not clipped, no h-scroll, toggle+menu visible",
+      "/story light 375: one line, not clipped, no h-scroll, toggle+menu visible",
+      "/ dark 320: one line, not clipped, no h-scroll, toggle+menu visible",
+      "/story dark 320: one line, not clipped, no h-scroll, toggle+menu visible",
+      "/ dark 375: one line, not clipped, no h-scroll, toggle+menu visible",
+      "/story dark 375: one line, not clipped, no h-scroll, toggle+menu visible"
+     ],
+     "shots": [
+      "shots/95-3-home-light-320.png",
+      "shots/95-3-story-light-320.png",
+      "shots/95-3-home-light-375.png",
+      "shots/95-3-story-light-375.png",
+      "shots/95-3-home-dark-320.png",
+      "shots/95-3-story-dark-320.png",
+      "shots/95-3-home-dark-375.png",
+      "shots/95-3-story-dark-375.png"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "98",
+   "label": "#98",
+   "title": {
+    "en": "Clickable \"Beyond work\" cards, category and post pages",
+    "vi": "Thẻ \"Beyond work\" bấm được, trang chuyên mục và trang bài viết"
+   },
+   "links": [
+    {
+     "text": "#98 Story page: clickable \"Beyond work\" cards",
+     "href": "https://github.com/toinguyen-agilityio/my-portfolio/issues/98"
+    }
+   ],
+   "cases": [
+    {
+     "id": "98-1",
+     "title": {
+      "en": "Cards link to their category pages",
+      "vi": "Các thẻ dẫn tới trang chuyên mục"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Check the three cards in the \"Beyond work\" section of the Story page and where each one links.",
+      "vi": "Kiểm tra 3 thẻ trong mục \"Beyond work\" ở trang Story và đường dẫn của từng thẻ."
+     },
+     "expected": {
+      "en": "Travel, Sport and Photography cards link to /story/travel, /story/sport and /story/photography.",
+      "vi": "Thẻ Travel, Sport, Photography lần lượt dẫn tới /story/travel, /story/sport, /story/photography."
+     },
+     "result": {
+      "en": "Matches: each card links to its own category page.",
+      "vi": "Đúng như mong muốn: mỗi thẻ dẫn đúng tới trang chuyên mục của nó."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "The three \"Beyond work\" cards",
+        "vi": "3 thẻ \"Beyond work\""
+       },
+       "shots": [
+        1
+       ]
+      },
+      {
+       "text": {
+        "en": "Pages opened from the Travel, Sport, Photography cards",
+        "vi": "Trang mở ra khi bấm thẻ Travel, Sport, Photography"
+       },
+       "shots": [
+        2,
+        3,
+        4
+       ]
+      }
+     ],
+     "raw": [
+      "Beyond work section with cards captured",
+      "card \"Travel: read stories\" -> /story/travel",
+      "card \"Sport: read stories\" -> /story/sport",
+      "card \"Photography: read stories\" -> /story/photography"
+     ],
+     "shots": [
+      "shots/98-1-beyond-work-cards-light-1280.png",
+      "shots/98-1-travel-landing-light-1280.png",
+      "shots/98-1-sport-landing-light-1280.png",
+      "shots/98-1-photography-landing-light-1280.png"
+     ]
+    },
+    {
+     "id": "98-2",
+     "title": {
+      "en": "Hover and focus states",
+      "vi": "Trạng thái hover và focus"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Hover and keyboard-focus each \"Beyond work\" card, in light and dark themes.",
+      "vi": "Rê chuột và focus bằng bàn phím vào từng thẻ \"Beyond work\", ở giao diện sáng và tối."
+     },
+     "expected": {
+      "en": "Each card shows a \"Read stories\" hint, the border turns to the accent colour on hover, the cursor is a pointer, and focus shows a clear outline.",
+      "vi": "Mỗi thẻ có gợi ý \"Read stories\", viền đổi sang màu nhấn khi rê chuột, con trỏ là bàn tay, và khi focus có viền outline rõ ràng."
+     },
+     "result": {
+      "en": "Matches: all 3 cards show the hint; border changes to the accent colour, cursor is a pointer, and focus shows a 3px accent outline in both themes.",
+      "vi": "Đúng như mong muốn: cả 3 thẻ có gợi ý; viền đổi màu nhấn, con trỏ bàn tay, focus có outline 3px màu nhấn ở cả 2 giao diện."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Hover: accent border and \"Read stories\" hint (light / dark)",
+        "vi": "Rê chuột: viền màu nhấn và gợi ý \"Read stories\" (sáng / tối)"
+       },
+       "shots": [
+        1,
+        3
+       ]
+      },
+      {
+       "text": {
+        "en": "Keyboard focus: 3px outline (light / dark)",
+        "vi": "Focus bàn phím: outline 3px (sáng / tối)"
+       },
+       "shots": [
+        2,
+        4
+       ]
+      }
+     ],
+     "raw": [
+      "light: 3 cards, 'Read stories' hint on all=true, hover border rgb(226, 229, 235)->rgb(58, 71, 213), transform none, cursor=pointer",
+      "light: focus style outline=\"solid 3px rgb(58, 71, 213)\" border=rgb(58, 71, 213) shadow=none",
+      "dark: 3 cards, 'Read stories' hint on all=true, hover border rgb(43, 48, 60)->rgb(148, 160, 255), transform none, cursor=pointer",
+      "dark: focus style outline=\"solid 3px rgb(148, 160, 255)\" border=rgb(148, 160, 255) shadow=none"
+     ],
+     "shots": [
+      "shots/98-2-hover-light-1280.png",
+      "shots/98-2-focus-light-1280.png",
+      "shots/98-2-hover-dark-1280.png",
+      "shots/98-2-focus-dark-1280.png"
+     ]
+    },
+    {
+     "id": "98-3",
+     "title": {
+      "en": "Keyboard: Tab and Enter",
+      "vi": "Bàn phím: Tab và Enter"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Use only the keyboard: Tab to the cards, then press Enter.",
+      "vi": "Chỉ dùng bàn phím: bấm Tab tới các thẻ rồi nhấn Enter."
+     },
+     "expected": {
+      "en": "The cards can be reached in order Travel → Sport → Photography, and Enter opens the card's category page.",
+      "vi": "Có thể Tab tới các thẻ theo thứ tự Travel → Sport → Photography, và Enter mở trang chuyên mục của thẻ."
+     },
+     "result": {
+      "en": "Matches: the first card is reached after 10 Tab presses, order is Travel, Sport, Photography, and Enter opens /story/travel (light and dark).",
+      "vi": "Đúng như mong muốn: tới thẻ đầu sau 10 lần Tab, thứ tự Travel, Sport, Photography, Enter mở /story/travel (sáng và tối)."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "First card focused with Tab (light / dark)",
+        "vi": "Thẻ đầu được focus bằng Tab (sáng / tối)"
+       },
+       "shots": [
+        1,
+        3
+       ]
+      },
+      {
+       "text": {
+        "en": "/story/travel opened after Enter (light / dark)",
+        "vi": "Mở /story/travel sau khi nhấn Enter (sáng / tối)"
+       },
+       "shots": [
+        2,
+        4
+       ]
+      }
+     ],
+     "raw": [
+      "light: reached first card after 10 Tab presses; Enter -> /story/travel",
+      "light: Tab order of cards = travel, sport, photography",
+      "dark: reached first card after 10 Tab presses; Enter -> /story/travel",
+      "dark: Tab order of cards = travel, sport, photography"
+     ],
+     "shots": [
+      "shots/98-3-focused-card-light-1280.png",
+      "shots/98-3-after-enter-light-1280.png",
+      "shots/98-3-focused-card-dark-1280.png",
+      "shots/98-3-after-enter-dark-1280.png"
+     ]
+    },
+    {
+     "id": "98-4",
+     "title": {
+      "en": "Category page (Travel)",
+      "vi": "Trang chuyên mục (Travel)"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open the Travel category page at 320, 375 and 1280px, light and dark.",
+      "vi": "Mở trang chuyên mục Travel ở 320, 375 và 1280px, sáng và tối."
+     },
+     "expected": {
+      "en": "It lists both Travel posts with cover, date, location and reading time, has a back link to My story, an intro matching the card text, and no horizontal scroll or empty state.",
+      "vi": "Trang hiện đủ 2 bài Travel kèm ảnh bìa, ngày, địa điểm, thời gian đọc; có link quay lại My story, đoạn giới thiệu khớp với thẻ, không cuộn ngang và không hiện trạng thái trống."
+     },
+     "result": {
+      "en": "Matches: 2 posts shown with all card details, back link and intro present, images load, no horizontal scroll, in all 6 combinations.",
+      "vi": "Đúng như mong muốn: hiện 2 bài với đủ thông tin thẻ, có link quay lại và đoạn giới thiệu, ảnh tải được, không cuộn ngang ở cả 6 trường hợp."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Mobile 320 / 375px: 2 posts, no horizontal scroll",
+        "vi": "Điện thoại 320 / 375px: 2 bài, không cuộn ngang"
+       },
+       "shots": [
+        1,
+        2,
+        4,
+        5
+       ]
+      },
+      {
+       "text": {
+        "en": "Desktop 1280px: cards with cover, date, location, reading time",
+        "vi": "Desktop 1280px: thẻ có ảnh bìa, ngày, địa điểm, thời gian đọc"
+       },
+       "shots": [
+        3,
+        6
+       ]
+      }
+     ],
+     "raw": [
+      "/story/travel light 320: 2 posts [Slow trains and street food in Huế | Walking Lisbon by tram line]; no h-scroll, images load, no empty state",
+      "/story/travel light 375: 2 posts [Slow trains and street food in Huế | Walking Lisbon by tram line]; no h-scroll, images load, no empty state",
+      "/story/travel light 1280: 2 posts [Slow trains and street food in Huế | Walking Lisbon by tram line]; no h-scroll, images load, no empty state",
+      "card details: [cover=true date=true location=true readtime=true] October 1, 2026 / Huế, Vietnam / Slow trains and street food in Huế / Four days of bún bò, clay-pot rice and the slow train from Da Nang, with no plan beyond the next meal. / 1 min read || [cover=true date=true location=true readtime=true] June 15, 2026 / Lisbon, Portugal / Walking Lisbon by tram line / I picked t",
+      "back link to My story present",
+      "tags/text seen: City walks, Local food, Trains",
+      "category intro matches card text: \"I plan trips around local food and slow train rides. Every new city gives me ideas for the next interface I build.\"",
+      "/story/travel dark 320: 2 posts [Slow trains and street food in Huế | Walking Lisbon by tram line]; no h-scroll, images load, no empty state",
+      "/story/travel dark 375: 2 posts [Slow trains and street food in Huế | Walking Lisbon by tram line]; no h-scroll, images load, no empty state",
+      "/story/travel dark 1280: 2 posts [Slow trains and street food in Huế | Walking Lisbon by tram line]; no h-scroll, images load, no empty state"
+     ],
+     "shots": [
+      "shots/98-4-travel-light-320.png",
+      "shots/98-4-travel-light-375.png",
+      "shots/98-4-travel-light-1280.png",
+      "shots/98-4-travel-dark-320.png",
+      "shots/98-4-travel-dark-375.png",
+      "shots/98-4-travel-dark-1280.png"
+     ]
+    },
+    {
+     "id": "98-5",
+     "title": {
+      "en": "Unknown category shows 404",
+      "vi": "Chuyên mục không tồn tại hiện trang 404"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open a category that does not exist (/story/cooking).",
+      "vi": "Mở một chuyên mục không tồn tại (/story/cooking)."
+     },
+     "expected": {
+      "en": "The site returns HTTP 404 and shows the \"Page not found\" page.",
+      "vi": "Trang trả về HTTP 404 và hiện trang \"Page not found\"."
+     },
+     "result": {
+      "en": "Matches: HTTP 404 with the \"Page not found\" page.",
+      "vi": "Đúng như mong muốn: HTTP 404 và hiện trang \"Page not found\"."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "\"Page not found\" page for /story/cooking",
+        "vi": "Trang \"Page not found\" cho /story/cooking"
+       },
+       "shots": [
+        1
+       ]
+      }
+     ],
+     "raw": [
+      "/story/cooking: HTTP 404, page text: \"Skip to content Jordan Walker Error 404 Page not found The page you are looking for does not exist or has moved. Back to\""
+     ],
+     "shots": [
+      "shots/98-5-404-light-1280.png"
+     ]
+    },
+    {
+     "id": "98-6",
+     "title": {
+      "en": "Post pages",
+      "vi": "Các trang bài viết"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open both Travel posts at 320, 375 and 1280px, light and dark.",
+      "vi": "Mở 2 bài Travel ở 320, 375 và 1280px, sáng và tối."
+     },
+     "expected": {
+      "en": "Each post shows its title, date and location, headings and body text, images (and gallery where the post has one), and previous/next links.",
+      "vi": "Mỗi bài hiện tiêu đề, ngày và địa điểm, các tiêu đề con và nội dung, ảnh (và gallery nếu bài có), cùng link bài trước/bài sau."
+     },
+     "result": {
+      "en": "Matches: \"Slow trains and street food in Huế\" shows 3 sections and a 2-photo gallery; \"Walking Lisbon by tram line\" shows its section and cover; both have the meta line and prev/next links.",
+      "vi": "Đúng như mong muốn: bài \"Slow trains and street food in Huế\" có 3 mục và gallery 2 ảnh; bài \"Walking Lisbon by tram line\" có mục nội dung và ảnh bìa; cả 2 có dòng thông tin và link trước/sau."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "\"Slow trains…\": full page at 320 / 375 / 1280px and dark",
+        "vi": "Bài \"Slow trains…\": cả trang ở 320 / 375 / 1280px và giao diện tối"
+       },
+       "shots": [
+        1,
+        2,
+        3,
+        7
+       ]
+      },
+      {
+       "text": {
+        "en": "\"Slow trains…\": title + meta, body, gallery + prev/next",
+        "vi": "Bài \"Slow trains…\": tiêu đề + thông tin, nội dung, gallery + trước/sau"
+       },
+       "shots": [
+        4,
+        5,
+        6
+       ]
+      },
+      {
+       "text": {
+        "en": "\"Walking Lisbon…\": full page at 320 / 375 / 1280px and dark",
+        "vi": "Bài \"Walking Lisbon…\": cả trang ở 320 / 375 / 1280px và giao diện tối"
+       },
+       "shots": [
+        8,
+        9,
+        10,
+        14
+       ]
+      },
+      {
+       "text": {
+        "en": "\"Walking Lisbon…\": title + meta, body, prev/next",
+        "vi": "Bài \"Walking Lisbon…\": tiêu đề + thông tin, nội dung, trước/sau"
+       },
+       "shots": [
+        11,
+        12,
+        13
+       ]
+      }
+     ],
+     "raw": [
+      "/story/travel/hue-food-and-trains light 320: title=\"Slow trains and street food in Huế\", h2s=[Eating my way through town | What I took home | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "/story/travel/hue-food-and-trains light 375: title=\"Slow trains and street food in Huế\", h2s=[Eating my way through town | What I took home | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "/story/travel/hue-food-and-trains light 1280: title=\"Slow trains and street food in Huế\", h2s=[Eating my way through town | What I took home | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "meta line: \"October 1, 2026 / Huế, Vietnam\"",
+      "prev/next nav present=true",
+      "viewport shots top/body/bottom",
+      "/story/travel/hue-food-and-trains dark 1280: title=\"Slow trains and street food in Huế\", h2s=[Eating my way through town | What I took home | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "/story/travel/lisbon-tram-walks light 320: title=\"Walking Lisbon by tram line\", h2s=[Small finds], paragraphs=3, images/covers=1, figcaptions=0, gallery=none",
+      "/story/travel/lisbon-tram-walks light 375: title=\"Walking Lisbon by tram line\", h2s=[Small finds], paragraphs=3, images/covers=1, figcaptions=0, gallery=none",
+      "/story/travel/lisbon-tram-walks light 1280: title=\"Walking Lisbon by tram line\", h2s=[Small finds], paragraphs=3, images/covers=1, figcaptions=0, gallery=none",
+      "meta line: \"June 15, 2026 / Lisbon, Portugal\"",
+      "prev/next nav present=true",
+      "viewport shots top/body/bottom",
+      "/story/travel/lisbon-tram-walks dark 1280: title=\"Walking Lisbon by tram line\", h2s=[Small finds], paragraphs=3, images/covers=1, figcaptions=0, gallery=none"
+     ],
+     "shots": [
+      "shots/98-6-hue-food-and-trains-light-320.png",
+      "shots/98-6-hue-food-and-trains-light-375.png",
+      "shots/98-6-hue-food-and-trains-light-1280.png",
+      "shots/98-6-top-hue-food-and-trains-light-1280.png",
+      "shots/98-6-body-hue-food-and-trains-light-1280.png",
+      "shots/98-6-bottom-hue-food-and-trains-light-1280.png",
+      "shots/98-6-hue-food-and-trains-dark-1280.png",
+      "shots/98-6-lisbon-tram-walks-light-320.png",
+      "shots/98-6-lisbon-tram-walks-light-375.png",
+      "shots/98-6-lisbon-tram-walks-light-1280.png",
+      "shots/98-6-top-lisbon-tram-walks-light-1280.png",
+      "shots/98-6-body-lisbon-tram-walks-light-1280.png",
+      "shots/98-6-bottom-lisbon-tram-walks-light-1280.png",
+      "shots/98-6-lisbon-tram-walks-dark-1280.png"
+     ]
+    },
+    {
+     "id": "98-7a",
+     "title": {
+      "en": "Unknown post shows 404",
+      "vi": "Bài viết không tồn tại hiện trang 404"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open a post that does not exist (/story/travel/no-such-post).",
+      "vi": "Mở một bài viết không tồn tại (/story/travel/no-such-post)."
+     },
+     "expected": {
+      "en": "The site returns HTTP 404 and shows the \"Page not found\" page.",
+      "vi": "Trang trả về HTTP 404 và hiện trang \"Page not found\"."
+     },
+     "result": {
+      "en": "Matches: HTTP 404 with the \"Page not found\" page.",
+      "vi": "Đúng như mong muốn: HTTP 404 và hiện trang \"Page not found\"."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "\"Page not found\" page for /story/travel/no-such-post",
+        "vi": "Trang \"Page not found\" cho /story/travel/no-such-post"
+       },
+       "shots": [
+        1
+       ]
+      }
+     ],
+     "raw": [
+      "/story/travel/no-such-post: HTTP 404, page text: \"Skip to content Jordan Walker Error 404 Page not found The page you are looking for does not exist or has moved. Back to\""
+     ],
+     "shots": [
+      "shots/98-7a-404-light-1280.png"
+     ]
+    },
+    {
+     "id": "98-7b",
+     "title": {
+      "en": "Post under the wrong category shows 404",
+      "vi": "Bài viết nằm sai chuyên mục hiện trang 404"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open a real Travel post under the wrong category (/story/sport/hue-food-and-trains).",
+      "vi": "Mở một bài Travel có thật nhưng đặt sai chuyên mục (/story/sport/hue-food-and-trains)."
+     },
+     "expected": {
+      "en": "The site returns HTTP 404 instead of showing the post.",
+      "vi": "Trang trả về HTTP 404 thay vì hiện bài viết."
+     },
+     "result": {
+      "en": "Matches: HTTP 404 with the \"Page not found\" page.",
+      "vi": "Đúng như mong muốn: HTTP 404 và hiện trang \"Page not found\"."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "\"Page not found\" page for /story/sport/hue-food-and-trains",
+        "vi": "Trang \"Page not found\" cho /story/sport/hue-food-and-trains"
+       },
+       "shots": [
+        1
+       ]
+      }
+     ],
+     "raw": [
+      "/story/sport/hue-food-and-trains: HTTP 404, page text: \"Skip to content Jordan Walker Error 404 Page not found The page you are looking for does not exist or has moved. Back to\""
+     ],
+     "shots": [
+      "shots/98-7b-404-light-1280.png"
+     ]
+    },
+    {
+     "id": "98-8",
+     "title": {
+      "en": "Back links",
+      "vi": "Các liên kết quay lại"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Click the back links on a post page and on a category page.",
+      "vi": "Bấm link quay lại ở trang bài viết và ở trang chuyên mục."
+     },
+     "expected": {
+      "en": "From a post, \"Back to Travel\" goes to /story/travel; from a category page, the back link goes to /story.",
+      "vi": "Từ bài viết, \"Back to Travel\" về /story/travel; từ trang chuyên mục, link quay lại về /story."
+     },
+     "result": {
+      "en": "Matches: both back links go to the expected pages.",
+      "vi": "Đúng như mong muốn: cả 2 link quay lại đều tới đúng trang."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Post page with \"Back to Travel\" link",
+        "vi": "Trang bài viết có link \"Back to Travel\""
+       },
+       "shots": [
+        1
+       ]
+      },
+      {
+       "text": {
+        "en": "Category page reached from the post, then /story reached from the category",
+        "vi": "Trang chuyên mục mở từ bài viết, rồi /story mở từ trang chuyên mục"
+       },
+       "shots": [
+        2,
+        3
+       ]
+      }
+     ],
+     "raw": [
+      "post back link -> /story/travel (links on post: ← Back to Travel | Next →Walking Lisbon by tram line)",
+      "category back link -> /story"
+     ],
+     "shots": [
+      "shots/98-8-1-post-light-1280.png",
+      "shots/98-8-2-category-light-1280.png",
+      "shots/98-8-3-story-light-1280.png"
+     ]
+    },
+    {
+     "id": "98-9",
+     "title": {
+      "en": "Page titles, descriptions and internal links",
+      "vi": "Tiêu đề trang, mô tả và liên kết nội bộ"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Check page titles and meta descriptions on all 12 pages, and crawl every internal link.",
+      "vi": "Kiểm tra tiêu đề trang và meta description của cả 12 trang, và dò toàn bộ link nội bộ."
+     },
+     "expected": {
+      "en": "Every page has a unique title and description, and no internal link is broken.",
+      "vi": "Mỗi trang có tiêu đề và mô tả riêng, không có link nội bộ nào bị hỏng."
+     },
+     "result": {
+      "en": "Matches: 12 unique titles, 12 unique descriptions, 12 internal links crawled with 0 broken.",
+      "vi": "Đúng như mong muốn: 12 tiêu đề riêng, 12 mô tả riêng, dò 12 link nội bộ, 0 link hỏng."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Category page title (full list of 12 titles is in 98-9-page-titles.txt)",
+        "vi": "Tiêu đề trang chuyên mục (danh sách đủ 12 tiêu đề ở 98-9-page-titles.txt)"
+       },
+       "shots": [
+        1
+       ]
+      }
+     ],
+     "raw": [
+      "12 pages: 12 unique titles, 12 unique descriptions (98-9-page-titles.txt); internal links crawled=12, broken=0 "
+     ],
+     "shots": [
+      "shots/98-9-category-tab-title-light-1280.png"
+     ]
+    },
+    {
+     "id": "98-10",
+     "title": {
+      "en": "Accessibility (axe)",
+      "vi": "Khả năng truy cập (axe)"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Run axe accessibility checks (WCAG 2.0/2.1 A and AA) on the Travel category page and a Travel post, light and dark.",
+      "vi": "Chạy kiểm tra trợ năng axe (WCAG 2.0/2.1 A và AA) trên trang chuyên mục Travel và một bài Travel, sáng và tối."
+     },
+     "expected": {
+      "en": "No serious or critical accessibility issues.",
+      "vi": "Không có lỗi trợ năng mức nghiêm trọng (serious) hoặc rất nghiêm trọng (critical)."
+     },
+     "result": {
+      "en": "Matches: no serious or critical issues on any of the 4 runs.",
+      "vi": "Đúng như mong muốn: không có lỗi serious/critical ở cả 4 lần chạy."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Pages scanned in light theme",
+        "vi": "Các trang được quét ở giao diện sáng"
+       },
+       "shots": [
+        1,
+        2
+       ]
+      },
+      {
+       "text": {
+        "en": "Pages scanned in dark theme",
+        "vi": "Các trang được quét ở giao diện tối"
+       },
+       "shots": [
+        3,
+        4
+       ]
+      }
+     ],
+     "raw": [
+      "axe (wcag2a/2aa/21a/21aa) /story/travel light: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/travel/hue-food-and-trains light: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/travel dark: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/travel/hue-food-and-trains dark: no serious/critical issues"
+     ],
+     "shots": [
+      "shots/98-10-axe-travel-light-1280.png",
+      "shots/98-10-axe-travel-hue-food-and-trains-light-1280.png",
+      "shots/98-10-axe-travel-dark-1280.png",
+      "shots/98-10-axe-travel-hue-food-and-trains-dark-1280.png"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "sport",
+   "label": "#101 and #102",
+   "title": {
+    "en": "Sport page",
+    "vi": "Trang Sport"
+   },
+   "links": [
+    {
+     "text": "#101 Mock data for the Sport page",
+     "href": "https://github.com/toinguyen-agilityio/my-portfolio/issues/101"
+    },
+    {
+     "text": "#102 Demo posts and placeholder images for the Sport page",
+     "href": "https://github.com/toinguyen-agilityio/my-portfolio/issues/102"
+    }
+   ],
+   "cases": [
+    {
+     "id": "102-1",
+     "title": {
+      "en": "Sport category page",
+      "vi": "Trang chuyên mục Sport"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open the Sport category page at 320, 375 and 1280px, light and dark.",
+      "vi": "Mở trang chuyên mục Sport ở 320, 375 và 1280px, sáng và tối."
+     },
+     "expected": {
+      "en": "It lists both Sport posts with cover, date, location, reading time and tags, has a back link to My story, and no horizontal scroll or empty state.",
+      "vi": "Trang hiện đủ 2 bài Sport kèm ảnh bìa, ngày, địa điểm, thời gian đọc và tag; có link quay lại My story, không cuộn ngang và không hiện trạng thái trống."
+     },
+     "result": {
+      "en": "Matches: 2 posts shown with all card details and the Running/Badminton tags, back link present, images load, no horizontal scroll, in all 6 combinations.",
+      "vi": "Đúng như mong muốn: hiện 2 bài với đủ thông tin thẻ và tag Running/Badminton, có link quay lại, ảnh tải được, không cuộn ngang ở cả 6 trường hợp."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Mobile 320 / 375px: 2 posts, no horizontal scroll",
+        "vi": "Điện thoại 320 / 375px: 2 bài, không cuộn ngang"
+       },
+       "shots": [
+        1,
+        2,
+        4,
+        5
+       ]
+      },
+      {
+       "text": {
+        "en": "Desktop 1280px: cards with details and Running/Badminton tags",
+        "vi": "Desktop 1280px: thẻ đủ thông tin và tag Running/Badminton"
+       },
+       "shots": [
+        3,
+        6
+       ]
+      }
+     ],
+     "raw": [
+      "/story/sport light 320: 2 posts [Morning runs along the Perfume River | Weekend badminton doubles]; no h-scroll, images load, no empty state",
+      "/story/sport light 375: 2 posts [Morning runs along the Perfume River | Weekend badminton doubles]; no h-scroll, images load, no empty state",
+      "/story/sport light 1280: 2 posts [Morning runs along the Perfume River | Weekend badminton doubles]; no h-scroll, images load, no empty state",
+      "card details: [cover=true date=true location=true readtime=true] September 12, 2026 / Huế city, Vietnam / Morning runs along the Perfume River / Three mornings a week, five kilometres at sunrise, and the one habit that makes the rest of my day easier. / 1 min read || [cover=true date=true location=true readtime=true] July 20, 2026 / Da Nang, Vietnam / Weekend badminton doubles ",
+      "back link to My story present",
+      "tags/text seen: Running, Badminton",
+      "tag Running visible=true",
+      "/story/sport dark 320: 2 posts [Morning runs along the Perfume River | Weekend badminton doubles]; no h-scroll, images load, no empty state",
+      "/story/sport dark 375: 2 posts [Morning runs along the Perfume River | Weekend badminton doubles]; no h-scroll, images load, no empty state",
+      "/story/sport dark 1280: 2 posts [Morning runs along the Perfume River | Weekend badminton doubles]; no h-scroll, images load, no empty state"
+     ],
+     "shots": [
+      "shots/102-1-sport-light-320.png",
+      "shots/102-1-sport-light-375.png",
+      "shots/102-1-sport-light-1280.png",
+      "shots/102-1-sport-dark-320.png",
+      "shots/102-1-sport-dark-375.png",
+      "shots/102-1-sport-dark-1280.png"
+     ]
+    },
+    {
+     "id": "102-2",
+     "title": {
+      "en": "Post with a gallery",
+      "vi": "Bài viết có thư viện ảnh"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open the Sport post that has a photo gallery (\"Morning runs along the Perfume River\").",
+      "vi": "Mở bài Sport có gallery ảnh (\"Morning runs along the Perfume River\")."
+     },
+     "expected": {
+      "en": "The post shows title, date and location, its sections, a list, an inline figure, the gallery, and previous/next links.",
+      "vi": "Bài hiện tiêu đề, ngày và địa điểm, các mục nội dung, danh sách, ảnh minh họa trong bài, gallery và link bài trước/bài sau."
+     },
+     "result": {
+      "en": "Matches: 3 sections, a list, inline figure plus a 2-photo gallery, meta line and prev/next links, at all widths and both themes.",
+      "vi": "Đúng như mong muốn: 3 mục, có danh sách, ảnh trong bài và gallery 2 ảnh, dòng thông tin và link trước/sau, ở mọi độ rộng và cả 2 giao diện."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Full post at 320 / 375 / 1280px and dark",
+        "vi": "Cả bài ở 320 / 375 / 1280px và giao diện tối"
+       },
+       "shots": [
+        1,
+        2,
+        3,
+        7
+       ]
+      },
+      {
+       "text": {
+        "en": "Title + meta, body with list and figure, gallery + prev/next",
+        "vi": "Tiêu đề + thông tin, nội dung có danh sách và ảnh, gallery + trước/sau"
+       },
+       "shots": [
+        4,
+        5,
+        6
+       ]
+      }
+     ],
+     "raw": [
+      "/story/sport/morning-run-along-the-river light 320: title=\"Morning runs along the Perfume River\", h2s=[The route | What it teaches me | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "/story/sport/morning-run-along-the-river light 375: title=\"Morning runs along the Perfume River\", h2s=[The route | What it teaches me | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "/story/sport/morning-run-along-the-river light 1280: title=\"Morning runs along the Perfume River\", h2s=[The route | What it teaches me | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "meta line: \"September 12, 2026 / Huế city, Vietnam\"",
+      "prev/next nav present=true",
+      "viewport shots top/body/bottom",
+      "/story/sport/morning-run-along-the-river dark 1280: title=\"Morning runs along the Perfume River\", h2s=[The route | What it teaches me | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "body headings=3, has list=true, figures (inline+gallery)=2"
+     ],
+     "shots": [
+      "shots/102-2-morning-run-along-the-river-light-320.png",
+      "shots/102-2-morning-run-along-the-river-light-375.png",
+      "shots/102-2-morning-run-along-the-river-light-1280.png",
+      "shots/102-2-top-morning-run-along-the-river-light-1280.png",
+      "shots/102-2-body-morning-run-along-the-river-light-1280.png",
+      "shots/102-2-bottom-morning-run-along-the-river-light-1280.png",
+      "shots/102-2-morning-run-along-the-river-dark-1280.png"
+     ]
+    },
+    {
+     "id": "102-3",
+     "title": {
+      "en": "Post without a gallery",
+      "vi": "Bài viết không có thư viện ảnh"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open the Sport post without a gallery (\"Weekend badminton doubles\").",
+      "vi": "Mở bài Sport không có gallery (\"Weekend badminton doubles\")."
+     },
+     "expected": {
+      "en": "The post shows title, date and location, its body and cover, previous/next links, and no empty gallery section.",
+      "vi": "Bài hiện tiêu đề, ngày và địa điểm, nội dung và ảnh bìa, link trước/sau, và không có mục gallery trống."
+     },
+     "result": {
+      "en": "Matches: title, meta line \"July 20, 2026 / Da Nang, Vietnam\", one section, cover, prev/next links, no gallery.",
+      "vi": "Đúng như mong muốn: có tiêu đề, dòng \"July 20, 2026 / Da Nang, Vietnam\", một mục nội dung, ảnh bìa, link trước/sau, không có gallery."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Full post at 320 / 375 / 1280px and dark",
+        "vi": "Cả bài ở 320 / 375 / 1280px và giao diện tối"
+       },
+       "shots": [
+        1,
+        2,
+        3,
+        7
+       ]
+      },
+      {
+       "text": {
+        "en": "Title + meta, body, bottom with prev/next and no gallery",
+        "vi": "Tiêu đề + thông tin, nội dung, cuối bài có trước/sau và không có gallery"
+       },
+       "shots": [
+        4,
+        5,
+        6
+       ]
+      }
+     ],
+     "raw": [
+      "/story/sport/weekend-badminton-doubles light 320: title=\"Weekend badminton doubles\", h2s=[Why I keep coming back], paragraphs=3, images/covers=1, figcaptions=0, gallery=none",
+      "/story/sport/weekend-badminton-doubles light 375: title=\"Weekend badminton doubles\", h2s=[Why I keep coming back], paragraphs=3, images/covers=1, figcaptions=0, gallery=none",
+      "/story/sport/weekend-badminton-doubles light 1280: title=\"Weekend badminton doubles\", h2s=[Why I keep coming back], paragraphs=3, images/covers=1, figcaptions=0, gallery=none",
+      "meta line: \"July 20, 2026 / Da Nang, Vietnam\"",
+      "prev/next nav present=true",
+      "viewport shots top/body/bottom",
+      "/story/sport/weekend-badminton-doubles dark 1280: title=\"Weekend badminton doubles\", h2s=[Why I keep coming back], paragraphs=3, images/covers=1, figcaptions=0, gallery=none"
+     ],
+     "shots": [
+      "shots/102-3-weekend-badminton-doubles-light-320.png",
+      "shots/102-3-weekend-badminton-doubles-light-375.png",
+      "shots/102-3-weekend-badminton-doubles-light-1280.png",
+      "shots/102-3-top-weekend-badminton-doubles-light-1280.png",
+      "shots/102-3-body-weekend-badminton-doubles-light-1280.png",
+      "shots/102-3-bottom-weekend-badminton-doubles-light-1280.png",
+      "shots/102-3-weekend-badminton-doubles-dark-1280.png"
+     ]
+    },
+    {
+     "id": "102-4",
+     "title": {
+      "en": "Images load",
+      "vi": "Ảnh tải được"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Check that every image on the Sport category page and both Sport posts loads.",
+      "vi": "Kiểm tra mọi ảnh trên trang chuyên mục Sport và 2 bài Sport đều tải được."
+     },
+     "expected": {
+      "en": "No broken images.",
+      "vi": "Không có ảnh nào bị lỗi."
+     },
+     "result": {
+      "en": "Matches: 7 images checked across 3 pages, 0 broken.",
+      "vi": "Đúng như mong muốn: kiểm tra 7 ảnh trên 3 trang, 0 ảnh lỗi."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Images loaded on the category page and both posts",
+        "vi": "Ảnh tải được trên trang chuyên mục và 2 bài"
+       },
+       "shots": [
+        1,
+        2,
+        3
+       ]
+      }
+     ],
+     "raw": [
+      "/story/sport: 2 images, broken=0 ",
+      "/story/sport/morning-run-along-the-river: 4 images, broken=0 ",
+      "/story/sport/weekend-badminton-doubles: 1 images, broken=0 "
+     ],
+     "shots": [
+      "shots/102-4-images-sport-light-1280.png",
+      "shots/102-4-images-morning-run-along-the-river-light-1280.png",
+      "shots/102-4-images-weekend-badminton-doubles-light-1280.png"
+     ]
+    },
+    {
+     "id": "102-5",
+     "title": {
+      "en": "Previous and next links",
+      "vi": "Liên kết bài trước và bài sau"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Follow the Previous and Next links between the two Sport posts.",
+      "vi": "Đi theo link Previous và Next giữa 2 bài Sport."
+     },
+     "expected": {
+      "en": "Next and Previous move between the posts in order; the first post has no Previous and the last has no Next.",
+      "vi": "Next và Previous chuyển qua lại đúng thứ tự; bài đầu không có Previous, bài cuối không có Next."
+     },
+     "result": {
+      "en": "Matches: Next and Previous land on the expected posts, and the end posts have no link in the empty direction.",
+      "vi": "Đúng như mong muốn: Next và Previous tới đúng bài, bài đầu/cuối không có link ở chiều không có bài."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Links at the bottom of post 1 and post 2",
+        "vi": "Link ở cuối bài 1 và bài 2"
+       },
+       "shots": [
+        1,
+        2
+       ]
+      },
+      {
+       "text": {
+        "en": "Page reached via Next, then back via Previous",
+        "vi": "Trang tới bằng Next, rồi quay lại bằng Previous"
+       },
+       "shots": [
+        3,
+        4
+       ]
+      }
+     ],
+     "raw": [
+      "post 1 (morning-run-along-the-river): Previous=null, Next=/story/sport/weekend-badminton-doubles",
+      "post 2 (weekend-badminton-doubles): Previous=/story/sport/morning-run-along-the-river, Next=null",
+      "forward via \"Next\" from morning-run-along-the-river -> weekend-badminton-doubles (expected weekend-badminton-doubles)",
+      "back via \"Previous\" -> morning-run-along-the-river (expected morning-run-along-the-river)",
+      "end posts have no link in the empty direction: true"
+     ],
+     "shots": [
+      "shots/102-5-post1-nav-light-1280.png",
+      "shots/102-5-post2-nav-light-1280.png",
+      "shots/102-5-forward-step1-light-1280.png",
+      "shots/102-5-back-step1-light-1280.png"
+     ]
+    },
+    {
+     "id": "102-6",
+     "title": {
+      "en": "Accessibility (axe)",
+      "vi": "Khả năng truy cập (axe)"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Run axe accessibility checks (WCAG 2.0/2.1 A and AA) on the Sport category page and both Sport posts, light and dark.",
+      "vi": "Chạy kiểm tra trợ năng axe (WCAG 2.0/2.1 A và AA) trên trang chuyên mục Sport và 2 bài Sport, sáng và tối."
+     },
+     "expected": {
+      "en": "No serious or critical accessibility issues.",
+      "vi": "Không có lỗi trợ năng mức serious hoặc critical."
+     },
+     "result": {
+      "en": "Matches: no serious or critical issues on any of the 6 runs.",
+      "vi": "Đúng như mong muốn: không có lỗi serious/critical ở cả 6 lần chạy."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Pages scanned in light theme",
+        "vi": "Các trang được quét ở giao diện sáng"
+       },
+       "shots": [
+        1,
+        2,
+        3
+       ]
+      },
+      {
+       "text": {
+        "en": "Pages scanned in dark theme",
+        "vi": "Các trang được quét ở giao diện tối"
+       },
+       "shots": [
+        4,
+        5,
+        6
+       ]
+      }
+     ],
+     "raw": [
+      "axe (wcag2a/2aa/21a/21aa) /story/sport light: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/sport/morning-run-along-the-river light: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/sport/weekend-badminton-doubles light: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/sport dark: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/sport/morning-run-along-the-river dark: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/sport/weekend-badminton-doubles dark: no serious/critical issues"
+     ],
+     "shots": [
+      "shots/102-6-axe-sport-light-1280.png",
+      "shots/102-6-axe-sport-morning-run-along-the-river-light-1280.png",
+      "shots/102-6-axe-sport-weekend-badminton-doubles-light-1280.png",
+      "shots/102-6-axe-sport-dark-1280.png",
+      "shots/102-6-axe-sport-morning-run-along-the-river-dark-1280.png",
+      "shots/102-6-axe-sport-weekend-badminton-doubles-dark-1280.png"
+     ]
+    },
+    {
+     "id": "102-7",
+     "title": {
+      "en": "Post under the wrong category shows 404",
+      "vi": "Bài viết nằm sai chuyên mục hiện trang 404"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open a Travel post under the Sport category (/story/sport/hue-food-and-trains).",
+      "vi": "Mở bài Travel dưới chuyên mục Sport (/story/sport/hue-food-and-trains)."
+     },
+     "expected": {
+      "en": "The site returns HTTP 404 instead of showing the post.",
+      "vi": "Trang trả về HTTP 404 thay vì hiện bài viết."
+     },
+     "result": {
+      "en": "Matches: HTTP 404 with the \"Page not found\" page.",
+      "vi": "Đúng như mong muốn: HTTP 404 và hiện trang \"Page not found\"."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "\"Page not found\" page for /story/sport/hue-food-and-trains",
+        "vi": "Trang \"Page not found\" cho /story/sport/hue-food-and-trains"
+       },
+       "shots": [
+        1
+       ]
+      }
+     ],
+     "raw": [
+      "/story/sport/hue-food-and-trains: HTTP 404, page text: \"Skip to content Jordan Walker Error 404 Page not found The page you are looking for does not exist or has moved. Back to\""
+     ],
+     "shots": [
+      "shots/102-7-404-light-1280.png"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "105",
+   "label": "#105",
+   "title": {
+    "en": "Photography page",
+    "vi": "Trang Photography"
+   },
+   "links": [
+    {
+     "text": "#105 Mock data for the Photography page",
+     "href": "https://github.com/toinguyen-agilityio/my-portfolio/issues/105"
+    }
+   ],
+   "cases": [
+    {
+     "id": "105-1",
+     "title": {
+      "en": "Photography category page",
+      "vi": "Trang chuyên mục Photography"
+     },
+     "status": "fail",
+     "tested": {
+      "en": "Open the Photography category page at 320, 375 and 1280px, light and dark, and check every post card.",
+      "vi": "Mở trang chuyên mục Photography ở 320, 375 và 1280px, sáng và tối, và kiểm tra từng thẻ bài viết."
+     },
+     "expected": {
+      "en": "It lists all 3 Photography posts in order, and every card shows cover, date, location and reading time; back link present, no horizontal scroll, no empty state.",
+      "vi": "Trang hiện đủ 3 bài Photography đúng thứ tự, mọi thẻ đều có ảnh bìa, ngày, địa điểm và thời gian đọc; có link quay lại, không cuộn ngang, không hiện trạng thái trống."
+     },
+     "result": {
+      "en": "Does not match: 2 of the 3 cards show no location.",
+      "vi": "Không đúng như mong muốn: 2/3 thẻ không hiện địa điểm."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Post 2 card ('Golden hour on the river') shows no location: its front matter in content/story/photography/golden-hour-river.mdx has no `location` field.",
+        "vi": "Thẻ bài 2 ('Golden hour on the river') không hiện địa điểm: front matter trong content/story/photography/golden-hour-river.mdx không có trường `location`."
+       },
+       "shots": [
+        3,
+        6
+       ]
+      },
+      {
+       "text": {
+        "en": "Post 3 card ('A day in the darkroom') shows no location: no `location` field in day-in-the-darkroom.mdx. The plan expects every card to show a location; file a bug or confirm location is optional for these posts.",
+        "vi": "Thẻ bài 3 ('A day in the darkroom') không hiện địa điểm: day-in-the-darkroom.mdx không có trường `location`. Kế hoạch yêu cầu mọi thẻ đều hiện địa điểm; cần tạo bug hoặc xác nhận địa điểm là tùy chọn với các bài này."
+       },
+       "shots": [
+        3,
+        6
+       ]
+      },
+      {
+       "text": {
+        "en": "Everything else passed: 3 posts in order, cover, date, reading time, back link, no empty state, no horizontal scroll at 320 / 375px.",
+        "vi": "Các kiểm tra khác đều đạt: 3 bài đúng thứ tự, ảnh bìa, ngày, thời gian đọc, link quay lại, không trống, không cuộn ngang ở 320 / 375px."
+       },
+       "shots": [
+        1,
+        2,
+        4,
+        5
+       ]
+      }
+     ],
+     "raw": [
+      "/story/photography light 320: 3 posts [One roll of film in Huế | Golden hour on the river | A day in the darkroom]; no h-scroll, images load, no empty state",
+      "/story/photography light 375: 3 posts [One roll of film in Huế | Golden hour on the river | A day in the darkroom]; no h-scroll, images load, no empty state",
+      "/story/photography light 1280: 3 posts [One roll of film in Huế | Golden hour on the river | A day in the darkroom]; no h-scroll, images load, no empty state",
+      "card details: [cover=true date=true location=true readtime=true] September 20, 2026 / Huế, Vietnam / One roll of film in Huế / Thirty-six frames, one old camera and a morning of walking the streets without checking the screen. / 1 min read || [cover=true date=true location=false readtime=true] July 12, 2026 / Golden hour on the river / The best light of the day lasts about twen",
+      "back link to My story present",
+      "tags/text seen: Film, Street",
+      "/story/photography dark 320: 3 posts [One roll of film in Huế | Golden hour on the river | A day in the darkroom]; no h-scroll, images load, no empty state",
+      "/story/photography dark 375: 3 posts [One roll of film in Huế | Golden hour on the river | A day in the darkroom]; no h-scroll, images load, no empty state",
+      "/story/photography dark 1280: 3 posts [One roll of film in Huế | Golden hour on the river | A day in the darkroom]; no h-scroll, images load, no empty state"
+     ],
+     "shots": [
+      "shots/105-1-photography-light-320.png",
+      "shots/105-1-photography-light-375.png",
+      "shots/105-1-photography-light-1280.png",
+      "shots/105-1-photography-dark-320.png",
+      "shots/105-1-photography-dark-375.png",
+      "shots/105-1-photography-dark-1280.png"
+     ]
+    },
+    {
+     "id": "105-2",
+     "title": {
+      "en": "Cover images",
+      "vi": "Ảnh bìa"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Check the cover image file of each Photography post.",
+      "vi": "Kiểm tra file ảnh bìa của từng bài Photography."
+     },
+     "expected": {
+      "en": "Each post has its own cover image at a usable size.",
+      "vi": "Mỗi bài có ảnh bìa riêng với kích thước đủ dùng."
+     },
+     "result": {
+      "en": "Matches: all 3 covers exist and are 1200px wide.",
+      "vi": "Đúng như mong muốn: cả 3 ảnh bìa đều có và rộng 1200px."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "The three cover images on the category page",
+        "vi": "3 ảnh bìa trên trang chuyên mục"
+       },
+       "shots": [
+        1
+       ]
+      }
+     ],
+     "raw": [
+      "images: frames-of-hue/cover.jpg 1200px, golden-hour-river/cover.jpg 1200px, day-in-the-darkroom/cover.jpg 1200px"
+     ],
+     "shots": [
+      "shots/105-2-covers-light-1280.png"
+     ]
+    },
+    {
+     "id": "105-3",
+     "title": {
+      "en": "Post \"One roll of film in Huế\"",
+      "vi": "Bài \"One roll of film in Huế\""
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open the post \"One roll of film in Huế\" at 320, 375 and 1280px, light and dark.",
+      "vi": "Mở bài \"One roll of film in Huế\" ở 320, 375 và 1280px, sáng và tối."
+     },
+     "expected": {
+      "en": "The post shows title, date and location, its sections, an inline image with caption, a photo gallery, and previous/next links.",
+      "vi": "Bài hiện tiêu đề, ngày và địa điểm, các mục nội dung, ảnh trong bài có chú thích, gallery ảnh và link trước/sau."
+     },
+     "result": {
+      "en": "Matches: meta line \"September 20, 2026 / Huế, Vietnam\", 2 sections, cover + inline image with caption, 2-photo gallery, prev/next links.",
+      "vi": "Đúng như mong muốn: dòng \"September 20, 2026 / Huế, Vietnam\", 2 mục, ảnh bìa + ảnh trong bài có chú thích, gallery 2 ảnh, link trước/sau."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Full post at 320 / 375 / 1280px and dark",
+        "vi": "Cả bài ở 320 / 375 / 1280px và giao diện tối"
+       },
+       "shots": [
+        1,
+        2,
+        3,
+        7
+       ]
+      },
+      {
+       "text": {
+        "en": "Title + meta \"September 20, 2026 / Huế, Vietnam\", body, prev/next",
+        "vi": "Tiêu đề + \"September 20, 2026 / Huế, Vietnam\", nội dung, trước/sau"
+       },
+       "shots": [
+        4,
+        5,
+        6
+       ]
+      },
+      {
+       "text": {
+        "en": "Inline image with caption, and the gallery",
+        "vi": "Ảnh trong bài có chú thích, và gallery"
+       },
+       "shots": [
+        8,
+        9
+       ]
+      }
+     ],
+     "raw": [
+      "/story/photography/frames-of-hue light 320: title=\"One roll of film in Huế\", h2s=[Rules for the roll | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "/story/photography/frames-of-hue light 375: title=\"One roll of film in Huế\", h2s=[Rules for the roll | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "/story/photography/frames-of-hue light 1280: title=\"One roll of film in Huế\", h2s=[Rules for the roll | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "meta line: \"September 20, 2026 / Huế, Vietnam\"",
+      "prev/next nav present=true",
+      "viewport shots top/body/bottom",
+      "/story/photography/frames-of-hue dark 1280: title=\"One roll of film in Huế\", h2s=[Rules for the roll | Photo gallery], paragraphs=5, images/covers=4, figcaptions=1, gallery=2 items",
+      "non-gallery images (cover + body) = 2, gallery items=2",
+      "mid-post/figure image captured",
+      "gallery captured"
+     ],
+     "shots": [
+      "shots/105-3-frames-of-hue-light-320.png",
+      "shots/105-3-frames-of-hue-light-375.png",
+      "shots/105-3-frames-of-hue-light-1280.png",
+      "shots/105-3-top-frames-of-hue-light-1280.png",
+      "shots/105-3-body-frames-of-hue-light-1280.png",
+      "shots/105-3-bottom-frames-of-hue-light-1280.png",
+      "shots/105-3-frames-of-hue-dark-1280.png",
+      "shots/105-3-mid-post-image-light-1280.png",
+      "shots/105-3-gallery-light-1280.png"
+     ]
+    },
+    {
+     "id": "105-4",
+     "title": {
+      "en": "Posts \"Golden hour on the river\" and \"A day in the darkroom\"",
+      "vi": "Bài \"Golden hour on the river\" và \"A day in the darkroom\""
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open the posts \"Golden hour on the river\" and \"A day in the darkroom\" at all widths, light and dark.",
+      "vi": "Mở 2 bài \"Golden hour on the river\" và \"A day in the darkroom\" ở mọi độ rộng, sáng và tối."
+     },
+     "expected": {
+      "en": "Each post shows title, date, its sections and images (and gallery where it has one), and previous/next links.",
+      "vi": "Mỗi bài hiện tiêu đề, ngày, các mục nội dung và ảnh (và gallery nếu có), cùng link trước/sau."
+     },
+     "result": {
+      "en": "Matches: \"Golden hour\" shows its section and cover (no gallery); \"Darkroom\" shows its section, captioned image and a 3-photo gallery; both have prev/next links.",
+      "vi": "Đúng như mong muốn: bài \"Golden hour\" có mục nội dung và ảnh bìa (không gallery); bài \"Darkroom\" có mục nội dung, ảnh có chú thích và gallery 3 ảnh; cả 2 có link trước/sau."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "\"Golden hour\": full page at 320 / 375 / 1280px and dark",
+        "vi": "Bài \"Golden hour\": cả trang ở 320 / 375 / 1280px và giao diện tối"
+       },
+       "shots": [
+        1,
+        2,
+        3,
+        7
+       ]
+      },
+      {
+       "text": {
+        "en": "\"Golden hour\": top, body, bottom (no gallery)",
+        "vi": "Bài \"Golden hour\": đầu, giữa, cuối bài (không gallery)"
+       },
+       "shots": [
+        4,
+        5,
+        6
+       ]
+      },
+      {
+       "text": {
+        "en": "\"Darkroom\": full page at 320 / 375 / 1280px and dark",
+        "vi": "Bài \"Darkroom\": cả trang ở 320 / 375 / 1280px và giao diện tối"
+       },
+       "shots": [
+        8,
+        9,
+        10,
+        14
+       ]
+      },
+      {
+       "text": {
+        "en": "\"Darkroom\": top, body, bottom with 3-photo gallery",
+        "vi": "Bài \"Darkroom\": đầu, giữa, cuối bài có gallery 3 ảnh"
+       },
+       "shots": [
+        11,
+        12,
+        13
+       ]
+      }
+     ],
+     "raw": [
+      "/story/photography/golden-hour-river light 320: title=\"Golden hour on the river\", h2s=[What I look for], paragraphs=3, images/covers=1, figcaptions=0, gallery=none",
+      "/story/photography/golden-hour-river light 375: title=\"Golden hour on the river\", h2s=[What I look for], paragraphs=3, images/covers=1, figcaptions=0, gallery=none",
+      "/story/photography/golden-hour-river light 1280: title=\"Golden hour on the river\", h2s=[What I look for], paragraphs=3, images/covers=1, figcaptions=0, gallery=none",
+      "meta line: \"July 12, 2026\"",
+      "prev/next nav present=true",
+      "viewport shots top/body/bottom",
+      "/story/photography/golden-hour-river dark 1280: title=\"Golden hour on the river\", h2s=[What I look for], paragraphs=3, images/covers=1, figcaptions=0, gallery=none",
+      "/story/photography/day-in-the-darkroom light 320: title=\"A day in the darkroom\", h2s=[Lessons from the trays | Photo gallery], paragraphs=3, images/covers=4, figcaptions=1, gallery=3 items",
+      "/story/photography/day-in-the-darkroom light 375: title=\"A day in the darkroom\", h2s=[Lessons from the trays | Photo gallery], paragraphs=3, images/covers=4, figcaptions=1, gallery=3 items",
+      "/story/photography/day-in-the-darkroom light 1280: title=\"A day in the darkroom\", h2s=[Lessons from the trays | Photo gallery], paragraphs=3, images/covers=4, figcaptions=1, gallery=3 items",
+      "meta line: \"April 5, 2026\"",
+      "prev/next nav present=true",
+      "viewport shots top/body/bottom",
+      "/story/photography/day-in-the-darkroom dark 1280: title=\"A day in the darkroom\", h2s=[Lessons from the trays | Photo gallery], paragraphs=3, images/covers=4, figcaptions=1, gallery=3 items"
+     ],
+     "shots": [
+      "shots/105-4-golden-hour-river-light-320.png",
+      "shots/105-4-golden-hour-river-light-375.png",
+      "shots/105-4-golden-hour-river-light-1280.png",
+      "shots/105-4-top-golden-hour-river-light-1280.png",
+      "shots/105-4-body-golden-hour-river-light-1280.png",
+      "shots/105-4-bottom-golden-hour-river-light-1280.png",
+      "shots/105-4-golden-hour-river-dark-1280.png",
+      "shots/105-4-day-in-the-darkroom-light-320.png",
+      "shots/105-4-day-in-the-darkroom-light-375.png",
+      "shots/105-4-day-in-the-darkroom-light-1280.png",
+      "shots/105-4-top-day-in-the-darkroom-light-1280.png",
+      "shots/105-4-body-day-in-the-darkroom-light-1280.png",
+      "shots/105-4-bottom-day-in-the-darkroom-light-1280.png",
+      "shots/105-4-day-in-the-darkroom-dark-1280.png"
+     ]
+    },
+    {
+     "id": "105-5",
+     "title": {
+      "en": "Previous and next links",
+      "vi": "Liên kết bài trước và bài sau"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Follow the Previous and Next links through the three Photography posts, forwards and back.",
+      "vi": "Đi theo link Previous và Next qua 3 bài Photography, cả chiều tới và chiều lùi."
+     },
+     "expected": {
+      "en": "Next and Previous move through the posts in order; the first post has no Previous and the last has no Next.",
+      "vi": "Next và Previous chuyển qua các bài đúng thứ tự; bài đầu không có Previous, bài cuối không có Next."
+     },
+     "result": {
+      "en": "Matches: every Next/Previous step lands on the expected post, and the end posts have no link in the empty direction.",
+      "vi": "Đúng như mong muốn: mọi bước Next/Previous tới đúng bài, bài đầu/cuối không có link ở chiều không có bài."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Links at the bottom of posts 1, 2 and 3",
+        "vi": "Link ở cuối bài 1, 2 và 3"
+       },
+       "shots": [
+        1,
+        2,
+        3
+       ]
+      },
+      {
+       "text": {
+        "en": "Going forward with Next",
+        "vi": "Đi tới bằng Next"
+       },
+       "shots": [
+        4,
+        5
+       ]
+      },
+      {
+       "text": {
+        "en": "Going back with Previous",
+        "vi": "Quay lại bằng Previous"
+       },
+       "shots": [
+        6,
+        7
+       ]
+      }
+     ],
+     "raw": [
+      "post 1 (frames-of-hue): Previous=null, Next=/story/photography/golden-hour-river",
+      "post 2 (golden-hour-river): Previous=/story/photography/frames-of-hue, Next=/story/photography/day-in-the-darkroom",
+      "post 3 (day-in-the-darkroom): Previous=/story/photography/golden-hour-river, Next=null",
+      "forward via \"Next\" from frames-of-hue -> golden-hour-river (expected golden-hour-river)",
+      "forward via \"Next\" from golden-hour-river -> day-in-the-darkroom (expected day-in-the-darkroom)",
+      "back via \"Previous\" -> golden-hour-river (expected golden-hour-river)",
+      "back via \"Previous\" -> frames-of-hue (expected frames-of-hue)",
+      "end posts have no link in the empty direction: true"
+     ],
+     "shots": [
+      "shots/105-5-post1-nav-light-1280.png",
+      "shots/105-5-post2-nav-light-1280.png",
+      "shots/105-5-post3-nav-light-1280.png",
+      "shots/105-5-forward-step1-light-1280.png",
+      "shots/105-5-forward-step2-light-1280.png",
+      "shots/105-5-back-step1-light-1280.png",
+      "shots/105-5-back-step2-light-1280.png"
+     ]
+    },
+    {
+     "id": "105-6",
+     "title": {
+      "en": "No category shows the empty state",
+      "vi": "Không chuyên mục nào hiện trạng thái trống"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Open the Travel, Sport and Photography category pages.",
+      "vi": "Mở 3 trang chuyên mục Travel, Sport và Photography."
+     },
+     "expected": {
+      "en": "None of them shows the \"no posts yet\" empty state, since each now has posts.",
+      "vi": "Không trang nào hiện trạng thái trống \"chưa có bài\", vì mỗi chuyên mục đều đã có bài."
+     },
+     "result": {
+      "en": "Matches: no empty state on any of the 3 pages.",
+      "vi": "Đúng như mong muốn: cả 3 trang đều không hiện trạng thái trống."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Travel, Sport, Photography pages with posts, no empty state",
+        "vi": "Trang Travel, Sport, Photography có bài, không trạng thái trống"
+       },
+       "shots": [
+        1,
+        2,
+        3
+       ]
+      }
+     ],
+     "raw": [
+      "/story/travel: empty state shown=false",
+      "/story/sport: empty state shown=false",
+      "/story/photography: empty state shown=false"
+     ],
+     "shots": [
+      "shots/105-6-travel-light-1280.png",
+      "shots/105-6-sport-light-1280.png",
+      "shots/105-6-photography-light-1280.png"
+     ]
+    },
+    {
+     "id": "105-7",
+     "title": {
+      "en": "Accessibility (axe)",
+      "vi": "Khả năng truy cập (axe)"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Run axe accessibility checks (WCAG 2.0/2.1 A and AA) on the Photography category page and all 3 posts, light and dark.",
+      "vi": "Chạy kiểm tra trợ năng axe (WCAG 2.0/2.1 A và AA) trên trang chuyên mục Photography và cả 3 bài, sáng và tối."
+     },
+     "expected": {
+      "en": "No serious or critical accessibility issues.",
+      "vi": "Không có lỗi trợ năng mức serious hoặc critical."
+     },
+     "result": {
+      "en": "Matches: no serious or critical issues on any of the 8 runs.",
+      "vi": "Đúng như mong muốn: không có lỗi serious/critical ở cả 8 lần chạy."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Pages scanned in light theme",
+        "vi": "Các trang được quét ở giao diện sáng"
+       },
+       "shots": [
+        1,
+        2,
+        3,
+        4
+       ]
+      },
+      {
+       "text": {
+        "en": "Pages scanned in dark theme",
+        "vi": "Các trang được quét ở giao diện tối"
+       },
+       "shots": [
+        5,
+        6,
+        7,
+        8
+       ]
+      }
+     ],
+     "raw": [
+      "axe (wcag2a/2aa/21a/21aa) /story/photography light: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/photography/frames-of-hue light: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/photography/golden-hour-river light: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/photography/day-in-the-darkroom light: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/photography dark: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/photography/frames-of-hue dark: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/photography/golden-hour-river dark: no serious/critical issues",
+      "axe (wcag2a/2aa/21a/21aa) /story/photography/day-in-the-darkroom dark: no serious/critical issues"
+     ],
+     "shots": [
+      "shots/105-7-axe-photography-light-1280.png",
+      "shots/105-7-axe-photography-frames-of-hue-light-1280.png",
+      "shots/105-7-axe-photography-golden-hour-river-light-1280.png",
+      "shots/105-7-axe-photography-day-in-the-darkroom-light-1280.png",
+      "shots/105-7-axe-photography-dark-1280.png",
+      "shots/105-7-axe-photography-frames-of-hue-dark-1280.png",
+      "shots/105-7-axe-photography-golden-hour-river-dark-1280.png",
+      "shots/105-7-axe-photography-day-in-the-darkroom-dark-1280.png"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "110",
+   "label": "#110",
+   "title": {
+    "en": "Release checks across all pages",
+    "vi": "Kiểm tra toàn bản phát hành"
+   },
+   "links": [
+    {
+     "text": "#110 Release 1: test checklist",
+     "href": "https://github.com/toinguyen-agilityio/my-portfolio/issues/110"
+    }
+   ],
+   "cases": [
+    {
+     "id": "theme-persistence",
+     "title": {
+      "en": "Theme toggle persists after reload, no flash",
+      "vi": "Giao diện sáng/tối được giữ sau khi tải lại, không bị nháy"
+     },
+     "status": "pass",
+     "tested": {
+      "en": "Switch to dark theme on 4 pages, reload, and watch the theme while the page loads.",
+      "vi": "Chuyển sang giao diện tối ở 4 trang, tải lại trang, và theo dõi giao diện trong lúc trang đang tải."
+     },
+     "expected": {
+      "en": "The choice is saved, the page comes back dark after reload, and there is no flash of the light theme while loading.",
+      "vi": "Lựa chọn được lưu lại, sau khi tải lại trang vẫn là giao diện tối, và không bị nháy giao diện sáng lúc đang tải."
+     },
+     "result": {
+      "en": "Matches: on all 4 pages the theme stays dark after reload (saved as \"dark\") and the dark class is present from the earliest load state.",
+      "vi": "Đúng như mong muốn: ở cả 4 trang giao diện vẫn tối sau khi tải lại (lưu là \"dark\") và class dark có ngay từ lúc trang bắt đầu tải."
+     },
+     "findings": [
+      {
+       "text": {
+        "en": "Home: light → toggled dark → still dark after reload",
+        "vi": "Trang chủ: sáng → bấm sang tối → tải lại vẫn tối"
+       },
+       "shots": [
+        1,
+        2,
+        3
+       ]
+      },
+      {
+       "text": {
+        "en": "/story: light → dark → still dark after reload",
+        "vi": "/story: sáng → tối → tải lại vẫn tối"
+       },
+       "shots": [
+        4,
+        5,
+        6
+       ]
+      },
+      {
+       "text": {
+        "en": "/story/travel: light → dark → still dark after reload",
+        "vi": "/story/travel: sáng → tối → tải lại vẫn tối"
+       },
+       "shots": [
+        7,
+        8,
+        9
+       ]
+      },
+      {
+       "text": {
+        "en": "Travel post: light → dark → still dark after reload",
+        "vi": "Bài Travel: sáng → tối → tải lại vẫn tối"
+       },
+       "shots": [
+        10,
+        11,
+        12
+       ]
+      }
+     ],
+     "raw": [
+      "/: starts light=yes, toggled dark=true, after reload dark=true, localStorage=dark, dark class at every readyState with stored dark=true [interactive:true,complete:true]",
+      "/story: starts light=yes, toggled dark=true, after reload dark=true, localStorage=dark, dark class at every readyState with stored dark=true [interactive:true,complete:true]",
+      "/story/travel: starts light=yes, toggled dark=true, after reload dark=true, localStorage=dark, dark class at every readyState with stored dark=true [interactive:true,complete:true]",
+      "/story/travel/hue-food-and-trains: starts light=yes, toggled dark=true, after reload dark=true, localStorage=dark, dark class at every readyState with stored dark=true [interactive:true,complete:true]"
+     ],
+     "shots": [
+      "shots/theme-home-1-light-1280.png",
+      "shots/theme-home-2-toggled-dark-1280.png",
+      "shots/theme-home-3-after-reload-dark-1280.png",
+      "shots/theme-story-1-light-1280.png",
+      "shots/theme-story-2-toggled-dark-1280.png",
+      "shots/theme-story-3-after-reload-dark-1280.png",
+      "shots/theme-story-travel-1-light-1280.png",
+      "shots/theme-story-travel-2-toggled-dark-1280.png",
+      "shots/theme-story-travel-3-after-reload-dark-1280.png",
+      "shots/theme-story-travel-hue-food-and-trains-1-light-1280.png",
+      "shots/theme-story-travel-hue-food-and-trains-2-toggled-dark-1280.png",
+      "shots/theme-story-travel-hue-food-and-trains-3-after-reload-dark-1280.png"
+     ]
+    }
+   ],
+   "extra": [
+    {
+     "status": "pass",
+     "text": {
+      "en": "Console errors on all pages visited: the only entries are the browser's 'Failed to load resource: 404' line for the four intentional 404 URLs. No other console error, page error, failed request or 4xx/5xx asset.",
+      "vi": "Lỗi console trên mọi trang đã mở: chỉ có dòng 'Failed to load resource: 404' của trình duyệt cho 4 URL 404 cố ý. Không có lỗi console, lỗi trang, request lỗi hay tài nguyên 4xx/5xx nào khác."
+     }
+    },
+    {
+     "status": "pass",
+     "text": {
+      "en": "'[PLACEHOLDER]' text: scanned all 12 pages, none found.",
+      "vi": "Chữ '[PLACEHOLDER]': đã quét 12 trang, không có."
+     }
+    }
+   ]
+  }
+ ],
+ "notCovered": [
+  {
+   "en": "Lighthouse was not run (not available). The accessibility checks use axe (WCAG 2.0/2.1 A and AA), so there is no numeric Lighthouse score.",
+   "vi": "Chưa chạy Lighthouse (không có sẵn). Phần truy cập dùng axe (WCAG 2.0/2.1 A và AA) nên không có điểm Lighthouse."
+  },
+  {
+   "en": "The live GitHub Pages demo (/my-portfolio base path) was not checked. Only the local production build in out/ was.",
+   "vi": "Chưa kiểm tra bản demo trên GitHub Pages (base path /my-portfolio). Chỉ kiểm tra bản build production chạy local trong out/."
+  },
+  {
+   "en": "Headless screenshots have no browser tab or network panel. Page titles and meta descriptions are listed in the evidence folder (98/98-9-page-titles.txt).",
+   "vi": "Ảnh chụp headless không có tab trình duyệt hay panel network. Tiêu đề và mô tả trang được liệt kê trong thư mục bằng chứng (98/98-9-page-titles.txt)."
+  },
+  {
+   "en": "Hover check: the border colour changes and the cursor is a pointer. No lift (translateY) was measured, which the plan allows.",
+   "vi": "Kiểm tra hover: màu viền đổi và con trỏ là pointer. Không đo hiệu ứng nâng (translateY), kế hoạch cho phép."
+  },
+  {
+   "en": "Real Safari, a real phone and a visual check of the placeholder images are still for a person to do.",
+   "vi": "Safari thật, điện thoại thật và việc xem bằng mắt các ảnh placeholder vẫn cần người kiểm tra."
+  }
+ ],
+ "footer": {
+  "title": {
+   "en": "Pull request",
+   "vi": "Pull request"
+  },
+  "items": [
+   {
+    "text": {
+     "en": "Test evidence and results:",
+     "vi": "Bằng chứng và kết quả test:"
+    },
+    "href": "https://github.com/toinguyen-agilityio/my-portfolio/pull/111"
+   }
+  ]
+ },
+ "issuesNote": {
+  "en": "#95, #98, #101, #102, #105. #101 and #102 were tested together as the Sport page.",
+  "vi": "#95, #98, #101, #102, #105. #101 và #102 được test chung ở trang Sport."
+ },
+ "casesNote": {
+  "en": "Includes the release-wide theme check from #110.",
+  "vi": "Gồm kiểm tra giao diện sáng/tối toàn bản phát hành từ #110."
+ }
+}
