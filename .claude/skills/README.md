@@ -5,6 +5,7 @@ Reusable workflows that Claude can run on request or pick up on its own.
 | Skill | What it does |
 |-------|--------------|
 | `git-workflow` | Creates branches, commits and PRs in the format from `CONTRIBUTING.md` |
+| `my-qa-release-report` | Builds the one-page HTML QA release report (cases by issue, expected vs actual, screenshot evidence) from a `report.json` and publishes it |
 
 ## Add a skill
 
