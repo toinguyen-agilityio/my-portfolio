@@ -72,7 +72,7 @@ export const projects = [
       'A kanban board with drag and drop, keyboard shortcuts and offline sync. I built the whole frontend.',
     tags: ['React', 'TypeScript', 'Vite'],
     demoUrl: 'https://example.com/demo/task-flow',
-    sourceUrl: 'https://example.com/source/task-flow',
+    sourceUrl: 'https://github.com/example/task-flow',
     thumbnail: 'kanban',
     thumbnailAlt: 'Task Flow kanban board with three columns of task cards',
     overview:
@@ -90,7 +90,7 @@ export const projects = [
       'A fast weather dashboard with hourly charts and a clean mobile layout. Scores 100 on Lighthouse.',
     tags: ['Next.js', 'Tailwind', 'Charts'],
     demoUrl: 'https://example.com/demo/weather-now',
-    sourceUrl: 'https://example.com/source/weather-now',
+    sourceUrl: 'https://github.com/example/weather-now',
     thumbnail: 'dashboard',
     thumbnailAlt: 'Weather Now dashboard with a bar chart of the coming hours',
     overview:
@@ -108,7 +108,7 @@ export const projects = [
       'An open source component library focused on accessibility, with full keyboard support and dark mode.',
     tags: ['Design system', 'a11y', 'Storybook'],
     demoUrl: 'https://example.com/demo/kit-ui',
-    sourceUrl: 'https://example.com/source/kit-ui',
+    sourceUrl: 'https://github.com/example/kit-ui',
     thumbnail: 'components',
     thumbnailAlt:
       'Kit UI components: two cards, two buttons, a toggle switch and a text field',
