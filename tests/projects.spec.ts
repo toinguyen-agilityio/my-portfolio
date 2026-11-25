@@ -41,16 +41,19 @@ test('every card link opens a new tab safely and has a unique accessible name', 
       await expect(link).toHaveAttribute('rel', 'noopener noreferrer');
     }
   }
-  const all = section(page).locator('a');
-  expect(await all.count()).toBe(projects.length * 2);
-  for (const rel of await all.evaluateAll((as) =>
+  const external = section(page).locator('a[target="_blank"]');
+  expect(await external.count()).toBe(projects.length * 2);
+  expect(await section(page).locator('a').count()).toBe(projects.length * 3);
+  for (const rel of await external.evaluateAll((as) =>
     as.map((a) => a.getAttribute('rel')),
   )) {
     expect(rel).toBe('noopener noreferrer');
   }
 });
 
-test('cards are not links and have no hover state', async ({ page }) => {
+test('cards have no hover style and are not wrapped in a link', async ({
+  page,
+}) => {
   await page.goto('/');
   const card = cards(page).first();
   const read = () =>
@@ -117,3 +120,63 @@ for (const colorScheme of ['light', 'dark'] as const) {
     });
   });
 }
+
+test('clicking a project card opens its detail page', async ({ page }) => {
+  for (const project of projects) {
+    await page.goto('/');
+    const card = cards(page).filter({ hasText: project.title });
+    await card.hover({ position: { x: 5, y: 5 } });
+    await card.click({ position: { x: 5, y: 5 } });
+    await expect(page).toHaveURL(new RegExp(`/projects/${project.slug}/?$`));
+    await expect(
+      page.getByRole('heading', { level: 1, name: project.title }),
+    ).toBeVisible();
+    await expect(page.getByText(project.overview)).toBeVisible();
+    await expect(
+      page.getByRole('link', { name: 'Back to projects' }),
+    ).toHaveAttribute('href', /#projects$/);
+  }
+});
+
+test('the external links in a card still open their own targets', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const link = section(page).getByRole('link', {
+    name: `Live demo of ${projects[0].title} (opens in a new tab)`,
+    exact: true,
+  });
+  await link.click({ trial: true });
+  await expect(link).toHaveAttribute('href', projects[0].demoUrl);
+});
+
+for (const project of projects) {
+  test(`detail page for ${project.slug} shows content and links`, async ({
+    page,
+  }) => {
+    await page.goto(`/projects/${project.slug}/`);
+    await expect(page).toHaveTitle(new RegExp(project.title));
+    for (const h of project.highlights) {
+      await expect(page.getByText(h)).toBeVisible();
+    }
+    await expect(
+      page.getByRole('link', {
+        name: `Live demo of ${project.title} (opens in a new tab)`,
+        exact: true,
+      }),
+    ).toHaveAttribute('href', project.demoUrl);
+    await expect(
+      page.getByRole('link', {
+        name: `Source code of ${project.title} (opens in a new tab)`,
+        exact: true,
+      }),
+    ).toHaveAttribute('href', project.sourceUrl);
+    await expectNoHorizontalScroll(page);
+    await expectNoA11yViolations(page);
+  });
+}
+
+test('unknown project slug shows the 404 page', async ({ page }) => {
+  const res = await page.goto('/projects/does-not-exist/');
+  expect(res?.status()).toBe(404);
+});
