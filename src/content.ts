@@ -17,6 +17,7 @@ export type Profile = {
 export type ThumbnailKind = 'kanban' | 'dashboard' | 'components';
 
 export type Project = {
+  slug: string;
   title: string;
   description: string;
   tags: readonly string[];
@@ -24,6 +25,9 @@ export type Project = {
   sourceUrl: string;
   thumbnail: ThumbnailKind;
   thumbnailAlt: string;
+  // Long text and bullet points shown on the project's detail page.
+  overview: string;
+  highlights: readonly string[];
 };
 
 export type SkillGroup = {
@@ -62,6 +66,7 @@ export const profile = {
 // DEMO-CONTENT: replace with your own content
 export const projects = [
   {
+    slug: 'task-flow',
     title: 'Task Flow',
     description:
       'A kanban board with drag and drop, keyboard shortcuts and offline sync. I built the whole frontend.',
@@ -70,8 +75,16 @@ export const projects = [
     sourceUrl: 'https://example.com/source/task-flow',
     thumbnail: 'kanban',
     thumbnailAlt: 'Task Flow kanban board with three columns of task cards',
+    overview:
+      'Task Flow started as a way to plan my own side projects and grew into a full kanban app. Cards move between columns with the mouse or the keyboard, and changes made offline are synced when the connection returns.',
+    highlights: [
+      'Drag and drop with a full keyboard alternative',
+      'Offline-first sync with conflict handling',
+      'Built the whole frontend in React and TypeScript',
+    ],
   },
   {
+    slug: 'weather-now',
     title: 'Weather Now',
     description:
       'A fast weather dashboard with hourly charts and a clean mobile layout. Scores 100 on Lighthouse.',
@@ -80,8 +93,16 @@ export const projects = [
     sourceUrl: 'https://example.com/source/weather-now',
     thumbnail: 'dashboard',
     thumbnailAlt: 'Weather Now dashboard with a bar chart of the coming hours',
+    overview:
+      'Weather Now shows the current conditions and an hourly forecast on one screen. It is built to load fast on slow phones, with a layout that adapts from small mobile screens to wide desktops.',
+    highlights: [
+      'Hourly bar charts that stay readable on mobile',
+      'Scores 100 on Lighthouse',
+      'Static pages with Tailwind for tiny CSS',
+    ],
   },
   {
+    slug: 'kit-ui',
     title: 'Kit UI',
     description:
       'An open source component library focused on accessibility, with full keyboard support and dark mode.',
@@ -91,6 +112,13 @@ export const projects = [
     thumbnail: 'components',
     thumbnailAlt:
       'Kit UI components: two cards, two buttons, a toggle switch and a text field',
+    overview:
+      'Kit UI is an open source component library with accessibility as its first requirement. Every component is documented in Storybook and works with a keyboard and a screen reader.',
+    highlights: [
+      'Full keyboard support in every component',
+      'Light and dark themes from design tokens',
+      'Documented and tested in Storybook',
+    ],
   },
 ] satisfies readonly Project[];
 
@@ -139,6 +167,10 @@ export type ProjectsSection = {
   intro: string;
   demoLabel: string;
   sourceLabel: string;
+  detailsLabel: string;
+  backLabel: string;
+  highlightsTitle: string;
+  linksTitle: string;
 };
 
 export const projectsSection = {
@@ -147,6 +179,10 @@ export const projectsSection = {
   intro: 'A few things I have built recently.',
   demoLabel: 'Live demo',
   sourceLabel: 'Source',
+  detailsLabel: 'View details',
+  backLabel: 'Back to projects',
+  highlightsTitle: 'Highlights',
+  linksTitle: 'Links',
 } satisfies ProjectsSection;
 
 export type ContactSection = {

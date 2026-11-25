@@ -1,13 +1,15 @@
+import Link from 'next/link';
 import { projectsSection, type Project } from '@/content';
-import { ExternalLink } from './ExternalLink';
+import { ExternalLink, textLinkClasses } from './ExternalLink';
 import { Tag } from './Tag';
 import { Thumbnail } from './thumbnails/Thumbnail';
 
-// A project card. Renders an <li>, so put it inside a <ul>. The card itself is not a link and
-// has no hover state: only the two links inside it do.
+// A project card. Renders an <li>, so put it inside a <ul>. The "View details" link is stretched
+// over the whole card (its ::after covers the card), so a click anywhere opens the detail page.
+// The two external links sit above that overlay (relative z-10) and keep working on their own.
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <li className="border-line bg-bg flex flex-col overflow-hidden rounded-lg border">
+    <li className="border-line bg-bg relative flex flex-col overflow-hidden rounded-lg border">
       <div role="img" aria-label={project.thumbnailAlt}>
         <Thumbnail kind={project.thumbnail} />
       </div>
@@ -23,11 +25,24 @@ export function ProjectCard({ project }: { project: Project }) {
         </ul>
         {/* The visible text comes first, then the project name, so each link name is unique. */}
         <div className="mt-auto flex flex-wrap gap-x-5 pt-2">
-          <ExternalLink href={project.demoUrl}>
+          <Link
+            href={`/projects/${project.slug}`}
+            className={`${textLinkClasses} after:absolute after:inset-0`}
+          >
+            {projectsSection.detailsLabel}
+            <span className="sr-only"> of {project.title}</span>
+          </Link>
+          <ExternalLink
+            href={project.demoUrl}
+            className={`${textLinkClasses} relative z-10`}
+          >
             {projectsSection.demoLabel}
             <span className="sr-only"> of {project.title}</span>
           </ExternalLink>
-          <ExternalLink href={project.sourceUrl}>
+          <ExternalLink
+            href={project.sourceUrl}
+            className={`${textLinkClasses} relative z-10`}
+          >
             {projectsSection.sourceLabel}
             <span className="sr-only"> code of {project.title}</span>
           </ExternalLink>
