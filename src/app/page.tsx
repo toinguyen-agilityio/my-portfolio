@@ -4,6 +4,7 @@ import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { ProjectsSection } from '@/components/ProjectsSection';
 import { SkillsSection } from '@/components/SkillsSection';
+import { TimelineSection } from '@/components/TimelineSection';
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         <About />
         <ProjectsSection />
         <SkillsSection />
+        <TimelineSection />
         <ContactSection />
       </main>
       <Footer />

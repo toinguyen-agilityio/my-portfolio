@@ -206,6 +206,57 @@ export const skillsSection = {
   intro: 'The tools and practices I reach for every day.',
 } satisfies SkillsSection;
 
+export type TimelineKind = 'work' | 'education';
+
+export type TimelineEntry = {
+  kind: TimelineKind;
+  title: string;
+  organization: string;
+  period: string;
+  description: string;
+};
+
+export type TimelineSection = {
+  title: string;
+  intro: string;
+  kindLabels: Record<TimelineKind, string>;
+};
+
+export const timelineSection = {
+  title: 'Experience & education',
+  // DEMO-CONTENT: replace with your own content
+  intro: 'Where I have worked and studied, most recent first.',
+  kindLabels: { work: 'Work', education: 'Education' },
+} satisfies TimelineSection;
+
+// DEMO-CONTENT: replace with your own content
+export const timeline = [
+  {
+    kind: 'work',
+    title: 'Senior Frontend Engineer',
+    organization: 'Example Studio',
+    period: '2023 – Present',
+    description:
+      'Lead the design system and ship accessible product features with React and TypeScript.',
+  },
+  {
+    kind: 'work',
+    title: 'Frontend Engineer',
+    organization: 'Sample Labs',
+    period: '2020 – 2023',
+    description:
+      'Built dashboards and internal tools, and improved page performance across the product.',
+  },
+  {
+    kind: 'education',
+    title: 'B.Sc. in Computer Science',
+    organization: 'Example University',
+    period: '2016 – 2020',
+    description:
+      'Focused on software engineering and human-computer interaction.',
+  },
+] satisfies readonly TimelineEntry[];
+
 export type Footer = {
   builtWith: string;
   demoNotice: string;
