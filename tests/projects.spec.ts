@@ -180,3 +180,11 @@ test('unknown project slug shows the 404 page', async ({ page }) => {
   const res = await page.goto('/projects/does-not-exist/');
   expect(res?.status()).toBe(404);
 });
+
+test('every project source link points to a github.com URL', () => {
+  for (const project of projects) {
+    expect(new URL(project.sourceUrl).hostname, project.title).toBe(
+      'github.com',
+    );
+  }
+});
