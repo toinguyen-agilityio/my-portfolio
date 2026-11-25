@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { expectNoHorizontalScroll, setTheme } from './helpers';
-import { footer, profile } from '../src/content';
+import { contact, footer, profile, socials } from '../src/content';
 
 test('footer shows the built-with, demo notice and template link copy', async ({
   page,
@@ -8,6 +8,17 @@ test('footer shows the built-with, demo notice and template link copy', async ({
   await page.goto('/');
   const footerLocator = page.getByRole('contentinfo');
   await expect(footerLocator).toContainText(profile.name);
+  await expect(footerLocator).toContainText(profile.headline);
+  await expect(
+    footerLocator.getByRole('link', { name: contact.email }),
+  ).toHaveAttribute('href', contact.mailtoHref);
+  for (const social of socials) {
+    await expect(
+      footerLocator.getByRole('link', {
+        name: `${social.label} (opens in a new tab)`,
+      }),
+    ).toHaveAttribute('href', social.href);
+  }
   await expect(footerLocator).toContainText(footer.builtWith);
   await expect(footerLocator).toContainText(footer.demoNotice);
   const link = footerLocator.getByRole('link', {
