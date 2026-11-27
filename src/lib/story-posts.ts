@@ -16,6 +16,7 @@ export type Post = {
   title: string;
   date: string;
   location?: string;
+  tripLength?: string;
   cover: string;
   coverAlt: string;
   excerpt: string;
@@ -86,6 +87,8 @@ function parse(category: string, file: string): Post {
     title: str(data, 'title', path),
     date,
     location: typeof data.location === 'string' ? data.location : undefined,
+    tripLength:
+      typeof data.tripLength === 'string' ? data.tripLength : undefined,
     cover: str(data, 'cover', path),
     coverAlt: str(data, 'coverAlt', path),
     excerpt: str(data, 'excerpt', path),

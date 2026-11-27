@@ -1,9 +1,52 @@
 import type { MDXRemoteProps } from 'next-mdx-remote/rsc';
 import { withBasePath } from '@/lib/story-posts';
 
+export function FoodCards({ children }: { children: React.ReactNode }) {
+  return (
+    <ul className="my-6 grid list-none grid-cols-[repeat(auto-fit,minmax(min(100%,200px),1fr))] gap-4 p-0">
+      {children}
+    </ul>
+  );
+}
+
+export function FoodCard({
+  src,
+  alt,
+  name,
+  note,
+  price,
+}: {
+  src: string;
+  alt: string;
+  name: string;
+  note: string;
+  price: string;
+}) {
+  return (
+    <li className="border-line bg-surface overflow-hidden rounded-lg border">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={withBasePath(src)}
+        alt={alt}
+        width={1200}
+        height={900}
+        loading="lazy"
+        className="aspect-[4/3] h-auto w-full object-cover"
+      />
+      <div className="p-4">
+        <p className="text-text m-0 font-medium">{name}</p>
+        <p className="text-muted mt-1 mb-0 text-[14px]">{note}</p>
+        <p className="text-text mt-2 mb-0 text-[14px] font-medium">{price}</p>
+      </div>
+    </li>
+  );
+}
+
 // Elements available in post bodies. Images get the base path, so a post can write
 // ![alt](/images/story/...) and it works under /my-portfolio.
 export const mdxComponents: NonNullable<MDXRemoteProps['components']> = {
+  FoodCards,
+  FoodCard,
   h2: ({ children, ...p }) => (
     <h2 className="mt-10 mb-3 [overflow-wrap:anywhere]" {...p}>
       {children}
@@ -44,7 +87,9 @@ export const mdxComponents: NonNullable<MDXRemoteProps['components']> = {
       src={typeof src === 'string' ? withBasePath(src) : undefined}
       alt={alt ?? ''}
       loading="lazy"
-      className="h-auto w-full rounded-md"
+      width={1200}
+      height={900}
+      className="aspect-[4/3] h-auto w-full rounded-md object-cover"
     />
   ),
 };

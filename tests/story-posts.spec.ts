@@ -197,6 +197,46 @@ test('a post shows its content, gallery and navigation', async ({ page }) => {
   await expect(page).toHaveURL(/hue-food-and-trains$/);
 });
 
+test('Huế post: unique images with alts, captioned gallery, food cards, metadata', async ({
+  page,
+}) => {
+  await page.goto('/story/travel/hue-food-and-trains');
+  const imgs = page.locator('article img');
+  const srcs = await imgs.evaluateAll((els) =>
+    els.map((e) => (e as HTMLImageElement).getAttribute('src')),
+  );
+  // Gallery images are all distinct and every image has a non-empty alt.
+  const gallerySrcs = await page
+    .locator('#gallery-title ~ ul img')
+    .evaluateAll((els) =>
+      els.map((e) => (e as HTMLImageElement).getAttribute('src')),
+    );
+  expect(new Set(gallerySrcs).size).toBe(4);
+  expect(srcs.length).toBeGreaterThan(4);
+  for (const img of await imgs.all()) {
+    expect(((await img.getAttribute('alt')) ?? '').trim()).not.toBe('');
+  }
+  // Every gallery figure has a caption.
+  const figures = page.locator('#gallery-title ~ ul figure');
+  await expect(figures).toHaveCount(4);
+  await expect(figures.locator('figcaption')).toHaveCount(4);
+  // Food cards show name, note and a VND price.
+  const cards = page.locator('article ul > li:has(p)').filter({
+    hasText: 'đ',
+  });
+  await expect(cards).toHaveCount(3);
+  await expect(cards.first()).toContainText('Bún bò Huế');
+  await expect(cards.first()).toContainText('35.000đ');
+  // Metadata.
+  await expect(page.locator('article')).toContainText('3 days');
+  await expect(page.getByText('Slow travel', { exact: true })).toBeVisible();
+  // Image ratios are reserved (no layout shift).
+  for (const img of await imgs.all()) {
+    expect(await img.getAttribute('width')).not.toBeNull();
+    expect(await img.getAttribute('height')).not.toBeNull();
+  }
+});
+
 test('back links go post → category → story', async ({ page }) => {
   await page.goto('/story/travel/lisbon-tram-walks');
   await page.getByRole('link', { name: '← Back to Travel' }).click();
